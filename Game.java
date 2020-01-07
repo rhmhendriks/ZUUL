@@ -43,6 +43,8 @@ public class Game
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
         
+        outside.setLookDescription("Dit is de look beschrijving");
+        
         // initialise room exits
         outside.setExit("east", theater);
         outside.setExit("south", lab);
