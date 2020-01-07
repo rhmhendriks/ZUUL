@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -19,6 +21,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Stack<String> historyList;
         
     /**
      * Create the game and initialise its internal map.
@@ -26,7 +29,9 @@ public class Game
     public Game() 
     {
         createRooms();
+        enableHistory();
         parser = new Parser();
+        Stack<String> historyList = new Stack<String>();
     }
 
     /**
@@ -44,7 +49,7 @@ public class Game
         office = new Room("in the computing admin office");
         
         outside.setLookDescription("Dit is de look beschrijving");
-        
+
         // initialise room exits
         outside.setExit("east", theater);
         outside.setExit("south", lab);
@@ -117,6 +122,9 @@ public class Game
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
+        else if (commandWord.equals("back")) {
+            goBack();
+        }
         // else command not recognised.
         return wantToQuit;
     }
@@ -161,6 +169,22 @@ public class Game
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
+    }
+
+    /**
+     * Back was entered, now we will go back to the previous rome
+     */
+    private void goBack(){
+
+    }
+
+    /**
+     * 
+     * This method is used to enable the room history list, 
+     * this list is mostly used by the back command. 
+     */
+    private void enableHistory(){
+        
     }
 
     /** 
