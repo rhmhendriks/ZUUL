@@ -19,6 +19,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
+    private String lookDescription;
 
     /**
      * Create a room described "description". Initially, it has
@@ -40,6 +41,15 @@ public class Room
     public void setExit(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
+    }
+
+    /**
+     * Define the output of the look command in the specified room
+     * @param lookDescr The wanted output when a user uses "look" in this room.
+     */
+    public void setLookDescription(String lookDescr) 
+    {
+        this.lookDescription = lookDescr;
     }
 
     /**
