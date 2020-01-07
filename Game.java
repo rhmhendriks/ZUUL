@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -19,14 +21,22 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
+    Room outside, theater, pub, lab, office, cel;
+    ArraykList<Item> inventory = new ArrayList<Item>();    
+    
     /**
      * Create the game and initialise its internal map.
      */
+
     public Game() 
     {
         createRooms();
         parser = new Parser();
+    }
+
+    public static void main(String[] args) {
+        Game mygame = new Game();
+        mygame.play();
     }
 
     /**
@@ -42,8 +52,7 @@ public class Game
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
-        
-        outside.setLookDescription("Dit is de look beschrijving");
+        cel = new Room("Je zit in de cel. Er zit een bewaker voor de cel. De bewaker zit op veilige afstand, zodat jij hem niet kan aanraken.");
         
         // initialise room exits
         outside.setExit("east", theater);
@@ -60,6 +69,8 @@ public class Game
         office.setExit("west", lab);
 
         currentRoom = outside;  // start game outside
+
+        inventory.add(new Item("key"));
     }
 
     /**
@@ -117,8 +128,20 @@ public class Game
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
+        else if (commandWord.equals("inventory")) {
+            printInventory();
+        }
         // else command not recognised.
         return wantToQuit;
+    }
+
+    private void printInventory() {
+        String output = "";
+        for(int i = 0; i < inventory.size(); i++) {
+            output += inventory.get(i).getDescription() + "";  
+        }
+        System.out.println("je hebt deze items momenteel bij u");
+        System.out.println(output);
     }
 
     // implementations of user commands:
