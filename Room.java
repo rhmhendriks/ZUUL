@@ -11,8 +11,8 @@ import java.util.HashMap;
  * connected to other rooms via exits.  For each existing exit, the room 
  * stores a reference to the neighboring room.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Ronald H.M. Hendriks and Luc Willemse
+ * @version 2019.01.08
  */
 
 public class Room 

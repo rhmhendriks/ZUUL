@@ -14,8 +14,8 @@ import java.util.ArrayList;
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author  Ronald H.M. Hendriks and Luc Willemse
+ * @version 2019.01.08
  */
 
 public class Game 
@@ -33,7 +33,6 @@ public class Game
     public Game() 
     {
         createRooms();
-        enableHistory();
         parser = new Parser();
         Stack<String> historyList = new Stack<String>();
     }
@@ -200,15 +199,6 @@ public class Game
      */
     private void goBack(){
 
-    }
-
-    /**
-     * 
-     * This method is used to enable the room history list, 
-     * this list is mostly used by the back command. 
-     */
-    private void enableHistory(){
-        
     }
 
     /** 
