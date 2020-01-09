@@ -24,7 +24,8 @@ public class Game
     private Room currentRoom;
     private Stack<Room> historyList;
     Room outside, theater, pub, lab, office, cel;
-    ArrayList<Item> inventory = new ArrayList<Item>();    
+    ArrayList<Item> inventory = new ArrayList<Item>(); 
+    private Player player;   
     
     /**
      * Create the game and initialise its internal map.
@@ -161,12 +162,15 @@ public class Game
         return wantToQuit;
     }
 
+    /**
+     * drop item
+     * @param command The command to be processed.
+     */
     private void dropItem(Command command) 
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know what to drop...
             System.out.println("drop What?");
-            return;
         }
 
         String item = command.getSecondWord();
@@ -189,12 +193,15 @@ public class Game
         }
     }
 
+    /**
+     * pick up item
+     * @param command The command to be processed.
+     */
     private void pickupItem(Command command) 
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
             System.out.println("Pick up What?");
-            return;
         }
 
         String item = command.getSecondWord();
@@ -203,7 +210,7 @@ public class Game
         Item newItem = currentRoom.pickupItem(item);
 
         if (newItem == null) {
-            System.out.println("There is no door!");
+            System.out.println("");
         }
         else {
             inventory.add(newItem);
