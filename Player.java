@@ -1,16 +1,11 @@
 public class Player
 {
     private String name;
-    private Room currentRoom;
     private int health;
-
+    private int difficulty;
     // constructor 
     public Player(String name) {
         this.name = name;
-    }
-    // in what room the player is
-    public Room getCurrentPlayerRoom() {
-		return currentRoom;
     }
     // get player name
     public String getPlayerName() {
