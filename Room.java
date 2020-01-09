@@ -108,6 +108,16 @@ public class Room
     public Item getItem(int index) {
         return items.get(index);
     }
+
+    /**
+     * Method used to print the look descriptions about the room
+     */
+    public void look(){
+        System.out.println(this.lookDescription);
+        System.out.println(" ");
+        System.out.println(this.getRoomItems());
+    }
+
     public Item pickupItem(String itemName) {
         for(int i = 0; i < items.size(); i++) {
             if(items.get(i).getDescription().equals(itemName)) {
@@ -133,7 +143,7 @@ public class Room
     public String getRoomItems() {
         String output = "";
         for(int i = 0; i < items.size(); i++) {
-            output += items.get(i).getDescription() + " ";
+            output += i + " " + items.get(i).getDescription() + "   ";
         }
         return output;
     }

@@ -154,6 +154,9 @@ public class Game
         else if (commandWord.equals("drop")) {
             dropItem(command);
         }
+        else if (commandWord.equals("look")) {
+            useLook();
+        }
         // else command not recognised.
         return wantToQuit;
     }
@@ -212,7 +215,7 @@ public class Game
     private void printInventory() {
         String output = "";
         for(int i = 0; i < inventory.size(); i++) {
-            output += inventory.get(i).getDescription() + "";  
+            output += i + " " + inventory.get(i).getDescription() + "   ";  
         }
         System.out.println("je hebt deze items momenteel bij je");
         System.out.println(output);
@@ -274,5 +277,13 @@ public class Game
         else {
             return true;  // signal that we want to quit
         }
+    }
+
+    /**
+     * "look" was entered. Now we will print the look output
+     * of the current room.
+     */
+    private void useLook(){
+        currentRoom.look();
     }
 }
