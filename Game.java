@@ -35,7 +35,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
-        Stack<String> historyList = new Stack<String>();
+        historyList = new Stack<Room>();
     }
 
     public static void main(String[] args) {
@@ -60,7 +60,6 @@ public class Game
         outside.setLookDescription("Dit is de look beschrijving");
 
         // initialise room exits
-        outside.setExit("east", historyList.pop());
         outside.setExit("south", lab);
         outside.setExit("west", pub);
 
@@ -116,9 +115,11 @@ public class Game
      * adds the introducing room to the history list
      * @param introducingRoom The room to be introduced
      */
-    private void roomIntroducer(Room introducingRoom){
+    private void roomIntroducer(Room introducingRoom, boolean addtohistorlylist, Room oldroom = null){
         System.out.println(introducingRoom.getLongDescription()); // print room introduction
-        historyList.push(introducingRoom); // Add the entered room to the historylist
+        if (addtohistorlylist){ 
+            historyList.push(oldroom); // Add the entered room to the historylist
+        }
     }
 
 
@@ -157,6 +158,9 @@ public class Game
         }
         else if (commandWord.equals("look")) {
             useLook();
+        }
+        else if (commandWord.equals("back")) {
+            useBack();
         }
         // else command not recognised.
         return wantToQuit;
@@ -265,8 +269,9 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
+            roomIntroducer(nextRoom, true, currentRoom);
             currentRoom = nextRoom;
-            roomIntroducer(currentRoom);
+            
         }
     }
 
@@ -293,4 +298,14 @@ public class Game
     private void useLook(){
         currentRoom.look();
     }
+
+    /**
+     * Get the room to go back
+     */
+    private void useBack(){
+        Room roomtogobackto = historyList.pop();
+        currentRoom = roomtogobackto;
+        roomIntroducer(currentRoom, false);
+    }
+
 }
