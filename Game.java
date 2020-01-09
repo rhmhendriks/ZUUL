@@ -59,7 +59,7 @@ public class Game
         outside.setLookDescription("Dit is de look beschrijving");
 
         // initialise room exits
-        outside.setExit("east", theater);
+        outside.setExit("east", historyList.pop());
         outside.setExit("south", lab);
         outside.setExit("west", pub);
 
@@ -113,7 +113,7 @@ public class Game
     /**
      * This method prints the room introduction and 
      * adds the introducing room to the history list
-     * @param introductionRoom The room to be introduced
+     * @param introducingRoom The room to be introduced
      */
     private void roomIntroducer(Room introducingRoom){
         System.out.println(introducingRoom.getLongDescription()); // print room introduction
@@ -144,9 +144,6 @@ public class Game
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
-        }
-        else if (commandWord.equals("back")) {
-            goBack();
         }
         else if (commandWord.equals("inventory")) {
             printInventory();
@@ -261,13 +258,6 @@ public class Game
             currentRoom = nextRoom;
             roomIntroducer(currentRoom);
         }
-    }
-
-    /**
-     * Back was entered, now we will go back to the previous rome
-     */
-    private void goBack(){
-
     }
 
     /** 
