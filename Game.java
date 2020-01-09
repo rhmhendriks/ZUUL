@@ -108,6 +108,8 @@ public class Game
         System.out.println(currentRoom.getLongDescription());
     }
 
+    
+
     /**
      * Given a command, process (that is: execute) the command.
      * @param command The command to be processed.
