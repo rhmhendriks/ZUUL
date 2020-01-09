@@ -104,6 +104,23 @@ public class Room
     public Item getItem(int index) {
         return items.get(index);
     }
+    public Item pickupItem(String itemName) {
+        for(int i = 0; i < items.size(); i++) {
+            if(items.get(i).getDescription().equals(itemName)) {
+                return items.get(i);
+            }
+        }
+        return null;
+    }
+
+    public void removeItem(String itemName) {
+        for(int i = 0; i < items.size(); i++) {
+            if(items.get(i).getDescription().equals(itemName)) {
+                items.remove(i);
+            }
+        }
+        
+    }
     // set item in the room
     public void setItem(Item newitem) {
         items.add(newitem);

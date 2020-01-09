@@ -139,8 +139,65 @@ public class Game
         else if (commandWord.equals("inventory")) {
             printInventory();
         }
+        else if (commandWord.equals("pickup")) {
+            pickupItem(command);
+        }
+        else if (commandWord.equals("drop")) {
+            dropItem(command);
+        }
         // else command not recognised.
         return wantToQuit;
+    }
+
+    private void dropItem(Command command) 
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know what to drop...
+            System.out.println("drop What?");
+            return;
+        }
+
+        String item = command.getSecondWord();
+
+        // Try to leave current room.
+        Item newItem = null;
+        int index = 0;
+        for(int i = 0; i < inventory.size(); i++) {
+            newItem = inventory.get(i);
+            index = i;
+        }
+
+        if (newItem == null) {
+            System.out.println("that item is not in your bag");
+        }
+        else {
+            inventory.remove(index);
+            currentRoom.setItem(new Item(item));
+            System.out.println("je hebt dit item laten vallen:" + item);
+        }
+    }
+
+    private void pickupItem(Command command) 
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Pick up What?");
+            return;
+        }
+
+        String item = command.getSecondWord();
+
+        // Try to pick up the item.
+        Item newItem = currentRoom.pickupItem(item);
+
+        if (newItem == null) {
+            System.out.println("There is no door!");
+        }
+        else {
+            inventory.add(newItem);
+            currentRoom.removeItem(item);
+            System.out.println("je hebt dit op gepakt:" + item);
+        }
     }
 
     private void printInventory() {
