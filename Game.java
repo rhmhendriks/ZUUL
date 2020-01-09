@@ -22,7 +22,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-    private Stack<String> historyList;
+    private Stack<Room> historyList;
     Room outside, theater, pub, lab, office, cel;
     ArrayList<Item> inventory = new ArrayList<Item>();    
     
@@ -42,7 +42,7 @@ public class Game
         mygame.play();
     }
 
-    /**
+    /**historyListhistoryList
      * Create all the rooms and link their exits together.
      */
     private void createRooms(){
@@ -107,6 +107,17 @@ public class Game
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
     }
+
+    /**
+     * This method prints the room introduction and 
+     * adds the introducing room to the history list
+     * @param introductionRoom The room to be introduced
+     */
+    private void roomIntroducer(Room introducingRoom){
+        System.out.println(introducingRoom.getLongDescription()); // print room introduction
+        historyList.push(introducingRoom); // Add the entered room to the historylist
+    }
+
 
     /**
      * Given a command, process (that is: execute) the command.
@@ -246,7 +257,7 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription());
+            roomIntroducer(currentRoom);
         }
     }
 
