@@ -100,7 +100,11 @@ public class Room
         return exits.get(direction);
     }
 
-    // get the items from the room
+    /** 
+     * get the items from the room
+     * @param index The name of the object you want to have returned
+     * @return The requested object
+     */
     public Item getItem(int index) {
         return items.get(index);
     }
