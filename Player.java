@@ -1,15 +1,12 @@
-import java.util.HashMap;
-
 public class Player
 {
     private String name;
     private Room currentRoom;
-    private HashMap<String, Item> itemsCarring;
+    private int health;
 
     // constructor 
     public Player(String name) {
         this.name = name;
-        itemsCarring = new HashMap<String, Item>();
     }
     // in what room the player is
     public Room getCurrentPlayerRoom() {
@@ -23,5 +20,8 @@ public class Player
     public void setPlayerName(String name) {
 		this.name = name;
     }
-    
+    // get health
+    public int getHealth() {
+        return health;
+    }
 }
