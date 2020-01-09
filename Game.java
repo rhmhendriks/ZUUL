@@ -15,7 +15,7 @@ import java.util.ArrayList;
  *  executes the commands that the parser returns.
  * 
  * @author  Ronald H.M. Hendriks and Luc Willemse
- * @version 2019.01.08
+ * @version 2020.01.08
  */
 
 public class Game 
@@ -45,13 +45,7 @@ public class Game
     /**
      * Create all the rooms and link their exits together.
      */
-    private void createRooms()System.out.println();
-    System.out.println("Welcome to the World of Zuul!");
-    System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-    System.out.println("Type 'help' if you need help.");
-    System.out.println();
-    System.out.println(currentRoom.getLongDescription());
-    {
+    private void createRooms(){
         Room outside, theater, pub, lab, office;
       
         // create the rooms
@@ -252,7 +246,6 @@ public class Game
         }
         else {
             currentRoom = nextRoom;
-            
             System.out.println(currentRoom.getLongDescription());
         }
     }
