@@ -110,6 +110,7 @@ public class Player
          */
         public void lostLive(){
             this.lives = this.lives - 1;
+            System.out.println("Je hebt een leven verloren! Je hebt er nog " + this.getLiveStatus() + " over!");
         }
 
         /**
@@ -190,7 +191,7 @@ public class Player
             for (int l = 0; l <= this.getLiveStatus() -1; l++){
                 livebar.append(" ♥");
             }
-            return "(" + getLiveStatus() + ") " + livebar.toString();
+            return "(" + this.getLiveStatus() + ") " + livebar.toString();
         }
 
     //////////////////////////////////////////////////////////

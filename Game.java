@@ -127,6 +127,7 @@ public class Game
         
         // Now we will start the game in the first room. 
             roomIntroducer(cel);
+            currentRoom = cel;
 
     }
 
@@ -134,7 +135,6 @@ public class Game
      * Create all the rooms and link their exits together.
      */
     private void createRooms(){
-        Room outside, theater, pub, lab, office;
       
         // create the rooms
         outside = new Room("outside the main entrance of the university");
@@ -205,8 +205,6 @@ public class Game
         System.out.println("Welcome to the World of Zuul!");
         System.out.println("World of Zuul is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
-        System.out.println();
-        System.out.println(currentRoom.getLongDescription());
     }
 
     /**
@@ -325,13 +323,45 @@ public class Game
      * Here we print some stupid, cryptic message and a list of the 
      * command words.
      */
+    private void printHelpCell() 
+    {
+        System.out.println("Op de muur staat geschreven welke acties je kunt");
+        System.out.println("gebruiken tijdens deze game.");
+        System.out.println();
+        System.out.println("Je kunt deze lijst opnieuw tonen met 'help', ");
+        System.out.println("maar denk eraan: het tonen van deze lijst kost");
+        System.out.println("je één leven.");
+        System.out.println();
+        System.out.println("Natuurlijk kun je ook altijd weer naar de cel om ");
+        System.out.println("om de lijst op de muur te bekijken. ");
+        parser.showCommands();
+    }
+
     private void printHelp() 
     {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
-        System.out.println();
-        System.out.println("Your command words are:");
-        parser.showCommands();
+        Scanner helpConfirmation = new Scanner(System.in);
+        boolean helpconbool;
+
+        System.out.println("Je hebt 'help' gebruikt! Dat kost je één leven.");
+        System.out.println("weet je zeker dat je een leven wilt betalen om ");
+        System.out.println("hulp te krijgen? [Ja (true) / Nee (false)] ");
+        
+
+        if (helpConfirmation.nextBoolean()){
+            activePlayer.lostLive();
+            System.out.println();
+            System.out.println("Op de muur staat geschreven welke acties je kunt");
+            System.out.println("gebruiken tijdens deze game.");
+            System.out.println();
+            System.out.println("Je kunt deze lijst opnieuw tonen met 'help', ");
+            System.out.println("maar denk eraan: het tonen van deze lijst kost");
+            System.out.println("je één leven.");
+            System.out.println();
+            System.out.println("Natuurlijk kun je ook altijd weer naar de cel om ");
+            System.out.println("om de lijst op de muur te bekijken. ");
+            parser.showCommands();
+        }
+        
     }
 
     /** 
