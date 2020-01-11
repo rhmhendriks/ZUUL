@@ -19,4 +19,12 @@ public class Player
     public int getHealth() {
         return health;
     }
+    // get difficulty
+    public int getDifficulty() {
+        return difficulty;
+    }
+    // set difficulty
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
 }
