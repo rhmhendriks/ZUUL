@@ -1,5 +1,6 @@
 import java.util.Stack;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *  This class is the main class of the "World of Zuul" application. 
@@ -84,9 +85,9 @@ public class Game
      * @param introducingRoom The room to be introduced
      */
     private void roomIntroducer(Room introducingRoom){
-        System.out.println("Speler :" + ActivePlayer.getName() + "   " + "Levens: " + ActivePlayer.createLivebar() + "   " + "Gezondheid: " + ActivePlayer.getHealth());
+        System.out.println("Speler :" + activePlayer.getName() + "   " + "Levens: " + activePlayer.createLivebar() + "   " + "Gezondheid: " + activePlayer.getHealth());
         System.out.println(" ");
-        System.out.println("Je bezit:" )
+        System.out.println("Je bezit:" );
 
 
 
@@ -99,6 +100,7 @@ public class Game
      */
     public void play() 
     {            
+
         printWelcome();
 
         // Enter the main command loop.  Here we repeatedly read commands and
@@ -311,5 +313,110 @@ public class Game
         Room roomtogobackto = historyList.pop();
         currentRoom = roomtogobackto;
         roomIntroducer(currentRoom);
+    }
+
+    private void gameStarter(){
+        // We specify the needed local variables
+            // Name input 
+                Scanner playerName = new Scanner(System.in);
+                Scanner playerNameConfirm = new Scanner(System.in);
+                String choosenName;
+                String confirmInputName;
+            
+            // Difficulty selection
+                Scanner difLevel = new Scanner(System.in);
+                Scanner difLevelConfirm = new Scanner(System.in);
+                String choosenDifLevel;
+                String confirmInputDifLevel;
+                String printableDifLevel;
+                int usableDifLevel;
+
+        // Now we put the things on the screen
+            // Set the Player Name
+                printWelcome();
+                System.out.println("---------------------------------------------------------");
+                System.out.println("Wat is jouw naam?");
+                choosenName = playerName.nextLine();
+
+                System.out.println(" ");
+
+                System.out.println("De door jouw gekozen naam is: " + choosenName);
+                System.out.println("Is dit juist? [yes / no]");
+                confirmInputName = playerNameConfirm.nextLine();
+
+                while (confirmInputName != "yes"){
+                    System.out.println(" ");
+                    System.out.println("Wat is jouw naam?");
+                    choosenName = playerName.nextLine();
+
+                    System.out.println(" ");
+
+                    System.out.println("De door jouw gekozen naam is: " + choosenName);
+                    System.out.println("Is dit juist? [yes / no]");
+                    confirmInputName = playerNameConfirm.nextLine();
+                }
+                
+            // create some room
+                System.out.println(" ");
+                System.out.println(" ");
+        
+            // Set the difficulty
+                System.out.println("Je kunt dit spel spelen op verschillende niveau's:");
+                System.out.println("(1) Makkelijk   (2) Gemiddeld   (3) Moeilijk");
+                System.out.println(" ");
+                System.out.println("Of speel met een tijdslimiet voor meer uitdaging:");
+                System.out.println("(4) Makkelijk   (5) Gemiddeld   (6) Moeilijk");
+                System.out.println(" ");
+                System.out.println("Op welk niveau wil je dit spel spelen? [nummer bijv. '2'] ");
+                choosenDifLevel = difLevel.nextLine();
+
+                System.out.println(" ");
+
+                if (choosenDifLevel == "1"){
+                    printableDifLevel = "Makkelijk";
+                    usableDifLevel = 1;
+                } else if (choosenDifLevel == "2"){
+                    printableDifLevel = "Gemiddeld";
+                    usableDifLevel = 2;
+                } else if (choosenDifLevel == "3"){
+                    printableDifLevel = "Moeilijk";
+                    usableDifLevel = 3;
+                } else  if (choosenDifLevel == "4"){
+                    printableDifLevel = "Makkelijk (met tijd)";
+                    usableDifLevel = 4;
+                } else if (choosenDifLevel == "5"){
+                    printableDifLevel = "Gemiddeld (met tijd)";
+                    usableDifLevel = 5;
+                } else if (choosenDifLevel == "6"){
+                    printableDifLevel = "Moeilijk (met tijd)";
+                    usableDifLevel = 6;
+                } else { 
+                    System.out.println(" ");
+                    System.out.println("Op welk niveau wil je dit spel spelen? ");
+                    choosenDifLevel = difLevel.nextLine();
+                }
+
+                System.out.println("Het door jouw gekozen niveau is: " + printableDifLevel);
+                System.out.println("Is dit juist? [yes / no]");
+                confirmInputDifLevel = difLevelConfirm.nextLine();
+
+                while (confirmInputDifLevel != "yes"){
+                    System.out.println(" ");
+                    System.out.println("Op welk niveau wil je dit spel spelen? [nummer bijv. '2'] ");
+                    choosenDifLevel = difLevel.nextLine();
+
+                    System.out.println(" ");
+
+                    System.out.println("Het door jouw gekozen niveau is: " + printableDifLevel);
+                    System.out.println("Is dit juist? [yes / no]");
+                    confirmInputDifLevel = difLevelConfirm.nextLine();
+                }
+
+                System.out.println(" ");
+
+        // We are going to create the player with the given parameters
+            Player activePlayer = new Player(choosenName);
+            activePlayer.setDifficulty(usableDifLevel);
+
     }
 }
