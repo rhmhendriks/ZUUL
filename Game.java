@@ -15,7 +15,7 @@ import java.util.ArrayList;
  *  executes the commands that the parser returns.
  * 
  * @author  Ronald H.M. Hendriks and Luc Willemse
- * @version 2020.01.08
+ * @version 0.2020.01.11
  */
 
 public class Game 
@@ -27,6 +27,7 @@ public class Game
     ArrayList<Item> inventory = new ArrayList<Item>(); 
     private Player player;   
     
+
     /**
      * Create the game and initialise its internal map.
      */
@@ -39,8 +40,8 @@ public class Game
     }
 
     public static void main(String[] args) {
-        Game mygame = new Game();
-        mygame.play();
+        Game game = new Game();
+        game.play();
     }
 
     /**historyListhistoryList
@@ -108,21 +109,6 @@ public class Game
         System.out.println(currentRoom.getLongDescription());
     }
 
-    
-
-    /**
-     * This method prints the room introduction and 
-     * adds the introducing room to the history list
-     * @param introducingRoom The room to be introduced
-     */
-    private void roomIntroducer(Room introducingRoom, boolean addtohistorlylist, Room oldroom = null){
-        System.out.println(introducingRoom.getLongDescription()); // print room introduction
-        if (addtohistorlylist){ 
-            historyList.push(oldroom); // Add the entered room to the historylist
-        }
-    }
-
-
     /**
      * Given a command, process (that is: execute) the command.
      * @param command The command to be processed.
@@ -160,7 +146,7 @@ public class Game
             useLook();
         }
         else if (commandWord.equals("back")) {
-            useBack();
+            
         }
         // else command not recognised.
         return wantToQuit;
@@ -269,9 +255,8 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
-            roomIntroducer(nextRoom, true, currentRoom);
             currentRoom = nextRoom;
-            
+            System.out.println(currentRoom.getLongDescription()); 
         }
     }
 
@@ -297,15 +282,6 @@ public class Game
      */
     private void useLook(){
         currentRoom.look();
-    }
-
-    /**
-     * Get the room to go back
-     */
-    private void useBack(){
-        Room roomtogobackto = historyList.pop();
-        currentRoom = roomtogobackto;
-        roomIntroducer(currentRoom, false);
     }
 
 }
