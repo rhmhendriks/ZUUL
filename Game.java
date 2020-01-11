@@ -15,7 +15,7 @@ import java.util.ArrayList;
  *  executes the commands that the parser returns.
  * 
  * @author  Ronald H.M. Hendriks and Luc Willemse
- * @version 2020.01.08
+ * @version 0.2020.01.11
  */
 
 public class Game 
@@ -27,6 +27,7 @@ public class Game
     ArrayList<Item> inventory = new ArrayList<Item>(); 
     private Player player;   
     
+
     /**
      * Create the game and initialise its internal map.
      */
@@ -39,8 +40,8 @@ public class Game
     }
 
     public static void main(String[] args) {
-        Game mygame = new Game();
-        mygame.play();
+        Game game = new Game();
+        game.play();
     }
 
     /**historyListhistoryList
