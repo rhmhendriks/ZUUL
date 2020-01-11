@@ -176,6 +176,9 @@ public class Game
 
         System.out.println(introducingRoom.getLongDescription()); // print room introduction
         
+        if (introducingRoom == cel){
+            printHelpCell();
+        }
     }
 
     /**
@@ -334,13 +337,13 @@ public class Game
         System.out.println();
         System.out.println("Natuurlijk kun je ook altijd weer naar de cel om ");
         System.out.println("om de lijst op de muur te bekijken. ");
+        System.out.println();
         parser.showCommands();
     }
 
     private void printHelp() 
     {
         Scanner helpConfirmation = new Scanner(System.in);
-        boolean helpconbool;
 
         System.out.println("Je hebt 'help' gebruikt! Dat kost je één leven.");
         System.out.println("weet je zeker dat je een leven wilt betalen om ");
@@ -359,6 +362,7 @@ public class Game
             System.out.println();
             System.out.println("Natuurlijk kun je ook altijd weer naar de cel om ");
             System.out.println("om de lijst op de muur te bekijken. ");
+            System.out.println();
             parser.showCommands();
         }
         

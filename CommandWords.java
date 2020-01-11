@@ -18,7 +18,7 @@ public class CommandWords {
      * Constructor - initialise the command words.
      */
     public CommandWords(){
-
+        createCommandWords();
     }
 
     /** 
@@ -54,7 +54,7 @@ public class CommandWords {
      */
     public void showAll(){
         for (String command : theCommandWords.keySet()){
-            System.out.println(command + "  -  " + theCommandWords.get(command));
+            System.out.println("   " + command + "  -  " + theCommandWords.get(command));
         }
         System.out.println();
     }
