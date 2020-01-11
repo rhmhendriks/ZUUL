@@ -26,7 +26,7 @@ public class Game
     private Stack<Room> historyList;
     Room outside, theater, pub, lab, office, cel;
     ArrayList<Item> inventory = new ArrayList<Item>(); 
-    private Player player;   
+    private Player activePlayer; 
     
 
     /**
@@ -45,6 +45,91 @@ public class Game
         game.play();
     }
 
+    private void gameStarter(){
+        // We specify the needed local variables
+            // Name input 
+                Scanner playerName = new Scanner(System.in);
+                Scanner playerNameConfirm = new Scanner(System.in);
+                String choosenName;
+                boolean confirmInputName;
+            
+            // Difficulty selection
+                Scanner difLevel = new Scanner(System.in);
+                Scanner difLevelConfirm = new Scanner(System.in);
+                String choosenDifLevel;
+                boolean confirmInputDifLevel;
+                int usableDifLevel;
+
+        // Now we put the things on the screen
+            // Set the Player Name
+                printWelcome();
+                System.out.println("---------------------------------------------------------");
+                System.out.println("Wat is jouw naam?");
+                choosenName = playerName.nextLine();
+
+                System.out.println(" ");
+
+                System.out.println("De door jouw gekozen naam is: " + choosenName);
+                System.out.println("Is dit juist? [Ja (true) / Nee (false)]");
+                confirmInputName = playerNameConfirm.nextBoolean();
+
+                while (!confirmInputName){
+                    System.out.println(" ");
+                    System.out.println("Wat is jouw naam?");
+                    choosenName = playerName.nextLine();
+
+                    System.out.println(" ");
+
+                    System.out.println("De door jouw gekozen naam is: " + choosenName);
+                    System.out.println("Is dit juist? [Ja (true) / Nee (false)]");
+                    confirmInputName = playerNameConfirm.nextBoolean();
+                }
+                
+            // create some room
+                System.out.println(" ");
+                System.out.println(" ");
+        
+            // Set the difficulty
+                System.out.println("Je kunt dit spel spelen op verschillende niveau's:");
+                System.out.println("(1) Makkelijk   (2) Gemiddeld   (3) Moeilijk");
+                System.out.println(" ");
+                System.out.println("Of speel met een tijdslimiet voor meer uitdaging:");
+                System.out.println("(4) Makkelijk   (5) Gemiddeld   (6) Moeilijk");
+                System.out.println(" ");
+                System.out.println("Op welk niveau wil je dit spel spelen? [nummer bijv. '2'] ");
+                choosenDifLevel = difLevel.nextLine();
+                usableDifLevel = Integer.parseInt(choosenDifLevel);
+
+                System.out.println(" ");
+
+                System.out.println("Het door jouw gekozen niveau is: " + choosenDifLevel);
+                System.out.println("Is dit juist? [Ja (true) / Nee (false)]");
+                confirmInputDifLevel = difLevelConfirm.nextBoolean();
+
+                while (!confirmInputDifLevel || usableDifLevel < 1 || usableDifLevel > 6){
+                    System.out.println(" ");
+                    System.out.println("Op welk niveau wil je dit spel spelen? [nummer bijv. '2'] ");
+                    choosenDifLevel = difLevel.nextLine();
+
+                    System.out.println(" ");
+
+                    System.out.println("Het door jouw gekozen niveau is: " + choosenDifLevel);
+                    System.out.println("Is dit juist? [Ja (true) / Nee (false)]");
+                    confirmInputDifLevel = difLevelConfirm.nextBoolean();
+                }
+
+                System.out.println(" ");
+
+              
+        // We are going to create the player with the given parameters
+            activePlayer = new Player(choosenName);
+            activePlayer.setDifficulty(usableDifLevel);
+        
+        // Now we will start the game in the first room. 
+            roomIntroducer(cel);
+
+    }
+
     /**historyListhistoryList
      * Create all the rooms and link their exits together.
      */
@@ -59,7 +144,7 @@ public class Game
         office = new Room("in the computing admin office");
         cel = new Room("Je zit in de cel. Er zit een bewaker voor de cel. De bewaker zit op veilige afstand, zodat jij hem niet kan aanraken.");
 
-        outside.setLookDescription("Dit is de look beschrijving");
+        cel.setLookDescription("Dit is de look beschrijving");
 
         // initialise room exits
         outside.setExit("south", lab);
@@ -85,11 +170,9 @@ public class Game
      * @param introducingRoom The room to be introduced
      */
     private void roomIntroducer(Room introducingRoom){
-        System.out.println("Speler :" + activePlayer.getName() + "   " + "Levens: " + activePlayer.createLivebar() + "   " + "Gezondheid: " + activePlayer.getHealth());
+        System.out.println("Speler: " + activePlayer.getName() + "   " + "Levens: " + activePlayer.createLivebar() + "   " + "Gezondheid: " + activePlayer.getHealth());
         System.out.println(" ");
         System.out.println("Je bezit:" );
-
-
 
         System.out.println(introducingRoom.getLongDescription()); // print room introduction
         
@@ -100,8 +183,7 @@ public class Game
      */
     public void play() 
     {            
-
-        printWelcome();
+        gameStarter();
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
@@ -164,7 +246,7 @@ public class Game
             useLook();
         }
         else if (commandWord.equals("back")) {
-            
+            useBack();
         }
         // else command not recognised.
         return wantToQuit;
@@ -315,108 +397,5 @@ public class Game
         roomIntroducer(currentRoom);
     }
 
-    private void gameStarter(){
-        // We specify the needed local variables
-            // Name input 
-                Scanner playerName = new Scanner(System.in);
-                Scanner playerNameConfirm = new Scanner(System.in);
-                String choosenName;
-                String confirmInputName;
-            
-            // Difficulty selection
-                Scanner difLevel = new Scanner(System.in);
-                Scanner difLevelConfirm = new Scanner(System.in);
-                String choosenDifLevel;
-                String confirmInputDifLevel;
-                String printableDifLevel;
-                int usableDifLevel;
-
-        // Now we put the things on the screen
-            // Set the Player Name
-                printWelcome();
-                System.out.println("---------------------------------------------------------");
-                System.out.println("Wat is jouw naam?");
-                choosenName = playerName.nextLine();
-
-                System.out.println(" ");
-
-                System.out.println("De door jouw gekozen naam is: " + choosenName);
-                System.out.println("Is dit juist? [yes / no]");
-                confirmInputName = playerNameConfirm.nextLine();
-
-                while (confirmInputName != "yes"){
-                    System.out.println(" ");
-                    System.out.println("Wat is jouw naam?");
-                    choosenName = playerName.nextLine();
-
-                    System.out.println(" ");
-
-                    System.out.println("De door jouw gekozen naam is: " + choosenName);
-                    System.out.println("Is dit juist? [yes / no]");
-                    confirmInputName = playerNameConfirm.nextLine();
-                }
-                
-            // create some room
-                System.out.println(" ");
-                System.out.println(" ");
-        
-            // Set the difficulty
-                System.out.println("Je kunt dit spel spelen op verschillende niveau's:");
-                System.out.println("(1) Makkelijk   (2) Gemiddeld   (3) Moeilijk");
-                System.out.println(" ");
-                System.out.println("Of speel met een tijdslimiet voor meer uitdaging:");
-                System.out.println("(4) Makkelijk   (5) Gemiddeld   (6) Moeilijk");
-                System.out.println(" ");
-                System.out.println("Op welk niveau wil je dit spel spelen? [nummer bijv. '2'] ");
-                choosenDifLevel = difLevel.nextLine();
-
-                System.out.println(" ");
-
-                if (choosenDifLevel == "1"){
-                    printableDifLevel = "Makkelijk";
-                    usableDifLevel = 1;
-                } else if (choosenDifLevel == "2"){
-                    printableDifLevel = "Gemiddeld";
-                    usableDifLevel = 2;
-                } else if (choosenDifLevel == "3"){
-                    printableDifLevel = "Moeilijk";
-                    usableDifLevel = 3;
-                } else  if (choosenDifLevel == "4"){
-                    printableDifLevel = "Makkelijk (met tijd)";
-                    usableDifLevel = 4;
-                } else if (choosenDifLevel == "5"){
-                    printableDifLevel = "Gemiddeld (met tijd)";
-                    usableDifLevel = 5;
-                } else if (choosenDifLevel == "6"){
-                    printableDifLevel = "Moeilijk (met tijd)";
-                    usableDifLevel = 6;
-                } else { 
-                    System.out.println(" ");
-                    System.out.println("Op welk niveau wil je dit spel spelen? ");
-                    choosenDifLevel = difLevel.nextLine();
-                }
-
-                System.out.println("Het door jouw gekozen niveau is: " + printableDifLevel);
-                System.out.println("Is dit juist? [yes / no]");
-                confirmInputDifLevel = difLevelConfirm.nextLine();
-
-                while (confirmInputDifLevel != "yes"){
-                    System.out.println(" ");
-                    System.out.println("Op welk niveau wil je dit spel spelen? [nummer bijv. '2'] ");
-                    choosenDifLevel = difLevel.nextLine();
-
-                    System.out.println(" ");
-
-                    System.out.println("Het door jouw gekozen niveau is: " + printableDifLevel);
-                    System.out.println("Is dit juist? [yes / no]");
-                    confirmInputDifLevel = difLevelConfirm.nextLine();
-                }
-
-                System.out.println(" ");
-
-        // We are going to create the player with the given parameters
-            Player activePlayer = new Player(choosenName);
-            activePlayer.setDifficulty(usableDifLevel);
-
-    }
+    
 }

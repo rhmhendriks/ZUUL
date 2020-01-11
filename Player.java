@@ -187,7 +187,7 @@ public class Player
          */
         public String createLivebar() {
             StringBuilder livebar = new StringBuilder();
-            for (int l = 0; l <= this.getLiveStatus(); l++){
+            for (int l = 0; l <= this.getLiveStatus() -1; l++){
                 livebar.append(" ♥");
             }
             return "(" + getLiveStatus() + ") " + livebar.toString();
@@ -208,8 +208,6 @@ public class Player
             }
             return result;
         }
-
-        public int 
 
 
 
