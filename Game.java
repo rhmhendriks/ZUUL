@@ -108,21 +108,6 @@ public class Game
         System.out.println(currentRoom.getLongDescription());
     }
 
-    
-
-    /**
-     * This method prints the room introduction and 
-     * adds the introducing room to the history list
-     * @param introducingRoom The room to be introduced
-     */
-    private void roomIntroducer(Room introducingRoom, boolean addtohistorlylist, Room oldroom = null){
-        System.out.println(introducingRoom.getLongDescription()); // print room introduction
-        if (addtohistorlylist){ 
-            historyList.push(oldroom); // Add the entered room to the historylist
-        }
-    }
-
-
     /**
      * Given a command, process (that is: execute) the command.
      * @param command The command to be processed.
@@ -160,7 +145,7 @@ public class Game
             useLook();
         }
         else if (commandWord.equals("back")) {
-            useBack();
+            
         }
         // else command not recognised.
         return wantToQuit;
@@ -269,9 +254,8 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
-            roomIntroducer(nextRoom, true, currentRoom);
             currentRoom = nextRoom;
-            
+            System.out.println(currentRoom.getLongDescription()); 
         }
     }
 
@@ -297,15 +281,6 @@ public class Game
      */
     private void useLook(){
         currentRoom.look();
-    }
-
-    /**
-     * Get the room to go back
-     */
-    private void useBack(){
-        Room roomtogobackto = historyList.pop();
-        currentRoom = roomtogobackto;
-        roomIntroducer(currentRoom, false);
     }
 
 }
