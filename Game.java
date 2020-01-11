@@ -79,6 +79,22 @@ public class Game
     }
 
     /**
+     * This method prints the current status of the player information
+     * and introduces the room that the player is trying to access. 
+     * @param introducingRoom The room to be introduced
+     */
+    private void roomIntroducer(Room introducingRoom){
+        System.out.println("Speler :" + ActivePlayer.getName() + "   " + "Levens: " + ActivePlayer.createLivebar() + "   " + "Gezondheid: " + ActivePlayer.getHealth());
+        System.out.println(" ");
+        System.out.println("Je bezit:" )
+
+
+
+        System.out.println(introducingRoom.getLongDescription()); // print room introduction
+        
+    }
+
+    /**
      *  Main play routine.  Loops until end of play.
      */
     public void play() 
@@ -255,6 +271,7 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
+            historyList.add(currentRoom);
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription()); 
         }
@@ -284,4 +301,15 @@ public class Game
         currentRoom.look();
     }
 
+
+    /**
+     * Back was entered. 
+     * We go back to the last accesed room.
+     */
+    
+    private void useBack(){
+        Room roomtogobackto = historyList.pop();
+        currentRoom = roomtogobackto;
+        roomIntroducer(currentRoom);
+    }
 }
