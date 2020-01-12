@@ -1,5 +1,4 @@
 import java.util.Stack;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -25,7 +24,6 @@ public class Game
     private Room currentRoom;
     private Stack<Room> historyList;
     Room outside, theater, pub, lab, office, cel;
-    ArrayList<Item> inventory = new ArrayList<Item>(); 
     private Player activePlayer; 
     
 
@@ -63,7 +61,9 @@ public class Game
         // Now we put the things on the screen
             // Set the Player Name
                 printWelcome();
+                System.out.println(" ");
                 System.out.println("---------------------------------------------------------");
+                System.out.println(" ");
                 System.out.println("Wat is jouw naam?");
                 choosenName = playerName.nextLine();
 
@@ -84,6 +84,9 @@ public class Game
                     System.out.println("Is dit juist? [Ja (true) / Nee (false)]");
                     confirmInputName = playerNameConfirm.nextBoolean();
                 }
+                playerName.close();
+                playerNameConfirm.close();
+
                 
             // create some room
                 System.out.println(" ");
@@ -117,10 +120,11 @@ public class Game
                     System.out.println("Is dit juist? [Ja (true) / Nee (false)]");
                     confirmInputDifLevel = difLevelConfirm.nextBoolean();
                 }
+                difLevel.close();
+                difLevelConfirm.close();
 
                 System.out.println(" ");
 
-              
         // We are going to create the player with the given parameters
             activePlayer = new Player(choosenName);
             activePlayer.setDifficulty(usableDifLevel);
@@ -161,7 +165,7 @@ public class Game
 
         currentRoom = outside;  // start game outside
 
-        inventory.add(new Item("key"));
+        activePlayer.inventory.add(new Item("key"));
     }
 
     /**
@@ -171,10 +175,11 @@ public class Game
      */
     private void roomIntroducer(Room introducingRoom){
         System.out.println("Speler: " + activePlayer.getName() + "   " + "Levens: " + activePlayer.createLivebar() + "   " + "Gezondheid: " + activePlayer.getHealth());
-        System.out.println(" ");
         System.out.println("Je bezit:" );
+        System.out.println(" ");
 
         System.out.println(introducingRoom.getLongDescription()); // print room introduction
+        System.out.println(" ");
         
         if (introducingRoom == cel){
             printHelpCell();
@@ -205,9 +210,10 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type 'help' if you need help.");
+        System.out.println("Welkom bij ons spel!");
+        System.out.println("Dit is een nieuwe minder saaie verzie van ZUUL");
+        System.out.println();
+        pressEnterToContinue();
     }
 
     /**
@@ -254,33 +260,33 @@ public class Game
     }
 
     /**
-     * drop item
+     * This method is used to drop an item from the bag
      * @param command The command to be processed.
      */
     private void dropItem(Command command) 
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know what to drop...
-            System.out.println("drop What?");
+            System.out.println("Wat wil je achterlaten?");
         }
 
-        String item = command.getSecondWord();
+        String item = command.getSecondWord(); // Get the item the player wants to drop
 
-        // Try to leave current room.
+        // Find the item to drop
         Item newItem = null;
         int index = 0;
-        for(int i = 0; i < inventory.size(); i++) {
-            newItem = inventory.get(i);
+        for(int i = 0; i < activePlayer.inventory.size(); i++) {
+            newItem = activePlayer.inventory.get(i);
             index = i;
         }
 
         if (newItem == null) {
-            System.out.println("that item is not in your bag");
+            System.out.println(item + " zit niet in de tas! Probeer het opnieuw!");
         }
         else {
-            inventory.remove(index);
+            activePlayer.inventory.remove(index);
             currentRoom.setItem(new Item(item));
-            System.out.println("je hebt dit item laten vallen:" + item);
+            System.out.println("je hebt " + item + " achtergelaten in " + currentRoom + "!");
         }
     }
 
@@ -292,7 +298,7 @@ public class Game
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
-            System.out.println("Pick up What?");
+            System.out.println("Je hebt niet aangegeven wat je wil opakken!");
         }
 
         String item = command.getSecondWord();
@@ -301,19 +307,19 @@ public class Game
         Item newItem = currentRoom.pickupItem(item);
 
         if (newItem == null) {
-            System.out.println("");
+            System.out.println("Helaas. Dit voorwerp is niet aanwezig in deze kamer!");
         }
         else {
-            inventory.add(newItem);
+            activePlayer.inventory.add(newItem);
             currentRoom.removeItem(item);
-            System.out.println("je hebt dit op gepakt:" + item);
+            System.out.println("je hebt " + item + " opgepakt en draagt het nu bij je in je tas!");
         }
     }
 
     private void printInventory() {
         String output = "";
-        for(int i = 0; i < inventory.size(); i++) {
-            output += i + " " + inventory.get(i).getDescription() + "   ";  
+        for(int i = 0; i < activePlayer.inventory.size(); i++) {
+            output += i + " " + activePlayer.inventory.get(i).getDescription() + "   ";  
         }
         System.out.println("je hebt deze items momenteel bij je");
         System.out.println(output);
@@ -365,7 +371,7 @@ public class Game
             System.out.println();
             parser.showCommands();
         }
-        
+        helpConfirmation.close();
     }
 
     /** 
@@ -419,6 +425,19 @@ public class Game
         currentRoom.look();
     }
 
+    /** 
+     * Help method witch is waiting for the user to press enter
+     */
+    private void pressEnterToContinue()
+    { 
+           System.out.println("Druk op enter om verder te gaan");
+           try
+           {
+               System.in.read();
+           }  
+           catch(Exception e)
+           {}  
+    }
 
     /**
      * Back was entered. 
