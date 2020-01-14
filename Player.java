@@ -26,6 +26,7 @@ public class Player
     private int lives;
     private int inventorySize;
     private int timeLimit;
+    private int moves;
     ArrayList<Item> inventory; 
 
     /**
