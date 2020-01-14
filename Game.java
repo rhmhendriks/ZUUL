@@ -23,7 +23,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Stack<Room> historyList;
-    Room outside, theater, pub, lab, office, cel;
+    Room outside, theater, pub, lab, office, cel, hal;
     ArrayList<Item> inventory = new ArrayList<Item>(); 
     private Player player;   
     
@@ -48,34 +48,15 @@ public class Game
      * Create all the rooms and link their exits together.
      */
     private void createRooms(){
-        Room outside, theater, pub, lab, office;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
-        cel = new Room("Je zit in de cel. Er zit een bewaker voor de cel. De bewaker zit op veilige afstand, zodat jij hem niet kan aanraken.");
-
-        outside.setLookDescription("Dit is de look beschrijving");
+            cel = new Room("Je zit in de cel. Er zit een bewaker voor de cel. De bewaker zit op veilige afstand, zodat jij hem niet kan aanraken.");
+            hal = new Room ("hgeydgwhcgwvgcyiuwece");
+        // adding lookdescription to the rooms  
+            cel.setLookDescription("Je ziet dat de bewaker een sleutelbos aan zijn broek heeft hangen. Aan jou de taak om ervoor te zorgen dat de bewaker dichter bijkomt, zodat jij de bewaker kan uitschakelen en zijn sleutel kan pakken om de cel te openen. Maar hoe ga je dit doen?");
 
         // initialise room exits
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
-
-        theater.setExit("west", outside);
-
-        pub.setExit("east", outside);
-
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
-
-        office.setExit("west", lab);
-
-        currentRoom = outside;  // start game outside
-
-        inventory.add(new Item("key"));
+            cel.setExit("Celdeur", hal);
     }
 
     /**
