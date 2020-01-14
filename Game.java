@@ -14,7 +14,7 @@ import java.util.Scanner;
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Ronald H.M. Hendriks and Luc Willemse
+ * @author  Ronald H.M. Hendriks, Nivard and Luc Willemse
  * @version 0.2020.01.11
  */
 
@@ -172,8 +172,6 @@ public class Game
         lab.setExit("east", office);
 
         office.setExit("west", lab);
-
-        currentRoom = outside;  // start game outside
     }
 
     /**
