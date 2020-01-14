@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * time that the user is playing, how many lives the player has left and the 
  * amount of batlehealth that the player has left. 
  * 
- * @author  Ronald H.M. Hendriks and Luc Willemse
+ * @author  Ronald H.M. Hendriks, Nivard Ypey and Luc Willemse
  * @version 2019.01.08
  */
 
