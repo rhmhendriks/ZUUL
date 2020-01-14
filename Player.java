@@ -68,24 +68,31 @@ public class Player
                 this.lives = 6;
                 this.inventorySize = 5;
                 this.health = 15;
+                this.moves = 45;
+                this.timeLimit = 999;
                 isGood = true;
             } else if (difficulty == 2){
                 this.difficulty = difficulty;
                 this.lives = 4;
                 this.inventorySize = 3;
                 this.health = 12;
+                this.moves = 35;
+                this.timeLimit = 999;
                 isGood = true;
             } else if (difficulty == 3){
                 this.difficulty = difficulty;
                 this.lives = 2;
                 this.inventorySize = 1;
                 this.health = 12;
+                this.moves = 25;
+                this.timeLimit = 999;
                 isGood = true;
             } else if (difficulty == 4){
                 this.difficulty = difficulty;
                 this.lives = 6;
                 this.inventorySize = 5;
                 this.health = 15;
+                this.moves = 45;
                 this.timeLimit = 900;
                 isGood = true;
             } else if (difficulty == 5){
@@ -93,13 +100,15 @@ public class Player
                 this.lives = 4;
                 this.inventorySize = 3;
                 this.health = 12;
-                isGood = true;
+                this.moves = 35;
                 this.timeLimit = 600;
+                isGood = true;
             } else if (difficulty == 6){
                 this.difficulty = difficulty;
                 this.lives = 2;
                 this.inventorySize = 1;
                 this.health = 12;
+                this.moves = 25;
                 this.timeLimit = 450;
                 isGood = true;
             }
