@@ -30,7 +30,6 @@ public class Game
     /**
      * Create the game and initialise its internal map.
      */
-
     public Game() 
     {
         createRooms();
@@ -38,11 +37,19 @@ public class Game
         historyList = new Stack<Room>();
     }
 
+    /**
+     * The main method for running outside of IDE
+     */
     public static void main(String[] args) {
         Game game = new Game();
         game.play();
     }
 
+    /**
+     * This method is used to get the game starting
+     * by making a player with personal settings
+     * like the player name and difficulty level
+     */
     private void gameStarter(){
         // We specify the needed local variables
             // Name input 
@@ -84,9 +91,6 @@ public class Game
                     System.out.println("Is dit juist? [Ja (true) / Nee (false)]");
                     confirmInputName = playerNameConfirm.nextBoolean();
                 }
-                playerName.close();
-                playerNameConfirm.close();
-
                 
             // create some room
                 System.out.println(" ");
@@ -120,8 +124,6 @@ public class Game
                     System.out.println("Is dit juist? [Ja (true) / Nee (false)]");
                     confirmInputDifLevel = difLevelConfirm.nextBoolean();
                 }
-                difLevel.close();
-                difLevelConfirm.close();
 
                 System.out.println(" ");
 
@@ -133,9 +135,17 @@ public class Game
             roomIntroducer(cel);
             currentRoom = cel;
 
+        // Temporary for testing parameters
+            activePlayer.inventory.add(new Item("key"));
+
+        // Lets close our scanners    
+            playerName.close();
+            playerNameConfirm.close();
+            difLevel.close();
+            difLevelConfirm.close();
     }
 
-    /**historyListhistoryList
+    /**
      * Create all the rooms and link their exits together.
      */
     private void createRooms(){
@@ -164,8 +174,6 @@ public class Game
         office.setExit("west", lab);
 
         currentRoom = outside;  // start game outside
-
-        activePlayer.inventory.add(new Item("key"));
     }
 
     /**
@@ -175,7 +183,7 @@ public class Game
      */
     private void roomIntroducer(Room introducingRoom){
         System.out.println("Speler: " + activePlayer.getName() + "   " + "Levens: " + activePlayer.createLivebar() + "   " + "Gezondheid: " + activePlayer.getHealth());
-        System.out.println("Je bezit:" );
+        System.out.println("Je bezit:" + activePlayer.getInventory());
         System.out.println(" ");
 
         System.out.println(introducingRoom.getLongDescription()); // print room introduction
@@ -272,6 +280,7 @@ public class Game
 
         String item = command.getSecondWord(); // Get the item the player wants to drop
 
+        /**
         // Find the item to drop
         Item newItem = null;
         int index = 0;
@@ -283,10 +292,18 @@ public class Game
         if (newItem == null) {
             System.out.println(item + " zit niet in de tas! Probeer het opnieuw!");
         }
+        
         else {
             activePlayer.inventory.remove(index);
             currentRoom.setItem(new Item(item));
             System.out.println("je hebt " + item + " achtergelaten in " + currentRoom + "!");
+        }
+        */
+
+        if (!activePlayer.inInventory(item)){
+            System.out.println(item + " zit niet in de tas! Probeer het opnieuw!");
+        } else if (activePlayer.removeFromInventory(item)) {
+
         }
     }
 
@@ -314,15 +331,6 @@ public class Game
             currentRoom.removeItem(item);
             System.out.println("je hebt " + item + " opgepakt en draagt het nu bij je in je tas!");
         }
-    }
-
-    private void printInventory() {
-        String output = "";
-        for(int i = 0; i < activePlayer.inventory.size(); i++) {
-            output += i + " " + activePlayer.inventory.get(i).getDescription() + "   ";  
-        }
-        System.out.println("je hebt deze items momenteel bij je");
-        System.out.println(output);
     }
 
     // implementations of user commands:
@@ -397,7 +405,7 @@ public class Game
         else {
             historyList.add(currentRoom);
             currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription()); 
+            roomIntroducer(currentRoom);
         }
     }
 

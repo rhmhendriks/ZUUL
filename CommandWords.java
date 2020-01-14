@@ -15,7 +15,7 @@ public class CommandWords {
     private HashMap<String, String> theCommandWords;
 
     /**
-     * Constructor - initialise the command words.
+     * Constructor - initialise the command words. 
      */
     public CommandWords(){
         createCommandWords();

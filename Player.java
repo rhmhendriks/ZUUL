@@ -199,10 +199,17 @@ public class Player
     // of the player. This section does view and modify!    //
     //////////////////////////////////////////////////////////
 
+        /**
+         * This method is used to add an item to 
+         * the players personal inventory. 
+         * 
+         * @param itemToAdd The item you want to add to the inventory
+         * @return True is its added, False if it isn't
+         */
         public boolean addToInventory(Item itemToAdd) {
             boolean result = false;
-            if (inventory.size() <= inventorySize -1){
-                inventory.add(itemToAdd);
+            if (this.inventory.size() <= inventorySize -1){
+                this.inventory.add(itemToAdd);
                 result = true;
             } else {
                 result = false;
@@ -210,6 +217,32 @@ public class Player
             return result;
         }
 
+        public String getInventory() {
+            String output = "";
+            if (this.inventory.size() <= 0){
+                for(int i = 0; i < this.inventory.size(); i++) {
+                    output = i + " " + this.inventory.get(i).getDescription() + "   ";  
+                }
+            } else {
+                output = "Je hebt niets bij je!";
+            }
+            return output;
+        }
 
+        public boolean inInventory(String toCheck){
+            if (this.inventory.contains(toCheck)){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public boolean removeFromInventory(Item itemToRemove){
+            if (this.inventory.remove(itemToRemove)){
+                return true;
+            } else {
+                return false;
+            }
+        }
 
     }
