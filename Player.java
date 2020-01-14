@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * time that the user is playing, how many lives the player has left and the 
  * amount of batlehealth that the player has left. 
  * 
- * @author  Ronald H.M. Hendriks and Luc Willemse
+ * @author  Ronald H.M. Hendriks, Nivard Ypey and Luc Willemse
  * @version 2019.01.08
  */
 
@@ -26,6 +26,7 @@ public class Player
     private int lives;
     private int inventorySize;
     private int timeLimit;
+    private int moves;
     ArrayList<Item> inventory; 
 
     /**
@@ -54,6 +55,33 @@ public class Player
         }
 
         /**
+         * Define the output of the health command
+         * @param numbHealth The wanted output when a user uses "look" in this room.
+         */
+        public void setInventorySize(int numbInventorySize)
+        {
+            this.inventorySize = numbInventorySize;
+        }
+
+        /**
+         * Define the output of the health command
+         * @param numbHealth The wanted output when a user uses "look" in this room.
+         */
+        public void setHealth(int numbHealth)
+        {
+            this.health = numbHealth;
+        }
+
+        /**
+         * Define the output of the moves command
+         * @param numbMoves The wanted output when a user uses "look" in this room.
+         */
+        public void setMoves(int numbMoves) 
+        {
+            this.moves = numbMoves;
+        }
+
+        /**
          * This method is used to set the difficulty of the game
          * 
          * @param difficulty an integer from 1 trough 6. 1 is easy, 2 moderate and 3 hard. 4 trough 6 are the same but without time limits
@@ -67,24 +95,31 @@ public class Player
                 this.lives = 6;
                 this.inventorySize = 5;
                 this.health = 15;
+                this.moves = 45;
+                this.timeLimit = 999;
                 isGood = true;
             } else if (difficulty == 2){
                 this.difficulty = difficulty;
                 this.lives = 4;
                 this.inventorySize = 3;
                 this.health = 12;
+                this.moves = 35;
+                this.timeLimit = 999;
                 isGood = true;
             } else if (difficulty == 3){
                 this.difficulty = difficulty;
                 this.lives = 2;
                 this.inventorySize = 1;
                 this.health = 12;
+                this.moves = 25;
+                this.timeLimit = 999;
                 isGood = true;
             } else if (difficulty == 4){
                 this.difficulty = difficulty;
                 this.lives = 6;
                 this.inventorySize = 5;
                 this.health = 15;
+                this.moves = 45;
                 this.timeLimit = 900;
                 isGood = true;
             } else if (difficulty == 5){
@@ -92,13 +127,15 @@ public class Player
                 this.lives = 4;
                 this.inventorySize = 3;
                 this.health = 12;
-                isGood = true;
+                this.moves = 35;
                 this.timeLimit = 600;
+                isGood = true;
             } else if (difficulty == 6){
                 this.difficulty = difficulty;
                 this.lives = 2;
                 this.inventorySize = 1;
                 this.health = 12;
+                this.moves = 25;
                 this.timeLimit = 450;
                 isGood = true;
             }
@@ -170,6 +207,16 @@ public class Player
          */
         public int getInventSize() {
             return this.inventorySize;
+        }
+
+        /**
+         * This method is used to return the moves
+         * 
+         * @return The time limit in seconds as integer. 
+         */
+        public int getMoves()
+        {
+            return this.moves;
         }
 
         /**
