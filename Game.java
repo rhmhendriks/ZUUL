@@ -144,11 +144,6 @@ public class Game
         // Temporary for testing parameters
             activePlayer.inventory.add(new Item("key"));
 
-        // Lets close our scanners    
-            playerName.close();
-            playerNameConfirm.close();
-            difLevel.close();
-            difLevelConfirm.close();
     }
 
     /**
