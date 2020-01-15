@@ -32,16 +32,20 @@ public class Clock
     }
 
     /**
-         * Define the output of the health command
-         * @param numbTimer The wanted output when a user uses "look" in this room.
+         * Define the output of the timer command
+         * @param numbTimer The wanted output when a user uses "time".
          */
         public void setTimer(Timer numbTimer)
         {
             this.timer = numbTimer;
         }
-
-        public Timer getTimer() {
-            return this.timer;
+        /**
+         * This method is returning the time thats remaining
+         * 
+         * @return A integer with the time of the game
+         */
+        public int getTimer() {
+            return this.secondsPassed;
         }
 
 }

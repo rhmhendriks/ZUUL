@@ -26,7 +26,7 @@ public class Game
     private Stack<Room> historyList;
     Room cel, gang, hal, trap, valkuil, keuken;
     private Player activePlayer;
-    private Clock timer;
+    private Clock activeClock;
         
 
 
@@ -139,7 +139,8 @@ public class Game
             currentRoom = cel;
 
         // time starter
-            timer = new Clock(activePlayer.getTimeLimit());
+            activeClock = new Clock(activePlayer.getTimeLimit());
+            activeClock.startClock();
 
     }
 
@@ -264,7 +265,7 @@ public class Game
             useBack();
         }
         else if (commandWord.equals("time")) {
-            activeClock.getTimer();
+            System.out.println(activeClock.getTimer());
         }
         // else command not recognised.
         return wantToQuit;
