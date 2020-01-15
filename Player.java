@@ -28,6 +28,7 @@ public class Player
     private int timeLimit;
     private int moves;
     ArrayList<Item> inventory; 
+    HashMap<Item, String> bag;
 
     /**
      * Intitialization of a player with the default settings but 
@@ -37,7 +38,7 @@ public class Player
      */
     public Player(String name) {
         this.name = name;
-        ArrayList<Item> inventory = new ArrayList<Item>(); 
+        this.bag = new HashMap<Item, String>();
     }
 
     //////////////////////////////////////////////////////////
@@ -55,8 +56,8 @@ public class Player
         }
 
         /**
-         * Define the output of the health command
-         * @param numbHealth The wanted output when a user uses "look" in this room.
+         * Define the inventory size.
+         * @param numbInventorySize the integer you wanna set the inventorysize to
          */
         public void setInventorySize(int numbInventorySize)
         {
@@ -255,8 +256,8 @@ public class Player
          */
         public boolean addToInventory(Item itemToAdd) {
             boolean result = false;
-            if (this.inventory.size() <= inventorySize -1){
-                this.inventory.add(itemToAdd);
+            if (this.bag.size() <= inventorySize -1){
+                this.bag.put(itemToAdd, itemToAdd.getDescription());
                 result = true;
             } else {
                 result = false;
@@ -265,31 +266,46 @@ public class Player
         }
 
         public String getInventory() {
-            String output = "";
-            if (this.inventory.size() <= 0){
-                for(int i = 0; i < this.inventory.size(); i++) {
-                    output = i + " " + this.inventory.get(i).getDescription() + "   ";  
-                }
+            // Lets initialize some local variables
+                StringBuilder output = new StringBuilder();
+
+            if (this.bag.size() <= 0){
+                output.append("Je hebt niets bij je!");
             } else {
-                output = "Je hebt niets bij je!";
+                for (Item i : bag.keySet()) {
+                    output.append(bag.get(i));
+                    output.append(" ");
+                }
             }
-            return output;
+            return output.toString();
         }
 
         public boolean inInventory(String toCheck){
-            if (this.inventory.contains(toCheck)){
+            if (this.bag.containsValue(toCheck)){
                 return true;
             } else {
                 return false;
             }
         }
 
-        public boolean removeFromInventory(Item itemToRemove){
-            if (this.inventory.remove(itemToRemove)){
+        public Item getItemAsObject(String itemToGet){
+            HashMap<String, Item> flippedBag = new HashMap<String, Item>();
+
+            for (Item i : bag.keySet()) {
+                flippedBag.put(bag.get(i), i);
+            }
+
+            return flippedBag.get(itemToGet);
+
+        }
+
+        public boolean removeFromInventory(String itemToRemove){
+
+            if (inInventory(itemToRemove)){
+                bag.remove(this.getItemAsObject(itemToRemove));
                 return true;
             } else {
                 return false;
             }
-        }
-
     }
+}

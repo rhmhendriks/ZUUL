@@ -247,7 +247,7 @@ public class Game
             wantToQuit = quit(command);
         }
         else if (commandWord.equals("inventory")) {
-            printInventory();
+            activePlayer.getInventory();
         }
         else if (commandWord.equals("pickup")) {
             pickupItem(command);
