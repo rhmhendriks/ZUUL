@@ -42,7 +42,7 @@ public class Room
         colors = new Stack<String>();
 
         // adding colors
-            colors.add("blauw");
+            colors.add("blauw"); 
             colors.add("groen");
             colors.add("rood");
             colors.add("oranje");
