@@ -263,6 +263,9 @@ public class Game
         else if (commandWord.equals("back")) {
             useBack();
         }
+        else if (commandWord.equals("time")) {
+            activeClock.getTimer();
+        }
         // else command not recognised.
         return wantToQuit;
     }

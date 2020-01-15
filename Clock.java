@@ -30,5 +30,19 @@ public class Clock
     public void startClock(){
         timer.scheduleAtFixedRate(task, 1000, 1000);
     }
+
+    /**
+         * Define the output of the health command
+         * @param numbTimer The wanted output when a user uses "look" in this room.
+         */
+        public void setTimer(Timer numbTimer)
+        {
+            this.timer = numbTimer;
+        }
+
+        public Timer getTimer() {
+            return this.timer;
+        }
+
 }
 
