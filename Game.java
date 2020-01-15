@@ -141,9 +141,6 @@ public class Game
         // time starter
             timer = new Clock(activePlayer.getTimeLimit());
 
-        // Temporary for testing parameters
-            activePlayer.inventory.add(new Item("key"));
-
     }
 
     /**
