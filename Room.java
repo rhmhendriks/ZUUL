@@ -136,7 +136,6 @@ public class Room
 
     private String getDirection(Room askedDirection)
     {
-
         // lets initilize some local variables
             HashMap<Room, String> flippedExits = new HashMap<Room, String>();
 
@@ -147,7 +146,6 @@ public class Room
 
             // get the color of a asked direction
                 return flippedExits.get(askedDirection);
-
         }
 
     /**
@@ -194,8 +192,8 @@ public class Room
                 items.remove(i);
             }
         }
-        
     }
+
     // set item in the room
     public void setItem(Item newitem) {
         items.add(newitem);
@@ -209,4 +207,3 @@ public class Room
         return output;
     }
 }
-
