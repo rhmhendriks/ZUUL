@@ -27,7 +27,7 @@ public class Game
     private Room currentRoom;
     private Stack<Room> historyList;
 
-    Room outside, theater, pub, lab, office, cel;
+    Room cel, gang, hal, trap, valkuil, keuken;
     private Player activePlayer;
     Timer timer = new Timer();
     int secondsPassed = 0;
@@ -182,8 +182,8 @@ public class Game
 
         // adding description 
             hal.setSecondDescription("Je zet het glas tegen de deur en drukt vervolgens je oor er tegenaan. Achter de roden deur hoor je gekling van borden, achter de  deur hoor je helemaal niks, welke deur kies je? ");
-            trap.setSecondDescription("Omdat je tijdens jouw spionage missie al op de eerste verdieping bent geweest van het kasteel, weet je dat de trap n
-
+            trap.setSecondDescription("Omdat je tijdens jouw spionage missie al op de eerste verdieping bent geweest van het kasteel, weet je dat de trap n");
+    }
     /**
      * This method prints the current status of the player information
      * and introduces the room that the player is trying to access. 
@@ -257,7 +257,7 @@ public class Game
             wantToQuit = quit(command);
         }
         else if (commandWord.equals("inventory")) {
-            printInventory();
+            activePlayer.getInventory();
         }
         else if (commandWord.equals("pickup")) {
             pickupItem(command);
