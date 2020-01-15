@@ -1,0 +1,26 @@
+#BlueJ class context
+comment0.target=Question
+comment0.text=\n\ Class\ Question\ -\ The\ questions\ of\ the\ games\n\n\ This\ class\ is\ part\ of\ the\ "World\ of\ Zuul"\ application.\ \n\ "World\ of\ Zuul"\ is\ a\ very\ simple,\ text\ based\ adventure\ game.\ \ \n\n\ A\ "Player"\ represents\ the\ person\ playing\ the\ game.\ A\ player\ object\ stores\ \n\ some\ important\ user\ specific\ settings\ like\ the\ name\ of\ the\ user\ and\ the\ \n\ diffeculty\ of\ the\ game.\ \n\ \n\ The\ player\ object\ also\ stores\ some\ realtime\ game\ information\ like\ the\ \n\ time\ that\ the\ user\ is\ playing,\ how\ many\ lives\ the\ player\ has\ left\ and\ the\ \n\ amount\ of\ batlehealth\ that\ the\ player\ has\ left.\ \n\ \n\ @author\ \ Ronald\ H.M.\ Hendriks,\ Nivard\ Ypey\ and\ Luc\ Willemse\n\ @version\ 2019.01.08\n
+comment1.params=theQuestion\ theAnswers\ theDiffeculty\ theCategory
+comment1.target=Question(java.lang.String,\ java.lang.String,\ int,\ int)
+comment1.text=\ \n\ Below\ is\ the\ contructor\ of\ a\ basic\ question.\ \n\ @param\ theQuestion\ The\ question\ that\ will\ be\ displayed\n\ @param\ theAnswers\ The\ answer(s)\ of\ the\ question\ as\ single\ string\ (open\ question)\ or\ comma\ seperated\ (multiplechoice)\ Please\ include\ (*)\ by\ the\ right\ answer\!\n\ @param\ theDiffeculty\ The\ Difficulty\ level\ the\ question\ can\ be\ used.\ (ex.\ 1,2\ or\ 3)\n\ @param\ theCategory\ The\ catgory\ for\ the\ question\ (ex.\ java\=1,\ php\=2\ and\ OSes\=3).\n
+comment10.params=
+comment10.target=int\ getCategory()
+comment2.params=newQuestion
+comment2.target=void\ setQuestion(java.lang.String)
+comment2.text=\n\ Set\ a\ new\ question\ for\ a\ question\ object.\ \n\ \n\ @param\ newQuestion\ The\ question\ that\ you\ want\ to\ save\ in\ a\ object\n
+comment3.params=newAnswers
+comment3.target=void\ setAnswers(java.lang.String)
+comment4.params=newDifLevel
+comment4.target=void\ setDifficulty(int)
+comment5.params=newCategory
+comment5.target=void\ setCategory(int)
+comment6.params=
+comment6.target=java.lang.String\ getQuestion()
+comment7.params=
+comment7.target=java.util.ArrayList\ getAnswers()
+comment8.params=
+comment8.target=java.util.ArrayList\ getAnswer()
+comment9.params=
+comment9.target=int\ getdiffeculty()
+numComments=11

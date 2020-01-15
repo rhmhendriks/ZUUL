@@ -1,6 +1,4 @@
 import java.util.Stack;
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.Scanner;
 
 
@@ -28,6 +26,7 @@ public class Game
     private Stack<Room> historyList;
     Room cel, gang, hal, trap, valkuil, keuken;
     private Player activePlayer;
+    private Clock timer;
         
 
 
@@ -140,6 +139,10 @@ public class Game
             currentRoom = cel;
 
         // time starter
+            timer = new Clock(activePlayer.getTimeLimit());
+
+        // Temporary for testing parameters
+            activePlayer.inventory.add(new Item("key"));
 
         // Lets close our scanners    
             playerName.close();
