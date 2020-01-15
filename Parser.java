@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * This class is part of the "World of Zuul" application. 
+ * This class is part of the "World of Zuul" application.  
  * "World of Zuul" is a very simple, text based adventure game.  
  * 
  * This parser reads user input and tries to interpret it as an "Adventure"

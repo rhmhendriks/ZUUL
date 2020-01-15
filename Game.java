@@ -1,5 +1,8 @@
 import java.util.Stack;
-import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.Scanner;
+
 
 /**
  *  This class is the main class of the "World of Zuul" application. 
@@ -14,7 +17,7 @@ import java.util.ArrayList;
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Ronald H.M. Hendriks and Luc Willemse
+ * @author  Ronald H.M. Hendriks, Nivard and Luc Willemse
  * @version 0.2020.01.11
  */
 
@@ -23,15 +26,21 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Stack<Room> historyList;
-    Room outside, theater, pub, lab, office, cel, hal, trap, valkuil;
-    ArrayList<Item> inventory = new ArrayList<Item>(); 
-    private Player player;   
-    
+
+    Room outside, theater, pub, lab, office, cel;
+    private Player activePlayer;
+    Timer timer = new Timer();
+    int secondsPassed = 0;
+    TimerTask task = new TimerTask(){
+        @Override
+        public void run() {
+            
+        }
+    };
 
     /**
      * Create the game and initialise its internal map.
      */
-
     public Game() 
     {
         createRooms();
@@ -39,12 +48,118 @@ public class Game
         historyList = new Stack<Room>();
     }
 
+    /**
+     * The main method for running outside of IDE
+     */
     public static void main(String[] args) {
         Game game = new Game();
         game.play();
     }
 
-    /**historyListhistoryList
+    /**
+     * This method is used to get the game starting
+     * by making a player with personal settings
+     * like the player name and difficulty level
+     */
+    private void gameStarter(){
+        // We specify the needed local variables
+            // Name input 
+                Scanner playerName = new Scanner(System.in);
+                Scanner playerNameConfirm = new Scanner(System.in);
+                String choosenName;
+                boolean confirmInputName;
+            
+            // Difficulty selection
+                Scanner difLevel = new Scanner(System.in);
+                Scanner difLevelConfirm = new Scanner(System.in);
+                String choosenDifLevel;
+                boolean confirmInputDifLevel;
+                int usableDifLevel;
+
+        // Now we put the things on the screen
+            // Set the Player Name
+                printWelcome();
+                System.out.println(" ");
+                System.out.println("---------------------------------------------------------");
+                System.out.println(" ");
+                System.out.println("Wat is jouw naam?");
+                choosenName = playerName.nextLine();
+
+                System.out.println(" ");
+
+                System.out.println("De door jouw gekozen naam is: " + choosenName);
+                System.out.println("Is dit juist? [Ja (true) / Nee (false)]");
+                confirmInputName = playerNameConfirm.nextBoolean();
+
+                while (!confirmInputName){
+                    System.out.println(" ");
+                    System.out.println("Wat is jouw naam?");
+                    choosenName = playerName.nextLine();
+
+                    System.out.println(" ");
+
+                    System.out.println("De door jouw gekozen naam is: " + choosenName);
+                    System.out.println("Is dit juist? [Ja (true) / Nee (false)]");
+                    confirmInputName = playerNameConfirm.nextBoolean();
+                }
+                
+            // create some room
+                System.out.println(" ");
+                System.out.println(" ");
+        
+            // Set the difficulty
+                System.out.println("Je kunt dit spel spelen op verschillende niveau's:");
+                System.out.println("(1) Makkelijk   (2) Gemiddeld   (3) Moeilijk");
+                System.out.println(" ");
+                System.out.println("Of speel met een tijdslimiet voor meer uitdaging:");
+                System.out.println("(4) Makkelijk   (5) Gemiddeld   (6) Moeilijk");
+                System.out.println(" ");
+                System.out.println("Op welk niveau wil je dit spel spelen? [nummer bijv. '2'] ");
+                choosenDifLevel = difLevel.nextLine();
+                usableDifLevel = Integer.parseInt(choosenDifLevel);
+
+                System.out.println(" ");
+
+                System.out.println("Het door jouw gekozen niveau is: " + choosenDifLevel);
+                System.out.println("Is dit juist? [Ja (true) / Nee (false)]");
+                confirmInputDifLevel = difLevelConfirm.nextBoolean();
+
+                while (!confirmInputDifLevel || usableDifLevel < 1 || usableDifLevel > 6){
+                    System.out.println(" ");
+                    System.out.println("Op welk niveau wil je dit spel spelen? [nummer bijv. '2'] ");
+                    choosenDifLevel = difLevel.nextLine();
+
+                    System.out.println(" ");
+
+                    System.out.println("Het door jouw gekozen niveau is: " + choosenDifLevel);
+                    System.out.println("Is dit juist? [Ja (true) / Nee (false)]");
+                    confirmInputDifLevel = difLevelConfirm.nextBoolean();
+                }
+
+                System.out.println(" ");
+
+        // We are going to create the player with the given parameters
+            activePlayer = new Player(choosenName);
+            activePlayer.setDifficulty(usableDifLevel);
+        
+        // Now we will start the game in the first room. 
+            roomIntroducer(cel);
+            currentRoom = cel;
+
+        // time starter
+                
+
+        // Temporary for testing parameters
+            activePlayer.inventory.add(new Item("key"));
+
+        // Lets close our scanners    
+            playerName.close();
+            playerNameConfirm.close();
+            difLevel.close();
+            difLevelConfirm.close();
+    }
+
+    /**
      * Create all the rooms and link their exits together.
      */
     private void createRooms(){
@@ -67,10 +182,24 @@ public class Game
 
         // adding description 
             hal.setSecondDescription("Je zet het glas tegen de deur en drukt vervolgens je oor er tegenaan. Achter de roden deur hoor je gekling van borden, achter de  deur hoor je helemaal niks, welke deur kies je? ");
-            trap.setSecondDescription("Omdat je tijdens jouw spionage missie al op de eerste verdieping bent geweest van het kasteel, weet je dat de trap naar de begane grond zich aan de andere kant van het kasteel bevindt. Dit is de laatste deur waarvoor je een sleutel nodig hebt, maar er zijn 2 deuren. Kies of je door de rode of de blauwe deur wil.");
-            
-        
+            trap.setSecondDescription("Omdat je tijdens jouw spionage missie al op de eerste verdieping bent geweest van het kasteel, weet je dat de trap n
 
+    /**
+     * This method prints the current status of the player information
+     * and introduces the room that the player is trying to access. 
+     * @param introducingRoom The room to be introduced
+     */
+    private void roomIntroducer(Room introducingRoom){
+        System.out.println("Speler: " + activePlayer.getName() + "   " + "Levens: " + activePlayer.createLivebar() + "   " + "Gezondheid: " + activePlayer.getHealth());
+        System.out.println("Je bezit:" + activePlayer.getInventory());
+        System.out.println(" ");
+
+        System.out.println(introducingRoom.getLongDescription()); // print room introduction
+        System.out.println(" ");
+        
+        if (introducingRoom == cel){
+            printHelpCell();
+        }
     }
 
     /**
@@ -78,7 +207,7 @@ public class Game
      */
     public void play() 
     {            
-        printWelcome();
+        gameStarter();
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
@@ -97,11 +226,10 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type 'help' if you need help.");
+        System.out.println("Welkom bij ons spel!");
+        System.out.println("Dit is een nieuwe minder saaie verzie van ZUUL");
         System.out.println();
-        System.out.println(currentRoom.getLongDescription());
+        pressEnterToContinue();
     }
 
     /**
@@ -141,40 +269,49 @@ public class Game
             useLook();
         }
         else if (commandWord.equals("back")) {
-            
+            useBack();
         }
         // else command not recognised.
         return wantToQuit;
     }
 
     /**
-     * drop item
+     * This method is used to drop an item from the bag
      * @param command The command to be processed.
      */
     private void dropItem(Command command) 
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know what to drop...
-            System.out.println("drop What?");
+            System.out.println("Wat wil je achterlaten?");
         }
 
-        String item = command.getSecondWord();
+        String item = command.getSecondWord(); // Get the item the player wants to drop
 
-        // Try to leave current room.
+        /**
+        // Find the item to drop
         Item newItem = null;
         int index = 0;
-        for(int i = 0; i < inventory.size(); i++) {
-            newItem = inventory.get(i);
+        for(int i = 0; i < activePlayer.inventory.size(); i++) {
+            newItem = activePlayer.inventory.get(i);
             index = i;
         }
 
         if (newItem == null) {
-            System.out.println("that item is not in your bag");
+            System.out.println(item + " zit niet in de tas! Probeer het opnieuw!");
         }
+        
         else {
-            inventory.remove(index);
+            activePlayer.inventory.remove(index);
             currentRoom.setItem(new Item(item));
-            System.out.println("je hebt dit item laten vallen:" + item);
+            System.out.println("je hebt " + item + " achtergelaten in " + currentRoom + "!");
+        }
+        */
+
+        if (!activePlayer.inInventory(item)){
+            System.out.println(item + " zit niet in de tas! Probeer het opnieuw!");
+        } else if (activePlayer.removeFromInventory(item)) {
+
         }
     }
 
@@ -186,7 +323,7 @@ public class Game
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
-            System.out.println("Pick up What?");
+            System.out.println("Je hebt niet aangegeven wat je wil opakken!");
         }
 
         String item = command.getSecondWord();
@@ -195,22 +332,13 @@ public class Game
         Item newItem = currentRoom.pickupItem(item);
 
         if (newItem == null) {
-            System.out.println("");
+            System.out.println("Helaas. Dit voorwerp is niet aanwezig in deze kamer!");
         }
         else {
-            inventory.add(newItem);
+            activePlayer.inventory.add(newItem);
             currentRoom.removeItem(item);
-            System.out.println("je hebt dit op gepakt:" + item);
+            System.out.println("je hebt " + item + " opgepakt en draagt het nu bij je in je tas!");
         }
-    }
-
-    private void printInventory() {
-        String output = "";
-        for(int i = 0; i < inventory.size(); i++) {
-            output += i + " " + inventory.get(i).getDescription() + "   ";  
-        }
-        System.out.println("je hebt deze items momenteel bij je");
-        System.out.println(output);
     }
 
     // implementations of user commands:
@@ -220,13 +348,46 @@ public class Game
      * Here we print some stupid, cryptic message and a list of the 
      * command words.
      */
+    private void printHelpCell() 
+    {
+        System.out.println("Op de muur staat geschreven welke acties je kunt");
+        System.out.println("gebruiken tijdens deze game.");
+        System.out.println();
+        System.out.println("Je kunt deze lijst opnieuw tonen met 'help', ");
+        System.out.println("maar denk eraan: het tonen van deze lijst kost");
+        System.out.println("je één leven.");
+        System.out.println();
+        System.out.println("Natuurlijk kun je ook altijd weer naar de cel om ");
+        System.out.println("om de lijst op de muur te bekijken. ");
+        System.out.println();
+        parser.showCommands();
+    }
+
     private void printHelp() 
     {
-        System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
-        System.out.println();
-        System.out.println("Your command words are:");
-        parser.showCommands();
+        Scanner helpConfirmation = new Scanner(System.in);
+
+        System.out.println("Je hebt 'help' gebruikt! Dat kost je één leven.");
+        System.out.println("weet je zeker dat je een leven wilt betalen om ");
+        System.out.println("hulp te krijgen? [Ja (true) / Nee (false)] ");
+        
+
+        if (helpConfirmation.nextBoolean()){
+            activePlayer.lostLive();
+            System.out.println();
+            System.out.println("Op de muur staat geschreven welke acties je kunt");
+            System.out.println("gebruiken tijdens deze game.");
+            System.out.println();
+            System.out.println("Je kunt deze lijst opnieuw tonen met 'help', ");
+            System.out.println("maar denk eraan: het tonen van deze lijst kost");
+            System.out.println("je één leven.");
+            System.out.println();
+            System.out.println("Natuurlijk kun je ook altijd weer naar de cel om ");
+            System.out.println("om de lijst op de muur te bekijken. ");
+            System.out.println();
+            parser.showCommands();
+        }
+        helpConfirmation.close();
     }
 
     /** 
@@ -250,8 +411,9 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
+            historyList.add(currentRoom);
             currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription()); 
+            roomIntroducer(currentRoom);
         }
     }
 
@@ -279,4 +441,30 @@ public class Game
         currentRoom.look();
     }
 
+    /** 
+     * Help method witch is waiting for the user to press enter
+     */
+    private void pressEnterToContinue()
+    { 
+           System.out.println("Druk op enter om verder te gaan");
+           try
+           {
+               System.in.read();
+           }  
+           catch(Exception e)
+           {}  
+    }
+
+    /**
+     * Back was entered. 
+     * We go back to the last accesed room.
+     */
+    
+    private void useBack(){
+        Room roomtogobackto = historyList.pop();
+        currentRoom = roomtogobackto;
+        roomIntroducer(currentRoom);
+    }
+
+    
 }
