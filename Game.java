@@ -147,10 +147,6 @@ public class Game
             currentRoom = cel;
 
         // time starter
-                
-
-        // Temporary for testing parameters
-            activePlayer.inventory.add(new Item("key"));
 
         // Lets close our scanners    
             playerName.close();
@@ -183,6 +179,14 @@ public class Game
         // adding description 
             hal.setSecondDescription("Je zet het glas tegen de deur en drukt vervolgens je oor er tegenaan. Achter de roden deur hoor je gekling van borden, achter de  deur hoor je helemaal niks, welke deur kies je? ");
             trap.setSecondDescription("Omdat je tijdens jouw spionage missie al op de eerste verdieping bent geweest van het kasteel, weet je dat de trap n");
+        
+        // create and assign items to an room
+            // Create the items  
+                Item itGlass = new Item("glas");
+
+            // Assign items to a room
+                hal.setItem(itGlass);
+
     }
     /**
      * This method prints the current status of the player information
