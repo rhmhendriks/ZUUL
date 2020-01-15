@@ -1,5 +1,8 @@
 import java.util.Stack;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.Scanner;
+
 
 /**
  *  This class is the main class of the "World of Zuul" application. 
@@ -23,9 +26,10 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Stack<Room> historyList;
-    Room outside, theater, pub, lab, office, cel;
-    private Player activePlayer; 
-    
+    Room cel, gang, hal, trap, valkuil, keuken;
+    private Player activePlayer;
+        
+
 
     /**
      * Create the game and initialise its internal map.
@@ -135,8 +139,7 @@ public class Game
             roomIntroducer(cel);
             currentRoom = cel;
 
-        // Temporary for testing parameters
-            activePlayer.inventory.add(new Item("key"));
+        // time starter
 
         // Lets close our scanners    
             playerName.close();
@@ -151,29 +154,33 @@ public class Game
     private void createRooms(){
       
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
-        cel = new Room("Je zit in de cel. Er zit een bewaker voor de cel. De bewaker zit op veilige afstand, zodat jij hem niet kan aanraken.");
-
-        cel.setLookDescription("Dit is de look beschrijving");
+            cel = new Room("Je zit in de cel. Er zit een bewaker voor de cel. De bewaker zit op veilige afstand, zodat jij hem niet kan aanraken.");
+            hal = new Room ("Je bent ontsnapt uit de cel. Je staat nu in een lange gang met twee deuren aan het eind van deze gang. Je zit op de hoogste verdieping van het kasteel. Om bij de uitgang te komen, moet je opzoek naar de trap. Om te weten te komen door welke deur je moet, moet je goed luisteren wat er achter deze deur zich afspeelt. De deuren in het kasteel zijn erg dik, het is onmogelijk om met het bloten oor te horen wat zich er achter de deur bevindt.");
+            trap = new Room("Deze trap gaat maar tot en met de eerste verdieping van het kasteel. Je moet zo stil mogelijk van de trap af lopen. Beantwoord de volgende vraag goed, om ervoor te zorgen dat je zo stil mogelijk bent en je niet gesnapt wordt.");
 
         // initialise room exits
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+            cel.setExit("blauw", hal);
+            hal.setExit("rood", valkuil);
+            hal.setExit("blauw", trap);
+            trap.setExit("blauw", valkuil);
 
-        theater.setExit("west", outside);
+        // adding lookdescription to the rooms  
+            cel.setLookDescription("Je ziet dat de bewaker een sleutelbos aan zijn broek heeft hangen. Aan jou de taak om ervoor te zorgen dat de bewaker dichter bijkomt, zodat jij de bewaker kan uitschakelen en zijn sleutel kan pakken om de cel te openen. Maar hoe ga je dit doen? Om hierachter te komen moet je de volgende vraag goed beantwoorden:");
+            hal.setLookDescription("In de hoek van de gang zie je kast, kijk wat erin zit door middel van een spel:");
+            trap.setLookDescription("er is niet veel te zien");
 
-        pub.setExit("east", outside);
+        // adding description 
+            hal.setSecondDescription("Je zet het glas tegen de deur en drukt vervolgens je oor er tegenaan. Achter de roden deur hoor je gekling van borden, achter de  deur hoor je helemaal niks, welke deur kies je? ");
+            trap.setSecondDescription("Omdat je tijdens jouw spionage missie al op de eerste verdieping bent geweest van het kasteel, weet je dat de trap n");
+        
+        // create and assign items to an room
+            // Create the items  
+                Item itGlass = new Item("glas");
 
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
+            // Assign items to a room
+                hal.setItem(itGlass);
 
-        office.setExit("west", lab);
     }
-
     /**
      * This method prints the current status of the player information
      * and introduces the room that the player is trying to access. 
