@@ -53,7 +53,8 @@ public class Room
             colors.add("roze");
             colors.add("grijs");
         
-        Collections.shuffle(colors);
+        // now we shuffle the stack
+            Collections.shuffle(colors);
     }
 
     /**
@@ -133,11 +134,21 @@ public class Room
         return returnString;
     }
 
-    private String getDirection()
+    private String getDirection(Room askedDirection)
     {
-       String exits = direction;
-       
-    }
+
+        // lets initilize some local variables
+            HashMap<Room, String> flippedExits = new HashMap<Room, String>();
+
+            // create a temporary fliped verion of teh exits hashmap
+                for (String k : exits.keySet()) {
+                    flippedExits.put(exits.get(k), k);
+                }
+
+            // get the color of a asked direction
+                return flippedExits.get(askedDirection);
+
+        }
 
     /**
      * Return the room that is reached if we go from this room in direction
