@@ -28,26 +28,32 @@ public class Question
         private ArrayList<String> answers;
         private int diffeculty;
         private int category;
+        private String answerString;
 
     /** 
     * Below is the contructor of a basic question. 
     * @param theQuestion The question that will be displayed
-    * @param theAnswers The answer(s) of the question as single string (open question) or comma seperated (multiplechoice)
+    * @param theAnswers The answer(s) of the question as single string (open question) or comma seperated (multiplechoice) Please include (*) by the right answer!
     * @param theDiffeculty The Difficulty level the question can be used. (ex. 1,2 or 3)
     * @param theCategory The catgory for the question (ex. java=1, php=2 and OSes=3).
     */
     public Question(String theQuestion, String theAnswers, int theDiffeculty, int theCategory){
         // Let's initialize some local variables
-            String[] answerString;
+            String[] answerStringMul;
             List<String> listOfCSV;
         
         // Now we will prepare the creaton of the arrayList
-            // Split the string up in a temporary array
-                answerString = theAnswers.split("\\s*[,]\\s*");
-            // Let's put the values in a temporary list
-                listOfCSV = Arrays.asList(answerString);
-            // Now we will create the definitive Arraylist for the question
-                answers = new ArrayList<String>(listOfCSV);
+            if (theAnswers.contains(",")){
+                // Split the string up in a temporary array
+                    answerStringMul = theAnswers.split("\\s*[,]\\s*");
+                // Let's put the values in a temporary list
+                    listOfCSV = Arrays.asList(answerStringMul);
+                // Now we will create the definitive Arraylist for the question
+                    answers = new ArrayList<String>(listOfCSV);
+            } else { 
+                answers = null;
+                answerString = theAnswers;
+            }
 
         // Now we will fill the other variables
             question = theQuestion;
@@ -111,7 +117,18 @@ public String getQuestion(){
 }
 
 public ArrayList<String> getAnswers(){
-    return answers;
+    if (this.answers == null){
+        return this.getAnswer();
+    } else {
+        return answers;
+    }
+}
+
+
+public ArrayList<String> getAnswer(){
+    ArrayList<String> returnarray = new ArrayList<String>();
+    returnarray.add(answerString);
+    return returnarray;
 }
 
 public int getdiffeculty(){

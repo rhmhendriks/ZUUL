@@ -1,5 +1,8 @@
 import java.util.Stack;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.Scanner;
+
 
 /**
  *  This class is the main class of the "World of Zuul" application. 
@@ -24,8 +27,15 @@ public class Game
     private Room currentRoom;
     private Stack<Room> historyList;
     Room outside, theater, pub, lab, office, cel;
-    private Player activePlayer; 
-    
+    private Player activePlayer;
+    Timer timer = new Timer();
+    int secondsPassed = 0;
+    TimerTask task = new TimerTask(){
+        @Override
+        public void run() {
+            
+        }
+    };
 
     /**
      * Create the game and initialise its internal map.
@@ -134,6 +144,9 @@ public class Game
         // Now we will start the game in the first room. 
             roomIntroducer(cel);
             currentRoom = cel;
+
+        // time starter
+                
 
         // Temporary for testing parameters
             activePlayer.inventory.add(new Item("key"));
