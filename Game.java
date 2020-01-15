@@ -141,11 +141,6 @@ public class Game
 
         // time starter
 
-        // Lets close our scanners    
-            playerName.close();
-            playerNameConfirm.close();
-            difLevel.close();
-            difLevelConfirm.close();
     }
 
     /**
