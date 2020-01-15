@@ -55,6 +55,33 @@ public class Player
         }
 
         /**
+         * Define the output of the health command
+         * @param numbHealth The wanted output when a user uses "look" in this room.
+         */
+        public void setInventorySize(int numbInventorySize)
+        {
+            this.inventorySize = numbInventorySize;
+        }
+
+        /**
+         * Define the output of the health command
+         * @param numbHealth The wanted output when a user uses "look" in this room.
+         */
+        public void setHealth(int numbHealth)
+        {
+            this.health = numbHealth;
+        }
+
+        /**
+         * Define the output of the moves command
+         * @param numbMoves The wanted output when a user uses "look" in this room.
+         */
+        public void setMoves(int numbMoves) 
+        {
+            this.moves = numbMoves;
+        }
+
+        /**
          * This method is used to set the difficulty of the game
          * 
          * @param difficulty an integer from 1 trough 6. 1 is easy, 2 moderate and 3 hard. 4 trough 6 are the same but without time limits
@@ -180,6 +207,16 @@ public class Player
          */
         public int getInventSize() {
             return this.inventorySize;
+        }
+
+        /**
+         * This method is used to return the moves
+         * 
+         * @return The time limit in seconds as integer. 
+         */
+        public int getMoves()
+        {
+            return this.moves;
         }
 
         /**

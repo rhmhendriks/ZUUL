@@ -2,6 +2,7 @@
 dependency1.from=Player
 dependency1.to=Item
 dependency1.type=UsesDependency
+<<<<<<< HEAD
 dependency2.from=Game
 dependency2.to=Parser
 dependency2.type=UsesDependency
