@@ -83,6 +83,16 @@ public class Player
         }
 
         /**
+         * Define the output of the time limit command
+         * @param numbTimeLimit The new time limit for the user.
+         */
+        public void setTimeLimit(int numbTimeLimit) 
+        {
+            this.timeLimit = numbTimeLimit;
+        }
+
+
+        /**
          * This method is used to set the difficulty of the game
          * 
          * @param difficulty an integer from 1 trough 6. 1 is easy, 2 moderate and 3 hard. 4 trough 6 are the same but without time limits
@@ -225,7 +235,7 @@ public class Player
          * 
          * @return The time limit in seconds as integer. 
          */
-        public int timeLimit() {
+        public int getTimeLimit() {
             return this.timeLimit;
         }
 

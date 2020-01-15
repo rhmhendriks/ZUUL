@@ -26,17 +26,10 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Stack<Room> historyList;
-
     Room cel, gang, hal, trap, valkuil, keuken;
     private Player activePlayer;
-    Timer timer = new Timer();
-    int secondsPassed = 0;
-    TimerTask task = new TimerTask(){
-        @Override
-        public void run() {
-            
-        }
-    };
+        
+
 
     /**
      * Create the game and initialise its internal map.
