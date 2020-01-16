@@ -336,7 +336,7 @@ public class Game
             System.out.println("Helaas. Dit voorwerp is niet aanwezig in deze kamer!");
         }
         else {
-            activePlayer.inventory.add(newItem);
+            activePlayer.addToInventory(newItem);
             currentRoom.removeItem(item);
             System.out.println("je hebt " + item + " opgepakt en draagt het nu bij je in je tas!");
         }
