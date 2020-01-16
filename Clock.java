@@ -59,7 +59,7 @@ public class Clock
 
                 String inputLine = whatToDo.nextLine();
                 if(inputLine.contains("quit") || inputLine.contains("startover")) {
-
+                    
                 }
             }
         }
