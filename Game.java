@@ -26,10 +26,10 @@ public class Game
     private Stack<Room> historyList;
     Room cel, gang, hal, trap, valkuil, keuken;
     private Player activePlayer;
-    private Clock timer;
-        
+    private Clock activeClock;
+    private boolean wantToQuit;
 
-
+    
     /**
      * Create the game and initialise its internal map.
      */
@@ -38,8 +38,12 @@ public class Game
         createRooms();
         parser = new Parser();
         historyList = new Stack<Room>();
-    }
+        boolean wantToQuit = false;
 
+            
+        
+    
+    }
     /**
      * The main method for running outside of IDE
      */
@@ -139,7 +143,8 @@ public class Game
             currentRoom = cel;
 
         // time starter
-            timer = new Clock(activePlayer.getTimeLimit());
+            activeClock = new Clock(activePlayer.getTimeLimit());
+            activeClock.startClock();
     }
 
     /**
@@ -233,7 +238,6 @@ public class Game
      */
     private boolean processCommand(Command command) 
     {
-        boolean wantToQuit = false;
 
         if(command.isUnknown()) {
             System.out.println("I don't know what you mean...");
@@ -264,6 +268,9 @@ public class Game
         }
         else if (commandWord.equals("back")) {
             useBack();
+        }
+        else if (commandWord.equals("time")) {
+            System.out.println(activeClock.getTimer());
         }
         // else command not recognised.
         return wantToQuit;
