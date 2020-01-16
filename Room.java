@@ -28,6 +28,8 @@ public class Room
     private String direction;
     ArrayList<Item> items = new ArrayList<Item>();
     private Stack<String> colors;
+    private boolean locked;
+    private Item needForUnlock;
 
     /**
      * Create a room described "description". Initially, it has
@@ -35,11 +37,13 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description) 
+    public Room(String description, boolean lockedYN) 
     {
         this.description = description;
+        locked = lockedYN;
         exits = new HashMap<>();
         colors = new Stack<String>();
+
 
         // adding colors
             colors.add("blauw"); 
@@ -205,5 +209,30 @@ public class Room
             output += i + " " + items.get(i).getDescription() + "   ";
         }
         return output;
+    }
+
+    public void setLock(boolean trueFalse){
+        locked = trueFalse;
+    }
+
+    public Boolean getLock(){
+        return locked;
+    }
+
+    public void setItemForUnlocking(Item theItem){
+        needForUnlock = theItem;
+    }
+
+    public Item getItemForUnlocking(){
+        return needForUnlock;
+    }
+
+    public String getLockInstruction(){
+        StringBuilder output = new StringBuilder();
+        output.append("Deze kamer kun je niet openen! Je hebt het volgende item nodig om deze kamer te openen ");
+        output.append(needForUnlock.getDescription());
+        output.append(".");
+  
+        return output.toString();
     }
 }
