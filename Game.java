@@ -145,7 +145,6 @@ public class Game
         // time starter
             activeClock = new Clock(activePlayer.getTimeLimit());
             activeClock.startClock();
-
     }
 
     /**
@@ -154,9 +153,9 @@ public class Game
     private void createRooms(){
       
         // create the rooms
-            cel = new Room("Je zit in de cel. Er zit een bewaker voor de cel. De bewaker zit op veilige afstand, zodat jij hem niet kan aanraken.");
-            hal = new Room ("Je bent ontsnapt uit de cel. Je staat nu in een lange gang met twee deuren aan het eind van deze gang. Je zit op de hoogste verdieping van het kasteel. Om bij de uitgang te komen, moet je opzoek naar de trap. Om te weten te komen door welke deur je moet, moet je goed luisteren wat er achter deze deur zich afspeelt. De deuren in het kasteel zijn erg dik, het is onmogelijk om met het bloten oor te horen wat zich er achter de deur bevindt.");
-            trap = new Room("Deze trap gaat maar tot en met de eerste verdieping van het kasteel. Je moet zo stil mogelijk van de trap af lopen. Beantwoord de volgende vraag goed, om ervoor te zorgen dat je zo stil mogelijk bent en je niet gesnapt wordt.");
+            cel = new Room("Je zit in de cel. Er zit een bewaker voor de cel. De bewaker zit op veilige afstand, zodat jij hem niet kan aanraken.", false);
+            hal = new Room ("Je bent ontsnapt uit de cel. Je staat nu in een lange gang met twee deuren aan het eind van deze gang. Je zit op de hoogste verdieping van het kasteel. Om bij de uitgang te komen, moet je opzoek naar de trap. Om te weten te komen door welke deur je moet, moet je goed luisteren wat er achter deze deur zich afspeelt. De deuren in het kasteel zijn erg dik, het is onmogelijk om met het bloten oor te horen wat zich er achter de deur bevindt.", false);
+            trap = new Room("Deze trap gaat maar tot en met de eerste verdieping van het kasteel. Je moet zo stil mogelijk van de trap af lopen. Beantwoord de volgende vraag goed, om ervoor te zorgen dat je zo stil mogelijk bent en je niet gesnapt wordt.", true);
 
         // initialise room exits
             cel.setExit("blauw", hal);
@@ -179,6 +178,9 @@ public class Game
 
             // Assign items to a room
                 hal.setItem(itGlass);
+
+            // set items for unlock
+                hal.setItemForUnlocking(itGlass);
 
     }
     /**
@@ -411,8 +413,7 @@ public class Game
         }
         else {
             historyList.add(currentRoom);
-            currentRoom = nextRoom;
-            roomIntroducer(currentRoom);
+            processLock(nextRoom);
         }
     }
 
@@ -465,5 +466,20 @@ public class Game
         roomIntroducer(currentRoom);
     }
 
-    
+    private void processLock(Room checkRoom){
+
+        if (!checkRoom.getLock()){
+            currentRoom = checkRoom;
+            roomIntroducer(currentRoom);
+        } else {
+            Item neededForUnlock = checkRoom.getItemForUnlocking();
+            if (!activePlayer.inInventory(neededForUnlock.getDescription())){
+                System.out.println(checkRoom.getLockInstruction());
+            } else {
+                checkRoom.setLock(false);
+                currentRoom = checkRoom;
+                roomIntroducer(currentRoom);
+            }
+        }
+    }
 }
