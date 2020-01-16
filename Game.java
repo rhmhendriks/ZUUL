@@ -1,9 +1,7 @@
 import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javax.management.ConstructorParameters;
-
 import java.util.Scanner;
 
 
@@ -31,9 +29,10 @@ public class Game
     private Stack<Room> historyList;
     Room cel, gang, hal, trap, valkuil, keuken;
     private Player activePlayer;
-        
+    private Clock activeClock;
+    private boolean wantToQuit;
 
-
+    
     /**
      * Create the game and initialise its internal map.
      */
@@ -42,8 +41,8 @@ public class Game
         createRooms();
         parser = new Parser();
         historyList = new Stack<Room>();
+        boolean wantToQuit = false;
     }
-
     /**
      * The main method for running outside of IDE
      */
@@ -143,27 +142,27 @@ public class Game
             currentRoom = cel;
 
         // time starter
-                
-
-        // Temporary for testing parameters
-            activePlayer.inventory.add(new Item("key"));
-
-        // Lets close our scanners    
-            playerName.close();
-            playerNameConfirm.close();
-            difLevel.close();
-            difLevelConfirm.close();
+            activeClock = new Clock(activePlayer.getTimeLimit());
+            activeClock.startClock();
     }
 
+     // Temporary for testing parameters
+     activePlayer.inventory.add(new Item("key"));
+
+     // Lets close our scanners    
+         playerName.close();
+         playerNameConfirm.close();
+         difLevel.close();
+         difLevelConfirm.close();
     /**
      * Create all the rooms and link their exits together.
      */
     private void createRooms(){
       
         // create the rooms
-            cel = new Room("Je zit in de cel. Er zit een bewaker voor de cel. De bewaker zit op veilige afstand, zodat jij hem niet kan aanraken.");
-            hal = new Room ("Je bent ontsnapt uit de cel. Je staat nu in een lange gang met twee deuren aan het eind van deze gang. Je zit op de hoogste verdieping van het kasteel. Om bij de uitgang te komen, moet je opzoek naar de trap. Om te weten te komen door welke deur je moet, moet je goed luisteren wat er achter deze deur zich afspeelt. De deuren in het kasteel zijn erg dik, het is onmogelijk om met het bloten oor te horen wat zich er achter de deur bevindt.");
-            trap = new Room("Deze trap gaat maar tot en met de eerste verdieping van het kasteel. Je moet zo stil mogelijk van de trap af lopen. Beantwoord de volgende vraag goed, om ervoor te zorgen dat je zo stil mogelijk bent en je niet gesnapt wordt.");
+            cel = new Room("Je zit in de cel. Er zit een bewaker voor de cel. De bewaker zit op veilige afstand, zodat jij hem niet kan aanraken.", false);
+            hal = new Room ("Je bent ontsnapt uit de cel. Je staat nu in een lange gang met twee deuren aan het eind van deze gang. Je zit op de hoogste verdieping van het kasteel. Om bij de uitgang te komen, moet je opzoek naar de trap. Om te weten te komen door welke deur je moet, moet je goed luisteren wat er achter deze deur zich afspeelt. De deuren in het kasteel zijn erg dik, het is onmogelijk om met het bloten oor te horen wat zich er achter de deur bevindt.", false);
+            trap = new Room("Deze trap gaat maar tot en met de eerste verdieping van het kasteel. Je moet zo stil mogelijk van de trap af lopen. Beantwoord de volgende vraag goed, om ervoor te zorgen dat je zo stil mogelijk bent en je niet gesnapt wordt.", true);
 
         // initialise room exits
             cel.setExit("blauw", hal);
@@ -179,6 +178,17 @@ public class Game
         // adding description 
             hal.setSecondDescription("Je zet het glas tegen de deur en drukt vervolgens je oor er tegenaan. Achter de roden deur hoor je gekling van borden, achter de  deur hoor je helemaal niks, welke deur kies je? ");
             trap.setSecondDescription("Omdat je tijdens jouw spionage missie al op de eerste verdieping bent geweest van het kasteel, weet je dat de trap n");
+        
+        // create and assign items to an room
+            // Create the items  
+                Item itGlass = new Item("glas");
+
+            // Assign items to a room
+                hal.setItem(itGlass);
+
+            // set items for unlock
+                hal.setItemForUnlocking(itGlass);
+
     }
 
     private Stack<Question> IT1;{
@@ -260,7 +270,6 @@ public class Game
      */
     private boolean processCommand(Command command) 
     {
-        boolean wantToQuit = false;
 
         if(command.isUnknown()) {
             System.out.println("I don't know what you mean...");
@@ -291,6 +300,9 @@ public class Game
         }
         else if (commandWord.equals("back")) {
             useBack();
+        }
+        else if (commandWord.equals("time")) {
+            System.out.println(activeClock.getTimer());
         }
         // else command not recognised.
         return wantToQuit;
@@ -433,8 +445,7 @@ public class Game
         }
         else {
             historyList.add(currentRoom);
-            currentRoom = nextRoom;
-            roomIntroducer(currentRoom);
+            processLock(nextRoom);
         }
     }
 
@@ -487,5 +498,20 @@ public class Game
         roomIntroducer(currentRoom);
     }
 
-    
+    private void processLock(Room checkRoom){
+
+        if (!checkRoom.getLock()){
+            currentRoom = checkRoom;
+            roomIntroducer(currentRoom);
+        } else {
+            Item neededForUnlock = checkRoom.getItemForUnlocking();
+            if (!activePlayer.inInventory(neededForUnlock.getDescription())){
+                System.out.println(checkRoom.getLockInstruction());
+            } else {
+                checkRoom.setLock(false);
+                currentRoom = checkRoom;
+                roomIntroducer(currentRoom);
+            }
+        }
+    }
 }
