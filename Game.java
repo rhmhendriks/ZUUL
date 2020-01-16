@@ -138,16 +138,18 @@ public class Game
         // We are going to create the player with the given parameters
             activePlayer = new Player(choosenName);
             activePlayer.setDifficulty(usableDifLevel);
+
+        // time starter
+        if(activePlayer.getTimeLimit() != 999) {
+            activeClock = new Clock(activePlayer.getTimeLimit());
+            activeClock.startClock();
+            }
         
         // Now we will start the game in the first room. 
             roomIntroducer(cel);
             currentRoom = cel;
 
-        // time starter
-            if(activePlayer.getTimeLimit() != 999) {
-            activeClock = new Clock(activePlayer.getTimeLimit());
-            activeClock.startClock();
-            }
+        
     }
 
     /**
@@ -232,9 +234,9 @@ public class Game
     private void roomIntroducer(Room introducingRoom){
         System.out.println("Speler: " + activePlayer.getName() + "   " + "Levens: " + activePlayer.createLivebar() + "   " + "Gezondheid: " + activePlayer.getHealth());
         System.out.println("Je bezit:" + activePlayer.getInventory());
-       // if(activePlayer.getTimeLimit() != 999) {
-       //     System.out.println(activeClock.getTimer()/60 + " minuten");
-        //}
+        if(activePlayer.getDifficulty() != 999) {
+          System.out.println(activeClock.getTimer()/60 + " minuten");
+        }
         System.out.println(" ");
 
         System.out.println(introducingRoom.getLongDescription()); // print room introduction
@@ -314,7 +316,11 @@ public class Game
             useBack();
         }
         else if (commandWord.equals("time")) {
+            if (activePlayer.getDifficulty() >= 4) {
             System.out.println(activeClock.getTimer());
+            } else {
+                System.out.println("De moeilijkheidsgraad die jij hebt gekozen bevat geen tijdslimiet");
+            }
         }
         // else command not recognised.
         return wantToQuit;

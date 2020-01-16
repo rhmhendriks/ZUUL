@@ -51,7 +51,7 @@ public class Clock
 
         public void timeUp() {
             Scanner whatToDo = new Scanner(System.in);
-            while(this.secondsPassed == 0) {
+            while (this.secondsPassed == 0) {
                 System.out.println("De tijd is op. Je kan gebruik maken van de volgende commandos:");
                 System.out.println("'quit' om te stoppen, of 'startover' om opnieuw te beginnen");
                 System.out.println();
@@ -59,7 +59,7 @@ public class Clock
 
                 String inputLine = whatToDo.nextLine();
                 if(inputLine.contains("quit") || inputLine.contains("startover")) {
-                    
+
                 }
             }
         }
