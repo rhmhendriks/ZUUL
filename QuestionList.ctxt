@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=QuestionList
+comment0.text=\n\ class\ QuestionList\ -\ geef\ hier\ een\ beschrijving\ van\ deze\ class\n\n\ @author\ (jouw\ naam)\n\ @version\ (versie\ nummer\ of\ datum)\n
+comment1.params=
+comment1.target=QuestionList()
+comment1.text=\n\ Constructor\ voor\ objects\ van\ class\ QuestionList\n
+comment2.params=y
+comment2.target=int\ voorbeeldMethod(int)
+comment2.text=\n\ Voorbeeld\ van\ een\ method\ -\ schrijf\ hier\ jouw\ comment\n\n\ @param\ \ y\ \ \ \ deze\ method\ krijgt\ deze\ parameter\ mee\ in\ de\ aanroep\n\ @return\ \ \ \ deze\ method\ geeft\ de\ som\ van\ x\ en\ y\ terug\n
+numComments=3
