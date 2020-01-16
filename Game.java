@@ -1,6 +1,9 @@
 import java.util.Stack;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javax.management.ConstructorParameters;
+
 import java.util.Scanner;
 
 
@@ -176,6 +179,31 @@ public class Game
         // adding description 
             hal.setSecondDescription("Je zet het glas tegen de deur en drukt vervolgens je oor er tegenaan. Achter de roden deur hoor je gekling van borden, achter de  deur hoor je helemaal niks, welke deur kies je? ");
             trap.setSecondDescription("Omdat je tijdens jouw spionage missie al op de eerste verdieping bent geweest van het kasteel, weet je dat de trap n");
+    }
+
+    private Stack<Question> IT1;{
+        //Create stack questions for difficulty 1 and insert corresponding data
+        IT1 = new Stack<Question>;
+        IT1.put (new Question("Wat is het verschil tussen een int en void functie?","Een int retourneert alleen een getal. Een void retourneert niets*,Een int retourneert alleen een getal en een void retourneert alles,Een int retourneert alleen een getal zonder decimalen. Een void retourneert een getal met decimalen."));
+        IT1.put (new Question("Wat is het datatype van de waarde TRUE?", "Boolean", 1, 0));
+        IT1.put (new Question("Vul het juiste woord in: Object slaan gegevens op in ______", "Velden", theDiffeculty, theCategory));
+        IT1.put (new Question("Maak een veld voor het gegeven \"prijs\" waarin men een bedrag kan invullen","private int prijs", theDiffeculty, theCategory);
+        IT1.put (new Question(theQuestion, theAnswers, theDiffeculty, theCategory))
+    }
+
+    private Stack<Question> IT2;{
+        //Create stack questions for difficulty 2 and insert corresponding data
+        IT2 = new Stack<Question>;
+        IT2.put (new Question("Welke waarde heeft het 13e array-element in een Array genaamd Lijst?", "Lijst[12]", theDiffeculty, theCategory));
+        IT2.put (new Question("Waarom is het niet altijd aan te raden om import java.util.* te gebruiken?","Deze functie wordt niet meer door Java ondersteund,Deze functie omvat niet alle Java packages,Het programma wordt hierdoor erg traag*", theDiffeculty, theCategory));
+        IT2.put (new Question("Wat is een geldige reden om een Stack te gebruiken ipv een Array(List)","De rij met gegevens mag niet worden aangepast,Je wilt meer functionaliteit toevoegen aan een rij met gegevens,Je wilt van een rij gegevens alleen de laatste waarde halen", theDiffeculty, theCategory));
+        IT2.put (new Question("Wat is het verschil tussen een Array en een ArrayList in Java?","Een ArrayList kan alleen gegevens van bovenaf halen en een Array kan van elke plek gegevens halen,Een Array heeft een vast aantal gegevens en een ArrayList heeft oneindig,Een Array ", theDiffeculty, theCategory))
+    }
+
+    private Stack<Question> IT3;{
+        //Create stack for questions for difficulty 3 and insert corresponding data
+        IT3 = new Stack<Question>;
+        IT3.put (newQuestion());
     }
     /**
      * This method prints the current status of the player information
