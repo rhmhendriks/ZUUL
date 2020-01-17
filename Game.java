@@ -140,6 +140,7 @@ public class Game
 
         // time starter
             timer = new Clock(activePlayer.getTimeLimit());
+            System.out.println("hello");
     }
 
     /**
