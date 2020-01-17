@@ -145,9 +145,12 @@ public class Game
 
         // time starter
             if(activePlayer.getTimeLimit() != 999) {
-            activeClock = new Clock(activePlayer.getTimeLimit());
-            activeClock.startClock();
+            System.out.println("hello");
             }
+    }
+
+    public void sayHello(){
+        System.out.println("hello");
     }
 
     /**
@@ -170,7 +173,6 @@ public class Game
             trap2 = new Room("dskskf", true); // must have the firestone
             poort = new Room("dskskf", false);
             bos = new Room("dskskf", false);
-
 
         // initialise room exits
             cel.setExit("rcolor", gang);
