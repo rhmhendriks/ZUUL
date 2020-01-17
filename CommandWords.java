@@ -34,6 +34,7 @@ public class CommandWords {
         theCommandWords.put("pickup", "Pak een voorwerp op uit de huidige ruimte met 'pickup <voorwerp>'");
         theCommandWords.put("drop", "Laat een voorwerp achter in de huidige ruimte.");
         theCommandWords.put("look", "Kijk door de ruimte en vind verborgen geheimen...");
+        theCommandWords.put("time", "Kijk hoeveel tijd je nog over hebt.");
     }
 
     /**

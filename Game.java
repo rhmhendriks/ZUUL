@@ -24,12 +24,13 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Stack<Room> historyList;
-    Room cel, gang, hal, trap, valkuil, keuken;
+    Room cel, gang, valkuil1, trap, valkuil2, hal, valkuil3, keuken, eetzaal, muur, gracht, trap2, valkuil4, poort, bos;
+    Item keychain, glass, pan, rope, firestone, sword; 
     private Player activePlayer;
-    private Clock timer;
-        
+    private Clock activeClock;
+    private boolean wantToQuit;
 
-
+    
     /**
      * Create the game and initialise its internal map.
      */
@@ -38,8 +39,12 @@ public class Game
         createRooms();
         parser = new Parser();
         historyList = new Stack<Room>();
-    }
+        boolean wantToQuit = false;
 
+            
+        
+    
+    }
     /**
      * The main method for running outside of IDE
      */
@@ -139,8 +144,10 @@ public class Game
             currentRoom = cel;
 
         // time starter
-            timer = new Clock(activePlayer.getTimeLimit());
-            System.out.println("hello");
+            if(activePlayer.getTimeLimit() != 999) {
+            activeClock = new Clock(activePlayer.getTimeLimit());
+            activeClock.startClock();
+            }
     }
 
     /**
@@ -150,33 +157,71 @@ public class Game
       
         // create the rooms
             cel = new Room("Je zit in de cel. Er zit een bewaker voor de cel. De bewaker zit op veilige afstand, zodat jij hem niet kan aanraken.", false);
-            hal = new Room ("Je bent ontsnapt uit de cel. Je staat nu in een lange gang met twee deuren aan het eind van deze gang. Je zit op de hoogste verdieping van het kasteel. Om bij de uitgang te komen, moet je opzoek naar de trap. Om te weten te komen door welke deur je moet, moet je goed luisteren wat er achter deze deur zich afspeelt. De deuren in het kasteel zijn erg dik, het is onmogelijk om met het bloten oor te horen wat zich er achter de deur bevindt.", false);
+            gang = new Room("Je bent ontsnapt uit de cel. Je staat nu in een lange gang met twee deuren aan het eind van deze gang. Je zit op de hoogste verdieping van het kasteel. Om bij de uitgang te komen, moet je opzoek naar de trap. Om te weten te komen door welke deur je moet, moet je goed luisteren wat er achter deze deur zich afspeelt. De deuren in het kasteel zijn erg dik, het is onmogelijk om met het bloten oor te horen wat zich er achter de deur bevindt.", true); // must have the keychain
             trap = new Room("Deze trap gaat maar tot en met de eerste verdieping van het kasteel. Je moet zo stil mogelijk van de trap af lopen. Beantwoord de volgende vraag goed, om ervoor te zorgen dat je zo stil mogelijk bent en je niet gesnapt wordt.", true);
+            valkuil1 = new Room("dskskf", false);
+            valkuil2 = new Room("dskskf", false);
+            hal = new Room("dskskf", true); // must have the keychain 
+            valkuil3 = new Room("dskskf", false);
+            keuken = new Room("dskskf", true); // must have the sword
+            eetzaal = new Room("dskskf", false);
+            muur = new Room("dskskf", true); // must have the rope
+            gracht = new Room("dskskf", false);
+            trap2 = new Room("dskskf", true); // must have the firestone
+            poort = new Room("dskskf", false);
+            bos = new Room("dskskf", false);
+
 
         // initialise room exits
-            cel.setExit("blauw", hal);
-            hal.setExit("rood", valkuil);
-            hal.setExit("blauw", trap);
-            trap.setExit("blauw", valkuil);
-
+            cel.setExit("rcolor", gang);
+            gang.setExit("rcolor", valkuil1);
+            gang.setExit("rcolor", trap);
+            trap.setExit("rcolor", valkuil2);
+            trap.setExit("rcolor", hal);
+            hal.setExit("rcolor", valkuil3);
+            hal.setExit("rcolor", keuken);
+            keuken.setExit("rcolor", eetzaal);
+            eetzaal.setExit("rcolor", muur);
+            eetzaal.setExit("rcolor", trap2);
+            muur.setExit("rcolor", gracht);
+            gracht.setExit("rcolor", bos);
+            trap2.setExit("rcolor", valkuil4);
+            trap2.setExit("rcolor", poort);
+            poort.setExit("rcolor", bos);
+            
         // adding lookdescription to the rooms  
             cel.setLookDescription("Je ziet dat de bewaker een sleutelbos aan zijn broek heeft hangen. Aan jou de taak om ervoor te zorgen dat de bewaker dichter bijkomt, zodat jij de bewaker kan uitschakelen en zijn sleutel kan pakken om de cel te openen. Maar hoe ga je dit doen? Om hierachter te komen moet je de volgende vraag goed beantwoorden:");
-            hal.setLookDescription("In de hoek van de gang zie je kast, kijk wat erin zit door middel van een spel:");
+            gang.setLookDescription("In de hoek van de gang zie je kast, kijk wat erin zit door middel van een spel:");
             trap.setLookDescription("er is niet veel te zien");
 
         // adding description 
-            hal.setSecondDescription("Je zet het glas tegen de deur en drukt vervolgens je oor er tegenaan. Achter de roden deur hoor je gekling van borden, achter de  deur hoor je helemaal niks, welke deur kies je? ");
+            gang.setSecondDescription("Je zet het glas tegen de deur en drukt vervolgens je oor er tegenaan. Achter deur " + gang.getDirection(valkuil1) + " hoor je gekling van borden, achter de " + gang.getDirection(trap) + " deur hoor je helemaal niks, welke deur kies je? ");
             trap.setSecondDescription("Omdat je tijdens jouw spionage missie al op de eerste verdieping bent geweest van het kasteel, weet je dat de trap n");
         
         // create and assign items to an room
-            // Create the items  
-                Item itGlass = new Item("glas");
+            // Create the items
+                keychain = new Item("sleutelbos");  
+                glass = new Item("glas");
+                sword = new Item("zwaart");
+                pan = new Item("pan");
+                rope = new Item("touw");
+                firestone = new Item("vuursteen");
+
 
             // Assign items to a room
-                hal.setItem(itGlass);
+                cel.setItem(keychain); 
+                gang.setItem(glass);
+                hal.setItem(sword);
+                keuken.setItem(pan);
+                eetzaal.setItem(rope);
+                eetzaal.setItem(firestone);
 
             // set items for unlock
-                hal.setItemForUnlocking(itGlass);
+                gang.setItemForUnlocking(keychain);
+                hal.setItemForUnlocking(keychain);
+                keuken.setItemForUnlocking(sword);
+                muur.setItemForUnlocking(rope);
+                trap2.setItemForUnlocking(firestone);
 
     }
     /**
@@ -187,6 +232,9 @@ public class Game
     private void roomIntroducer(Room introducingRoom){
         System.out.println("Speler: " + activePlayer.getName() + "   " + "Levens: " + activePlayer.createLivebar() + "   " + "Gezondheid: " + activePlayer.getHealth());
         System.out.println("Je bezit:" + activePlayer.getInventory());
+       // if(activePlayer.getTimeLimit() != 999) {
+       //     System.out.println(activeClock.getTimer()/60 + " minuten");
+        //}
         System.out.println(" ");
 
         System.out.println(introducingRoom.getLongDescription()); // print room introduction
@@ -234,7 +282,6 @@ public class Game
      */
     private boolean processCommand(Command command) 
     {
-        boolean wantToQuit = false;
 
         if(command.isUnknown()) {
             System.out.println("I don't know what you mean...");
@@ -265,6 +312,9 @@ public class Game
         }
         else if (commandWord.equals("back")) {
             useBack();
+        }
+        else if (commandWord.equals("time")) {
+            System.out.println(activeClock.getTimer());
         }
         // else command not recognised.
         return wantToQuit;
