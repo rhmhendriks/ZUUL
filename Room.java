@@ -138,7 +138,7 @@ public class Room
         return returnString;
     }
 
-    private String getDirection(Room askedDirection)
+    public String getDirection(Room askedDirection)
     {
         // lets initilize some local variables
             HashMap<Room, String> flippedExits = new HashMap<Room, String>();
