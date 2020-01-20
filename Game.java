@@ -146,8 +146,9 @@ public class Game
             }
         
         // Now we will start the game in the first room. 
+            currentRoom = cel; 
             roomIntroducer(cel);
-            currentRoom = cel;
+            
 
         
     }
@@ -236,6 +237,8 @@ public class Game
         System.out.println("Je bezit:" + activePlayer.getInventory());
         if(activePlayer.getDifficulty() != 999) {
           System.out.println(activeClock.getTimer()/60 + " minuten");
+        } else {
+            System.out.println();
         }
         System.out.println(" ");
 
@@ -421,9 +424,10 @@ public class Game
         System.out.println("Je hebt 'help' gebruikt! Dat kost je één leven.");
         System.out.println("weet je zeker dat je een leven wilt betalen om ");
         System.out.println("hulp te krijgen? [Ja (true) / Nee (false)] ");
+        Boolean confirmation = helpConfirmation.nextBoolean();
         
 
-        if (helpConfirmation.nextBoolean()){
+        if (confirmation) {
             activePlayer.lostLive();
             System.out.println();
             System.out.println("Op de muur staat geschreven welke acties je kunt");
@@ -437,6 +441,8 @@ public class Game
             System.out.println("om de lijst op de muur te bekijken. ");
             System.out.println();
             parser.showCommands();
+            System.out.println();
+            System.out.println("je hebt de keuzen uit de volgende " + currentRoom.getExitString());
         }
         helpConfirmation.close();
     }
