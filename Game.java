@@ -149,10 +149,6 @@ public class Game
             }
     }
 
-    public void sayHello(){
-        System.out.println("hello");
-    }
-
     /**
      * Create all the rooms and link their exits together.
      */
