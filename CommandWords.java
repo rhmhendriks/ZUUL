@@ -35,6 +35,7 @@ public class CommandWords {
         theCommandWords.put("drop", "Laat een voorwerp achter in de huidige ruimte.");
         theCommandWords.put("look", "Kijk door de ruimte en vind verborgen geheimen...");
         theCommandWords.put("time", "Kijk hoeveel tijd je nog over hebt.");
+        theCommandWords.put("hit", "Om de vijand aan te vallen ");
     }
 
     /**

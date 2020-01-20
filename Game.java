@@ -19,7 +19,7 @@ import java.util.Scanner;
  * @version 0.2020.01.11
  */
 
-public class Game 
+public class Game
 {
     private Parser parser;
     private Room currentRoom;
@@ -28,6 +28,7 @@ public class Game
     Item keychain, glass, pan, rope, firestone, sword; 
     private Player activePlayer;
     private Clock activeClock;
+    private Enemy activeEnemy;
     private boolean wantToQuit;
 
     
@@ -165,14 +166,14 @@ public class Game
             trap = new Room("Deze trap gaat maar tot en met de eerste verdieping van het kasteel. Je moet zo stil mogelijk van de trap af lopen. Beantwoord de volgende vraag goed, om ervoor te zorgen dat je zo stil mogelijk bent en je niet gesnapt wordt.", true);
             valkuil2 = new Room("Helaas dit was de verkeerde deur, om geen leven kwijt te raken moet je de volgende vraag goed beantwoorden:", false);
             hal = new Room("Je loopt rustig en voorzichtig door de hal. Gelukkig maar dat je zo voorzichtig doet. Wanneer je halverwege de hal bent komt er een kok uit een van de deuren. Kijk rond om een verstop plek te vinden.", true); // must have the keychain 
-            valkuil3 = new Room("dskskf", false);
-            keuken = new Room("dskskf", true); // must have the sword
-            eetzaal = new Room("dskskf", false);
-            muur = new Room("dskskf", true); // must have the rope
-            gracht = new Room("dskskf", false);
-            trap2 = new Room("dskskf", true); // must have the firestone
-            poort = new Room("dskskf", false);
-            bos = new Room("dskskf", false);
+            valkuil3 = new Room("Helaas dit was de verkeerde deur, om geen leven kwijt te raken moet je de volgende vraag goed beantwoorden:", false);
+            keuken = new Room("Je doet de deur van de keuken zachtjes open en kruipt naar binnen achter een kastje. Je kijkt over het randje van het kastje om te zien of er koks in de keuken zijn. En ja, er staan 2 koks, druk bezig met het bereiden van het avond eten. Ze staan beiden met hun gezicht naar de deur waar jij naartoe moet. De enige optie is om ze allebei uit te schakelen. Je moet om je heen kijken om iets te vinden om de koks mee uit te schakelen.", true); // must have the sword
+            eetzaal = new Room("De koks in de keuken waren nog druk bezig met het voorbereiden van het avond eten, dus de eetzaal is gelukkig nog leeg. Je staat voor een keuze. Je ziet namelijk een stuk touw in de hoek van de eetzaal liggen. Er is een raam in de eetzaal waardoor je zou kunnen ontsnappen met het touw. De andere keuze is de vuurstenen pakken die bij de openhaard liggen en de trap naar beneden te pakken. Kies welk voorwerp je wilt pakken. ga daarna naar de bijbehoorde kamer.", false);
+            muur = new Room("Je hebt blijkbaar voor het touw gekozen. Je hangt aan het touw langs de muur. Onder je zit water, er zit namelijk een gracht om het kasteel heen. Je moet je heel langzaam laten zakken, om ervoor te zorgen dat de bewakers in de wachttorens je niet zien. Speel het volgende spel om ervoor te zorgen dat je je zo stil mogelijk naar beneden laat zakken. ", true); // must have the rope
+            gracht = new Room("De gracht wordt erg goed in de gaten gehouden vanaf de bewakers toren. Een kleine beweging in het water en je wordt ontdekt. Het is al erg donker buiten, dus je kunnen niet goed in het water kijken, maar de horen het wel gelijk. Je besluit onderwater te zwemmen om op die manier zo min mogelijk geluid te maken. Het is een Breede gracht. Beantwoord de volgende vraag goed om ervoor te zorgen dat je lang genoeg je adem kan inhouden. ", false);
+            trap2 = new Room("Je loopt de trap af, wanneer je bijna beneden bent hoor je geroesemoes en zie je dat de deur langzaam opengaat. Je moet zo snel mogelijk een verstop plek vinden. Beantwoord de volgende vraaggoed, zodat je zo snel mogelijk een verstopplek kan vinden.", true); // must have the firestone
+            poort = new Room("De bewakers zijn druk in gesprek en letten niet goed op. Je doet de deur op een kiertje en kruipt stilletjes achter een kast die 2 meter van je vanaf staat. Je pakt je vuursteen. Met de vuursteen probeer je de kast in de brand te zetten. Beantwoord de volgende vraag goed, om de kast in brand te zetten ", false);
+            bos = new Room("Je zit in het bos, je rent zo hardt als je kan weg, zodat je al zo ver mogelijk weg bent voordat ze erachter komen dat je ontsnapt bent. Je kijkt nog eens om er zeker van te zijn dat je niet achtervolgt wordt. Terwijl je achteromkijkt bots je tegen iets of iemand aan en valt op de grond. Kijk om je heen wat er is gebeurd.  ", false);
 
         // initialise room exits
             cel.setExit("rcolor", gang);
@@ -198,12 +199,21 @@ public class Game
             trap.setLookDescription("er is niet veel te zien");
             valkuil2.setLookDescription("er is niet veel te zien");
             hal.setLookDescription("Je ziet een harnas aan de zijkant van de hal staan, je besluit daar snel achter te gaan staan. De kok komt steeds dichterbij. Je moet zo stil mogelijk blijven staan, zodat de kok jou niet opmerkt. Beantwoord deze vraag goed om ervoor te zorgen dat jij zo stil mogelijk blijft staan.");
+            keuken.setLookDescription("Je ziet een metalen pan in een open kastje staan. pak de pan");
+            trap2.setLookDescription("Je ziet door de spleet van de deur dat er nog maar 2 wachters bij de poort van het kasteel zijn.");
+            bos.setLookDescription("");
 
         // adding description 
             gang.setSecondDescription("Je zet het glas tegen de deur en drukt vervolgens je oor er tegenaan. Achter deur " + gang.getDirection(valkuil1) + " hoor je gekling van borden, achter de " + gang.getDirection(trap) + " deur hoor je helemaal niks, welke deur kies je? ");
             trap.setSecondDescription("Omdat je tijdens jouw spionage missie al op de eerste verdieping bent geweest van het kasteel, weet je dat de trap naar de begane grond zich aan de andere kant van het kasteel bevindt. Dit is de laatste deur waarvoor je een sleutel nodig hebt, maar er zijn 2 deuren. Kies door welke deur je wilt gaan.");
-            hal.setSecondDescription("De kok loopt voorbij. Je loopt door en komt weer voor 2 deuren te staan. Je hebt helaas niet gezien uit welke deur de kok kwam. Je wil naar de keuken. Maar welke deur lijdt naar de keuken? ");
-
+            hal.setSecondDescription("De kok loopt voorbij. Er staat een zwaart bij het harnas, neem deze mee, misschien komt die nog van pas! Je loopt door en komt weer voor 2 deuren te staan. Je hebt helaas niet gezien uit welke deur de kok kwam. Je wil naar de keuken. Maar welke deur lijdt naar de keuken? ");
+            keuken.setSecondDescription("Met de pan in je hand kruip je steeds dichter naar de 2 koks toe. Je benadert ze van achteren. Je moet heel snel handelen wil je ze allebei kunnen uit schakelen. Beantwoord de volgende vraag goed om ervoor te zorgen dat je snel genoeg handelt.");
+            muur.setSecondDescription("ga nu de gracht in.");
+            gracht.setSecondDescription("ga uit de gracht.");
+            trap2.setSecondDescription("Je rent zo snel mogelijk de trap af en verstopt je onder de trap. Je blijft er stil zitten. De mensen die op weg zijn naar de eetzaal lopen de trap op en merken niet dat jij er bent. Je wacht totdat ze de eetzaal in zijn. Je loopt naar de deur, kijk of je iets kan zien.");
+            poort.setSecondDescription("Het is je gelukt je hebt de kast in brand gezet. Het is nog een klein vuurtje en het is de bewakers nog niet opgevallen. Snel kruip je weer terug naar de deur van de trap. De kast staat nu bijna helemaal in brand. De bewakers schrikken op uit in gesprek en rennen naar een andere kamer om emmers met water te pakken. Wanneer ze uit de kamer zijn loop je snel naar de poort. verlaat de kamer. ");
+            bos.setSecondDescription("Gelukkig heb je een zwaard bij je. De bewaker rent namelijk op je af met getrokken zwaard. Ga het gevecht aan en schakel hem uit! gebruik hit");
+        
         // create and assign items to an room
             // Create the items
                 keychain = new Item("sleutelbos");  
@@ -241,7 +251,7 @@ public class Game
         if(activePlayer.getDifficulty() != 999) {
           System.out.println(activeClock.getTimer()/60 + " minuten");
         } else {
-            System.out.println();
+
         }
         System.out.println(" ");
 
@@ -317,6 +327,9 @@ public class Game
         }
         else if (commandWord.equals("look")) {
             useLook();
+        }
+        else if (commandWord.equals("hit")) {
+            useHit();
         }
         else if (commandWord.equals("back")) {
             useBack();
@@ -539,6 +552,12 @@ public class Game
                 currentRoom = checkRoom;
                 roomIntroducer(currentRoom);
             }
+        }
+    }
+
+    public void useHit() {
+        if(Room == bos){
+            
         }
     }
 }
