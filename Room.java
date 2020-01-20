@@ -128,9 +128,9 @@ public class Room
      * "Exits: north west".
      * @return Details of the room's exits.
      */
-    private String getExitString()
+    public String getExitString()
     {
-        String returnString = "Exits:";
+        String returnString = "uitgangen:";
         Set<String> keys = exits.keySet();
         for(String exit : keys) {
             returnString += " " + exit;

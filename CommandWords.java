@@ -26,7 +26,7 @@ public class CommandWords {
      */
     public void createCommandWords(){
         theCommandWords = new HashMap<>();
-        theCommandWords.put("go", "Ga naar een naastgelegen kamer door 'go <kamernaam>' te typen.");
+        theCommandWords.put("go", "Ga naar een naastgelegen kamer door 'go <deurkleur> te typen.");
         theCommandWords.put("quit", "Stop het spel onmiddelijk.");
         theCommandWords.put("help", "Laat dit helpvenster zien, maar dit kost wel één leven.");
         theCommandWords.put("back", "Ga terug naar de vorige kamer.");
