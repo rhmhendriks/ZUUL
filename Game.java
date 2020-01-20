@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -21,6 +22,7 @@ import java.util.Scanner;
 
 public class Game
 {
+    Random rand = new Random();
     private Parser parser;
     private Room currentRoom;
     private Stack<Room> historyList;
@@ -555,9 +557,23 @@ public class Game
         }
     }
 
-    public void useHit() {
-        if(Room == bos){
-            
+    public void useHit() { 
+
+        int health = activePlayer.getHealth();
+        int enemyHealth = activeEnemy.getEnemyHealth();
+
+        if(currentRoom == bos){
+            int damageDone = rand.nextInt(activePlayer.getmaxAttackDamage());
+            int damageTaken = rand.nextInt(activeEnemy.getEnemyMaxAttackDamage());
+
+            health -= damageDone;
+            enemyHealth -= damageTaken;
+
+            System.out.println("Je hebt de bewaker met " + damageDone + "geraakt");
+            System.out.println("De bewaker heeft jou een klap gegeven van " + damageTaken);
+
+        } else {
+            System.out.println("Er is hier niks om te slaan, wacht totdat je in het 'bos' ben aangekomen");
         }
     }
 }

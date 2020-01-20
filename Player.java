@@ -212,9 +212,9 @@ public class Player
         }
 
         /**
-         * This method is returning the health of the player
+         * This method is returning the attack damage of the player
          * 
-         * @return A integer with the health level of the player
+         * @return A integer with the attack damage level of the player
          */
         public int getmaxAttackDamage() {
             return maxAttackDamage;
