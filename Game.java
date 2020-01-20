@@ -174,7 +174,6 @@ public class Game
             poort = new Room("dskskf", false);
             bos = new Room("dskskf", false);
 
-
         // initialise room exits
             cel.setExit("rcolor", gang);
             gang.setExit("rcolor", valkuil1);
