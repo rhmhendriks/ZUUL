@@ -147,7 +147,7 @@ public class Player
                 this.inventorySize = 1;
                 this.health = 12;
                 this.moves = 25;
-                this.timeLimit = 450;
+                this.timeLimit = 4;
                 isGood = true;
             }
             return isGood;

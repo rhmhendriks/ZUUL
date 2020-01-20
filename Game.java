@@ -138,15 +138,19 @@ public class Game
         // We are going to create the player with the given parameters
             activePlayer = new Player(choosenName);
             activePlayer.setDifficulty(usableDifLevel);
-        
-        // Now we will start the game in the first room. 
-            roomIntroducer(cel);
-            currentRoom = cel;
 
         // time starter
-            if(activePlayer.getTimeLimit() != 999) {
-            System.out.println("hello");
+        if(activePlayer.getTimeLimit() != 999) {
+            activeClock = new Clock(activePlayer.getTimeLimit());
+            activeClock.startClock();
             }
+        
+        // Now we will start the game in the first room. 
+            currentRoom = cel; 
+            roomIntroducer(cel);
+            
+
+        
     }
 
     /**
@@ -157,10 +161,10 @@ public class Game
         // create the rooms
             cel = new Room("Je zit in de cel. Er zit een bewaker voor de cel. De bewaker zit op veilige afstand, zodat jij hem niet kan aanraken.", false);
             gang = new Room("Je bent ontsnapt uit de cel. Je staat nu in een lange gang met twee deuren aan het eind van deze gang. Je zit op de hoogste verdieping van het kasteel. Om bij de uitgang te komen, moet je opzoek naar de trap. Om te weten te komen door welke deur je moet, moet je goed luisteren wat er achter deze deur zich afspeelt. De deuren in het kasteel zijn erg dik, het is onmogelijk om met het bloten oor te horen wat zich er achter de deur bevindt.", true); // must have the keychain
+            valkuil1 = new Room("Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Gebruik back om terug naar de hal te gaan.", false);
             trap = new Room("Deze trap gaat maar tot en met de eerste verdieping van het kasteel. Je moet zo stil mogelijk van de trap af lopen. Beantwoord de volgende vraag goed, om ervoor te zorgen dat je zo stil mogelijk bent en je niet gesnapt wordt.", true);
-            valkuil1 = new Room("dskskf", false);
-            valkuil2 = new Room("dskskf", false);
-            hal = new Room("dskskf", true); // must have the keychain 
+            valkuil2 = new Room("Helaas dit was de verkeerde deur, om geen leven kwijt te raken moet je de volgende vraag goed beantwoorden:", false);
+            hal = new Room("Je loopt rustig en voorzichtig door de hal. Gelukkig maar dat je zo voorzichtig doet. Wanneer je halverwege de hal bent komt er een kok uit een van de deuren. Kijk rond om een verstop plek te vinden.", true); // must have the keychain 
             valkuil3 = new Room("dskskf", false);
             keuken = new Room("dskskf", true); // must have the sword
             eetzaal = new Room("dskskf", false);
@@ -190,12 +194,16 @@ public class Game
         // adding lookdescription to the rooms  
             cel.setLookDescription("Je ziet dat de bewaker een sleutelbos aan zijn broek heeft hangen. Aan jou de taak om ervoor te zorgen dat de bewaker dichter bijkomt, zodat jij de bewaker kan uitschakelen en zijn sleutel kan pakken om de cel te openen. Maar hoe ga je dit doen? Om hierachter te komen moet je de volgende vraag goed beantwoorden:");
             gang.setLookDescription("In de hoek van de gang zie je kast, kijk wat erin zit door middel van een spel:");
+            valkuil1.setLookDescription("er is niet veel te zien");
             trap.setLookDescription("er is niet veel te zien");
+            valkuil2.setLookDescription("er is niet veel te zien");
+            hal.setLookDescription("Je ziet een harnas aan de zijkant van de hal staan, je besluit daar snel achter te gaan staan. De kok komt steeds dichterbij. Je moet zo stil mogelijk blijven staan, zodat de kok jou niet opmerkt. Beantwoord deze vraag goed om ervoor te zorgen dat jij zo stil mogelijk blijft staan.");
 
         // adding description 
             gang.setSecondDescription("Je zet het glas tegen de deur en drukt vervolgens je oor er tegenaan. Achter deur " + gang.getDirection(valkuil1) + " hoor je gekling van borden, achter de " + gang.getDirection(trap) + " deur hoor je helemaal niks, welke deur kies je? ");
-            trap.setSecondDescription("Omdat je tijdens jouw spionage missie al op de eerste verdieping bent geweest van het kasteel, weet je dat de trap n");
-        
+            trap.setSecondDescription("Omdat je tijdens jouw spionage missie al op de eerste verdieping bent geweest van het kasteel, weet je dat de trap naar de begane grond zich aan de andere kant van het kasteel bevindt. Dit is de laatste deur waarvoor je een sleutel nodig hebt, maar er zijn 2 deuren. Kies door welke deur je wilt gaan.");
+            hal.setSecondDescription("De kok loopt voorbij. Je loopt door en komt weer voor 2 deuren te staan. Je hebt helaas niet gezien uit welke deur de kok kwam. Je wil naar de keuken. Maar welke deur lijdt naar de keuken? ");
+
         // create and assign items to an room
             // Create the items
                 keychain = new Item("sleutelbos");  
@@ -230,9 +238,11 @@ public class Game
     private void roomIntroducer(Room introducingRoom){
         System.out.println("Speler: " + activePlayer.getName() + "   " + "Levens: " + activePlayer.createLivebar() + "   " + "Gezondheid: " + activePlayer.getHealth());
         System.out.println("Je bezit:" + activePlayer.getInventory());
-       // if(activePlayer.getTimeLimit() != 999) {
-       //     System.out.println(activeClock.getTimer()/60 + " minuten");
-        //}
+        if(activePlayer.getDifficulty() != 999) {
+          System.out.println(activeClock.getTimer()/60 + " minuten");
+        } else {
+            System.out.println();
+        }
         System.out.println(" ");
 
         System.out.println(introducingRoom.getLongDescription()); // print room introduction
@@ -312,7 +322,11 @@ public class Game
             useBack();
         }
         else if (commandWord.equals("time")) {
+            if (activePlayer.getDifficulty() >= 4) {
             System.out.println(activeClock.getTimer());
+            } else {
+                System.out.println("De moeilijkheidsgraad die jij hebt gekozen bevat geen tijdslimiet");
+            }
         }
         // else command not recognised.
         return wantToQuit;
@@ -413,9 +427,10 @@ public class Game
         System.out.println("Je hebt 'help' gebruikt! Dat kost je één leven.");
         System.out.println("weet je zeker dat je een leven wilt betalen om ");
         System.out.println("hulp te krijgen? [Ja (true) / Nee (false)] ");
+        Boolean confirmation = helpConfirmation.nextBoolean();
         
 
-        if (helpConfirmation.nextBoolean()){
+        if (confirmation) {
             activePlayer.lostLive();
             System.out.println();
             System.out.println("Op de muur staat geschreven welke acties je kunt");
@@ -429,6 +444,8 @@ public class Game
             System.out.println("om de lijst op de muur te bekijken. ");
             System.out.println();
             parser.showCommands();
+            System.out.println();
+            System.out.println("je hebt de keuzen uit de volgende " + currentRoom.getExitString());
         }
         helpConfirmation.close();
     }
