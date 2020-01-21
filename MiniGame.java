@@ -1,7 +1,6 @@
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
-
 /**
  * This class is part of the "World of Zuul" application. 
  * "World of Zuul" is a very simple, text based adventure game.  
@@ -34,6 +33,7 @@ import java.util.Scanner;
         public static final String ANSI_PURPLE = "\u001B[35m";
         public static final String ANSI_CYAN = "\u001B[36m";
         public static final String ANSI_WHITE = "\u001B[37m";
+
 
     /**
      * This is the constructor for all our minigames
@@ -118,4 +118,41 @@ import java.util.Scanner;
             
 
     }
- }
+     // fight game
+    public void endFight(Player activePlayer, Enemy activeEnemy) { 
+
+        Random rand = new Random();
+
+        boolean playerAlive = true;
+        boolean enenmyAlive = true;
+
+        while (playerAlive && enenmyAlive) {
+
+            int damageDone = rand.nextInt(activePlayer.getmaxAttackDamage());
+            int damageTaken = rand.nextInt(activeEnemy.getEnemyMaxAttackDamage());
+
+            activePlayer.setHealth(activePlayer.getHealth() - damageTaken);
+            activeEnemy.setEnemyHealth(activeEnemy.getEnemyHealth() - damageDone);
+
+            System.out.println("Je hebt de bewaker met " + damageDone + " geraakt, hij heeft nog " + activeEnemy.getEnemyHealth() + " levens");
+            System.out.println("De bewaker heeft jou een klap gegeven van " + damageTaken + " je hebt nog " + activePlayer.getHealth() + " levens");
+
+            if(activePlayer.getHealth() <= 0 || activeEnemy.getEnemyHealth() <= 0) {
+                
+                if (activeEnemy.getEnemyHealth() <= 0) {
+                    enenmyAlive = false;
+                } else {
+                    if (activePlayer.getLiveStatus() > 1) {
+                        activePlayer.lostLive();
+                       } else {
+
+
+                       }
+
+            } else {
+                System.out.println("blij aanvallen, geeft niet op!");
+            }
+        }
+    }
+}
+

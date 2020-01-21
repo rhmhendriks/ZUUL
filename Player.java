@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * Class Player - The player of the game.
@@ -21,8 +22,10 @@ import java.util.HashMap;
 
 public class Player
 {
+    Random rand = new Random();
     private String name;
     private int health;
+    private int maxAttackDamage;
     private int difficulty;
     private int lives;
     private int inventorySize;
@@ -75,6 +78,15 @@ public class Player
         }
 
         /**
+         * Define the output of the damage command
+         * @param numbdamage The wanted output when a user uses "look" in this room.
+         */
+        public void setmaxAttackDamage(int numbmaxAttackDamage)
+        {
+            this.health = numbmaxAttackDamage;
+        }
+
+        /**
          * Define the output of the moves command
          * @param numbMoves The wanted output when a user uses "look" in this room.
          */
@@ -114,6 +126,7 @@ public class Player
                 this.lives = 6;
                 this.inventorySize = 5;
                 this.health = 15;
+                this.maxAttackDamage = 5;
                 this.moves = 45;
                 this.timeLimit = 999;
                 isGood = true;
@@ -122,6 +135,7 @@ public class Player
                 this.lives = 4;
                 this.inventorySize = 3;
                 this.health = 12;
+                this.maxAttackDamage = 4;
                 this.moves = 35;
                 this.timeLimit = 999;
                 isGood = true;
@@ -129,7 +143,8 @@ public class Player
                 this.difficulty = difficulty;
                 this.lives = 2;
                 this.inventorySize = 1;
-                this.health = 12;
+                this.health = 10;
+                this.maxAttackDamage = 3;
                 this.moves = 25;
                 this.timeLimit = 999;
                 isGood = true;
@@ -138,6 +153,7 @@ public class Player
                 this.lives = 6;
                 this.inventorySize = 5;
                 this.health = 15;
+                this.maxAttackDamage = 5;
                 this.moves = 45;
                 this.timeLimit = 900;
                 isGood = true;
@@ -146,6 +162,7 @@ public class Player
                 this.lives = 4;
                 this.inventorySize = 3;
                 this.health = 12;
+                this.maxAttackDamage = 4;
                 this.moves = 35;
                 this.timeLimit = 600;
                 isGood = true;
@@ -153,7 +170,8 @@ public class Player
                 this.difficulty = difficulty;
                 this.lives = 2;
                 this.inventorySize = 1;
-                this.health = 12;
+                this.health = 10;
+                this.maxAttackDamage = 3;
                 this.moves = 25;
                 this.timeLimit = 4;
                 isGood = true;
@@ -199,6 +217,15 @@ public class Player
          */
         public int getHealth() {
             return health;
+        }
+
+        /**
+         * This method is returning the attack damage of the player
+         * 
+         * @return A integer with the attack damage level of the player
+         */
+        public int getmaxAttackDamage() {
+            return maxAttackDamage;
         }
 
         /**
