@@ -574,6 +574,9 @@ public class Game
         else if (commandWord.equals("terug")) {
             useBack();
         }
+        else if (commandWord.equals("info")) {
+            useAbout();
+        }
         else if (commandWord.equals("tijd")) {
             if (activePlayer.getDifficulty() >= 4) {
             System.out.println(activeClock.getTimer());
@@ -760,6 +763,12 @@ public class Game
         Room roomtogobackto = historyList.pop();
         currentRoom = roomtogobackto;
         roomIntroducer(currentRoom);
+    }
+
+    private void useAbout() {
+        System.out.println("Dit is een ontsnappings leerspel. Het idee van het spel is dat je ontsnapt uit een kasteel, dit doe je door voorwerpen op te pakken en spellen goed te beantwoorden. Dit spel is gemaakt voor een school project.");
+        System.out.println("De auteurs van dit school project zijn:");
+        System.out.println("Luc Willemse & Ronald Hendriks & Nivard Ypey");
     }
 
     /**
