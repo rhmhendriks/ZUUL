@@ -317,31 +317,28 @@ public class Game
         if (commandWord.equals("help")) {
             printHelp();
         }
-        else if (commandWord.equals("go")) {
+        else if (commandWord.equals("ga")) {
             goRoom(command);
         }
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
-        else if (commandWord.equals("inventory")) {
+        else if (commandWord.equals("rugzak")) {
             System.out.println(activePlayer.getInventory());
         }
-        else if (commandWord.equals("pickup")) {
+        else if (commandWord.equals("oppakken")) {
             pickupItem(command);
         }
-        else if (commandWord.equals("drop")) {
+        else if (commandWord.equals("latenvallen")) {
             dropItem(command);
         }
-        else if (commandWord.equals("look")) {
+        else if (commandWord.equals("kijk")) {
             useLook();
         }
-        else if (commandWord.equals("hit")) {
-            useHit();
-        }
-        else if (commandWord.equals("back")) {
+        else if (commandWord.equals("terug")) {
             useBack();
         }
-        else if (commandWord.equals("time")) {
+        else if (commandWord.equals("tijd")) {
             if (activePlayer.getDifficulty() >= 4) {
             System.out.println(activeClock.getTimer());
             } else {
