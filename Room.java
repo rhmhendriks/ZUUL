@@ -111,7 +111,7 @@ public class Room
      */
     public String getLongDescription()
     {
-        return "You are " + description + ".\n" + getExitString();
+        return " Je bent in: " + description + ".\n" + getExitString();
     }
 
     /**
@@ -128,9 +128,9 @@ public class Room
      * "Exits: north west".
      * @return Details of the room's exits.
      */
-    private String getExitString()
+    public String getExitString()
     {
-        String returnString = "Exits:";
+        String returnString = "uitgangen: ";
         Set<String> keys = exits.keySet();
         for(String exit : keys) {
             returnString += " " + exit;
@@ -138,7 +138,7 @@ public class Room
         return returnString;
     }
 
-    private String getDirection(Room askedDirection)
+    public String getDirection(Room askedDirection)
     {
         // lets initilize some local variables
             HashMap<Room, String> flippedExits = new HashMap<Room, String>();

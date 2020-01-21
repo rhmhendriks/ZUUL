@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=Clock
+comment0.text=\n\ class\ Clock\ -\ geef\ hier\ een\ beschrijving\ van\ deze\ class\n\n\ @author\ (Luc\ Willemse)\n\ @version\ (15-01-2020)\n
+comment1.params=timeLimit
+comment1.target=Clock(int)
+comment1.text=\n\ Constructor\ voor\ objects\ van\ class\ Clock\n
+comment2.params=
+comment2.target=void\ run()
+comment3.params=
+comment3.target=void\ startClock()
+comment4.params=numbTimer
+comment4.target=void\ setTimer(java.util.Timer)
+comment4.text=\n\ Define\ the\ output\ of\ the\ timer\ command\n\ @param\ numbTimer\ The\ wanted\ output\ when\ a\ user\ uses\ "time".\n
+comment5.params=
+comment5.target=int\ getTimer()
+comment5.text=\n\ This\ method\ is\ returning\ the\ time\ thats\ remaining\n\ \n\ @return\ A\ integer\ with\ the\ time\ of\ the\ game\n
+comment6.params=
+comment6.target=void\ timeUp()
+numComments=7
