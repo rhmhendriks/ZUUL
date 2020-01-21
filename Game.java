@@ -473,12 +473,16 @@ public class Game
 
     private void printHelp() 
     {
-        Scanner helpConfirmation = new Scanner(System.in);
+        Scanner helpConfirmation;
+        Boolean confirmation;
+        
+        
+        helpConfirmation = new Scanner(System.in);
 
         System.out.println("Je hebt 'help' gebruikt! Dat kost je één leven.");
         System.out.println("weet je zeker dat je een leven wilt betalen om ");
         System.out.println("hulp te krijgen? [Ja (true) / Nee (false)] ");
-        Boolean confirmation = helpConfirmation.nextBoolean();
+        confirmation = helpConfirmation.nextBoolean();
         
 
         if (confirmation) {
@@ -498,7 +502,6 @@ public class Game
             System.out.println();
             System.out.println("je hebt de keuzen uit de volgende " + currentRoom.getExitString());
         }
-        helpConfirmation.close();
     }
 
     /** 
