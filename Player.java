@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+
 /**
  * Class Player - The player of the game.
  *
@@ -103,6 +104,13 @@ public class Player
             this.timeLimit = numbTimeLimit;
         }
 
+        /**
+         * Used to remove 1 singele move point
+         */
+        
+        public void remMove(){
+            moves--;
+        }
 
         /**
          * This method is used to set the difficulty of the game
@@ -344,5 +352,6 @@ public class Player
             } else {
                 return false;
             }
+
     }
 }
