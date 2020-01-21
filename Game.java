@@ -285,7 +285,7 @@ public class Game
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("bedankt voor het spelen, tot ziens!");
     }
 
     /**
@@ -309,7 +309,7 @@ public class Game
     {
 
         if(command.isUnknown()) {
-            System.out.println("I don't know what you mean...");
+            System.out.println("Sorry, ik weet niet wat je bedoeld.");
             return false;
         }
 
@@ -475,7 +475,7 @@ public class Game
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
+            System.out.println("waarheen?");
             return;
         }
 
@@ -485,7 +485,7 @@ public class Game
         Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
-            System.out.println("There is no door!");
+            System.out.println("Daar is geen deur!");
         }
         else {
             historyList.add(currentRoom);
@@ -501,7 +501,7 @@ public class Game
     private boolean quit(Command command) 
     {
         if(command.hasSecondWord()) {
-            System.out.println("Quit what?");
+            System.out.println("Quit wat?");
             return false;
         }
         else {
