@@ -561,29 +561,4 @@ public class Game
             }
         }
     }
-
-    public void useHit() { 
-
-        if(currentRoom == bos){
-            int damageDone = rand.nextInt(activePlayer.getmaxAttackDamage());
-            int damageTaken = rand.nextInt(activeEnemy.getEnemyMaxAttackDamage());
-
-            activePlayer.setHealth(activePlayer.getHealth() - damageTaken);
-            activeEnemy.setEnemyHealth(activeEnemy.getEnemyHealth() - damageDone);
-
-            System.out.println("Je hebt de bewaker met " + damageDone + " geraakt, hij heeft nog " + activeEnemy.getEnemyHealth() + " levens");
-            System.out.println("De bewaker heeft jou een klap gegeven van " + damageTaken + " je hebt nog " + activePlayer.getHealth() + " levens");
-
-            if(activePlayer.getHealth() <= 0 || activeEnemy.getEnemyHealth() <= 0) {
-                
-                
-
-            } else {
-                System.out.println("blij aanvallen, geeft niet op!");
-            }
-
-        } else {
-            System.out.println("Er is hier niks om te slaan, wacht totdat je in het 'bos' ben aangekomen");
-        }
-    }
 }
