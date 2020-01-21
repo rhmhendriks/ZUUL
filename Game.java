@@ -1,7 +1,4 @@
 import java.util.Stack;
-import java.util.Timer;
-import java.util.TimerTask;
-import javax.management.ConstructorParameters;
 import java.util.Scanner;
 
 
@@ -146,14 +143,6 @@ public class Game
             activeClock.startClock();
     }
 
-     // Temporary for testing parameters
-     activePlayer.inventory.add(new Item("key"));
-
-     // Lets close our scanners    
-         playerName.close();
-         playerNameConfirm.close();
-         difLevel.close();
-         difLevelConfirm.close();
     /**
      * Create all the rooms and link their exits together.
      */
