@@ -62,12 +62,13 @@ public class Game
      * The main method for running outside of IDE
      */
     public static void main(String[] args) {
-        while (true == true){
+        boolean boolvar = true;
+        while (boolvar){
             Game game = null;
             game = new Game();
             game.play();
             if (game.play()){
-                break;
+                boolvar = false;
             }
         }
     }
@@ -480,7 +481,7 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-        Boolean returnVariable = true;
+        Boolean returnVariable;
         
         while (! finished || activeClock.getTimer() > 0 || activePlayer.getMoves() > 0 || activePlayer.getLiveStatus() > 0) {
             if (activeClock.getTimer() <= 0){
@@ -517,11 +518,12 @@ public class Game
                 Command command = parser.getCommand();
                 finished = processCommand(command);
             }
-
+        }
         System.out.println(ANSI_CYAN + "Bedankt voor het spelen!     Tot de volgende keer");
         System.out.println("Dit venster kan nu worden gesloten!" + ANSI_RESET);
-
-        }
+        returnVariable = true;
+        
+        return returnVariable;
     }
 
     /**
