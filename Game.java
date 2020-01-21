@@ -68,7 +68,8 @@ public class Game
             game = new Game();
             game.play();
             if (game.play()){
-                boolvar = false;
+                System.exit(0);
+                break;
             }
         }
     }
@@ -481,9 +482,7 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-        Boolean returnVariable;
-        
-        while (! finished || activeClock.getTimer() > 0 || activePlayer.getMoves() > 0 || activePlayer.getLiveStatus() > 0) {
+        while (! finished && activeClock.getTimer() > 0 && activePlayer.getMoves() > 0 && activePlayer.getLiveStatus() > 0) {
             if (activeClock.getTimer() <= 0){
                 System.out.println();
                 System.out.println();
@@ -493,7 +492,7 @@ public class Game
                 System.out.println();
                 System.out.println();
                 System.out.println("Het spel wordt nu opnieuw geladen... Een ogenblik geduld...." + ANSI_RESET);
-                returnVariable = false;
+                return false;
             } else if ((activePlayer.getMoves() <= 0)){
                 System.out.println();
                 System.out.println();
@@ -503,7 +502,7 @@ public class Game
                 System.out.println();
                 System.out.println();
                 System.out.println("Het spel wordt nu opnieuw geladen... Een ogenblik geduld...." + ANSI_RESET);
-                returnVariable = false;
+                return false;
             } else if (activePlayer.getLiveStatus() <= 0) {
                 System.out.println();
                 System.out.println();
@@ -513,7 +512,7 @@ public class Game
                 System.out.println();
                 System.out.println();
                 System.out.println("Het spel wordt nu opnieuw geladen... Een ogenblik geduld...." + ANSI_RESET);
-                returnVariable = false;
+                return false;
             } else {
                 Command command = parser.getCommand();
                 finished = processCommand(command);
@@ -521,9 +520,8 @@ public class Game
         }
         System.out.println(ANSI_CYAN + "Bedankt voor het spelen!     Tot de volgende keer");
         System.out.println("Dit venster kan nu worden gesloten!" + ANSI_RESET);
-        returnVariable = true;
-        
-        return returnVariable;
+        System.exit(0);
+        return true;
     }
 
     /**
