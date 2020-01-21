@@ -26,7 +26,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Stack<Room> historyList;
-    Room cel, gang, valkuil1, trap, valkuil2, hal, valkuil3, keuken, eetzaal, muur, gracht, trap2, valkuil4, poort, bos;
+    Room cel, gang, valkuil1, trap, valkuil2, hal, valkuil3, keuken, eetzaal, muur, gracht, trap2, valkuil4, poort, bos, thuis;
     Item keychain, glass, pan, rope, firestone, sword; 
     private Player activePlayer;
     private Clock activeClock;
@@ -141,6 +141,7 @@ public class Game
         // We are going to create the player with the given parameters
             activePlayer = new Player(choosenName);
             activePlayer.setDifficulty(usableDifLevel);
+            activeEnemy = new Enemy();
 
         // time starter
         if(activePlayer.getTimeLimit() != 999) {
@@ -164,8 +165,8 @@ public class Game
         // create the rooms
             cel = new Room("Je zit in de cel. Er zit een bewaker voor de cel. De bewaker zit op veilige afstand, zodat jij hem niet kan aanraken.", false);
             gang = new Room("Je bent ontsnapt uit de cel. Je staat nu in een lange gang met twee deuren aan het eind van deze gang. Je zit op de hoogste verdieping van het kasteel. Om bij de uitgang te komen, moet je opzoek naar de trap. Om te weten te komen door welke deur je moet, moet je goed luisteren wat er achter deze deur zich afspeelt. De deuren in het kasteel zijn erg dik, het is onmogelijk om met het bloten oor te horen wat zich er achter de deur bevindt.", true); // must have the keychain
-            valkuil1 = new Room("Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Gebruik back om terug naar de hal te gaan.", false);
-            trap = new Room("Deze trap gaat maar tot en met de eerste verdieping van het kasteel. Je moet zo stil mogelijk van de trap af lopen. Beantwoord de volgende vraag goed, om ervoor te zorgen dat je zo stil mogelijk bent en je niet gesnapt wordt.", true);
+            valkuil1 = new Room("Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Gebruik back om terug naar de hal te gaan.", true); // must have glass
+            trap = new Room("Deze trap gaat maar tot en met de eerste verdieping van het kasteel. Je moet zo stil mogelijk van de trap af lopen. Beantwoord de volgende vraag goed, om ervoor te zorgen dat je zo stil mogelijk bent en je niet gesnapt wordt.", true); // must have glass
             valkuil2 = new Room("Helaas dit was de verkeerde deur, om geen leven kwijt te raken moet je de volgende vraag goed beantwoorden:", false);
             hal = new Room("Je loopt rustig en voorzichtig door de hal. Gelukkig maar dat je zo voorzichtig doet. Wanneer je halverwege de hal bent komt er een kok uit een van de deuren. Kijk rond om een verstop plek te vinden.", true); // must have the keychain 
             valkuil3 = new Room("Helaas dit was de verkeerde deur, om geen leven kwijt te raken moet je de volgende vraag goed beantwoorden:", false);
@@ -176,6 +177,7 @@ public class Game
             trap2 = new Room("Je loopt de trap af, wanneer je bijna beneden bent hoor je geroesemoes en zie je dat de deur langzaam opengaat. Je moet zo snel mogelijk een verstop plek vinden. Beantwoord de volgende vraaggoed, zodat je zo snel mogelijk een verstopplek kan vinden.", true); // must have the firestone
             poort = new Room("De bewakers zijn druk in gesprek en letten niet goed op. Je doet de deur op een kiertje en kruipt stilletjes achter een kast die 2 meter van je vanaf staat. Je pakt je vuursteen. Met de vuursteen probeer je de kast in de brand te zetten. Beantwoord de volgende vraag goed, om de kast in brand te zetten ", false);
             bos = new Room("Je zit in het bos, je rent zo hardt als je kan weg, zodat je al zo ver mogelijk weg bent voordat ze erachter komen dat je ontsnapt bent. Je kijkt nog eens om er zeker van te zijn dat je niet achtervolgt wordt. Terwijl je achteromkijkt bots je tegen iets of iemand aan en valt op de grond. Kijk om je heen wat er is gebeurd.  ", false);
+            thuis = new Room("Je bent veilig aangekomen bij je eigen kasteel, je hebt je koning gewaarschuwd voor de aanvalsplannen. nu maar lekker slapen en herstellen van het heftige avontuur.", false);
 
         // initialise room exits
             cel.setExit("rcolor", gang);
@@ -193,6 +195,7 @@ public class Game
             trap2.setExit("rcolor", valkuil4);
             trap2.setExit("rcolor", poort);
             poort.setExit("rcolor", bos);
+            bos.setExit("rcolor", thuis);
             
         // adding lookdescription to the rooms  
             cel.setLookDescription("Je ziet dat de bewaker een sleutelbos aan zijn broek heeft hangen. Aan jou de taak om ervoor te zorgen dat de bewaker dichter bijkomt, zodat jij de bewaker kan uitschakelen en zijn sleutel kan pakken om de cel te openen. Maar hoe ga je dit doen? Om hierachter te komen moet je de volgende vraag goed beantwoorden:");
@@ -236,6 +239,8 @@ public class Game
 
             // set items for unlock
                 gang.setItemForUnlocking(keychain);
+                valkuil1.setItemForUnlocking(glass);
+                trap.setItemForUnlocking(glass);
                 hal.setItemForUnlocking(keychain);
                 keuken.setItemForUnlocking(sword);
                 muur.setItemForUnlocking(rope);
@@ -319,7 +324,7 @@ public class Game
             wantToQuit = quit(command);
         }
         else if (commandWord.equals("inventory")) {
-            activePlayer.getInventory();
+            System.out.println(activePlayer.getInventory());
         }
         else if (commandWord.equals("pickup")) {
             pickupItem(command);
@@ -559,18 +564,23 @@ public class Game
 
     public void useHit() { 
 
-        int health = activePlayer.getHealth();
-        int enemyHealth = activeEnemy.getEnemyHealth();
-
         if(currentRoom == bos){
             int damageDone = rand.nextInt(activePlayer.getmaxAttackDamage());
             int damageTaken = rand.nextInt(activeEnemy.getEnemyMaxAttackDamage());
 
-            health -= damageDone;
-            enemyHealth -= damageTaken;
+            activePlayer.setHealth(activePlayer.getHealth() - damageTaken);
+            activeEnemy.setEnemyHealth(activeEnemy.getEnemyHealth() - damageDone);
 
-            System.out.println("Je hebt de bewaker met " + damageDone + "geraakt");
-            System.out.println("De bewaker heeft jou een klap gegeven van " + damageTaken);
+            System.out.println("Je hebt de bewaker met " + damageDone + " geraakt, hij heeft nog " + activeEnemy.getEnemyHealth() + " levens");
+            System.out.println("De bewaker heeft jou een klap gegeven van " + damageTaken + " je hebt nog " + activePlayer.getHealth() + " levens");
+
+            if(activePlayer.getHealth() <= 0 || activeEnemy.getEnemyHealth() <= 0) {
+                
+                
+
+            } else {
+                System.out.println("blij aanvallen, geeft niet op!");
+            }
 
         } else {
             System.out.println("Er is hier niks om te slaan, wacht totdat je in het 'bos' ben aangekomen");
