@@ -1,6 +1,7 @@
 import java.util.Stack;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 
 /**
@@ -85,7 +86,8 @@ public class Game
                 Scanner playerName = new Scanner(System.in);
                 Scanner playerNameConfirm = new Scanner(System.in);
                 String choosenName;
-                boolean confirmInputName;
+                boolean confirmInputName = false;
+                int confirmationRecieved = 0;
             
             // Difficulty selection
                 Scanner difLevel = new Scanner(System.in);
@@ -107,7 +109,17 @@ public class Game
 
                 System.out.println("De door jouw gekozen naam is: " + choosenName);
                 System.out.println("Is dit juist? [Ja (true) / Nee (false)]");
-                confirmInputName = playerNameConfirm.nextBoolean();
+                
+                while (confirmationRecieved == 0) {
+                    try {
+                        confirmInputName = playerNameConfirm.nextBoolean();
+                        confirmationRecieved = 1;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Je kan alleen 'true' of 'false' invullen");
+                        System.out.println("");
+                    }
+
+                }
 
                 while (!confirmInputName){
                     System.out.println(" ");
