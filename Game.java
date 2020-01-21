@@ -29,6 +29,18 @@ public class Game
     private Player activePlayer;
     private Clock activeClock;
     private boolean wantToQuit;
+    private boolean finished = false;
+
+    // enable the use of color in the text output. 
+        public static final String ANSI_RESET = "\u001B[0m";
+        public static final String ANSI_BLACK = "\u001B[30m";
+        public static final String ANSI_RED = "\u001B[31m";
+        public static final String ANSI_GREEN = "\u001B[32m";
+        public static final String ANSI_YELLOW = "\u001B[33m";
+        public static final String ANSI_BLUE = "\u001B[34m";
+        public static final String ANSI_PURPLE = "\u001B[35m";
+        public static final String ANSI_CYAN = "\u001B[36m";
+        public static final String ANSI_WHITE = "\u001B[37m";
 
     
     /**
@@ -40,17 +52,21 @@ public class Game
         parser = new Parser();
         historyList = new Stack<Room>();
         boolean wantToQuit = false;
-
-            
-        
-    
     }
+
     /**
+     * 
      * The main method for running outside of IDE
      */
     public static void main(String[] args) {
-        Game game = new Game();
-        game.play();
+        while (true == true){
+            Game game = null;
+            game = new Game();
+            game.play();
+            if (game.play()){
+                break;
+            }
+        }
     }
 
     /**
@@ -148,8 +164,6 @@ public class Game
         // Now we will start the game in the first room. 
             currentRoom = cel; 
             roomIntroducer(cel);
-            
-
         
     }
 
@@ -256,19 +270,55 @@ public class Game
     /**
      *  Main play routine.  Loops until end of play.
      */
-    public void play() 
+    public boolean play() 
     {            
         gameStarter();
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-                
-        boolean finished = false;
-        while (! finished) {
-            Command command = parser.getCommand();
-            finished = processCommand(command);
+        Boolean returnVariable = true;
+        
+        while (! finished || activeClock.getTimer() > 0 || activePlayer.getMoves() > 0 || activePlayer.getLiveStatus() > 0) {
+            if (activeClock.getTimer() <= 0){
+                System.out.println();
+                System.out.println();
+                System.out.println(ANSI_RED + "Je tijd is om!");
+                System.out.println("Het is je niet gelukt om op tijd te ontsnappen!");
+                System.out.println("De bewakers hebben je terug gebracht naar je Cel.");
+                System.out.println();
+                System.out.println();
+                System.out.println("Het spel wordt nu opnieuw geladen... Een ogenblik geduld...." + ANSI_RESET);
+                returnVariable = false;
+            } else if ((activePlayer.getMoves() <= 0)){
+                System.out.println();
+                System.out.println();
+                System.out.println(ANSI_RED + "Je zetten zijn op!");
+                System.out.println("Je hebt niet genoeg energie meer om iets te doen, hierdoor kun je ook niet meer rennen.");
+                System.out.println("De bewakers hebben je meegesleept en terug geplaatst in je Cel. ");
+                System.out.println();
+                System.out.println();
+                System.out.println("Het spel wordt nu opnieuw geladen... Een ogenblik geduld...." + ANSI_RESET);
+                returnVariable = false;
+            } else if (activePlayer.getLiveStatus() <= 0) {
+                System.out.println();
+                System.out.println();
+                System.out.println(ANSI_RED + "oh nee!, je hebt al je levens verloren!");
+                System.out.println("Zonder levens kun je je niet meer verzetten tegen de bewakers.");
+                System.out.println("De bewakers hebben je gevonden en weer naar de cel gebracht.");
+                System.out.println();
+                System.out.println();
+                System.out.println("Het spel wordt nu opnieuw geladen... Een ogenblik geduld...." + ANSI_RESET);
+                returnVariable = false;
+            } else {
+                Command command = parser.getCommand();
+                finished = processCommand(command);
+            }
+
+        System.out.println(ANSI_CYAN + "Bedankt voor het spelen!     Tot de volgende keer");
+        System.out.println("Dit venster kan nu worden gesloten!" + ANSI_RESET);
+
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        return returnVariable;
     }
 
     /**
@@ -345,30 +395,13 @@ public class Game
 
         String item = command.getSecondWord(); // Get the item the player wants to drop
 
-        /**
-        // Find the item to drop
-        Item newItem = null;
-        int index = 0;
-        for(int i = 0; i < activePlayer.inventory.size(); i++) {
-            newItem = activePlayer.inventory.get(i);
-            index = i;
-        }
-
-        if (newItem == null) {
-            System.out.println(item + " zit niet in de tas! Probeer het opnieuw!");
-        }
-        
-        else {
-            activePlayer.inventory.remove(index);
-            currentRoom.setItem(new Item(item));
-            System.out.println("je hebt " + item + " achtergelaten in " + currentRoom + "!");
-        }
-        */
-
         if (!activePlayer.inInventory(item)){
             System.out.println(item + " zit niet in de tas! Probeer het opnieuw!");
-        } else if (activePlayer.removeFromInventory(item)) {
-
+        } else {
+            Item tempItem = activePlayer.getItemAsObject(item);
+            activePlayer.removeFromInventory(tempItem.getDescription());
+            currentRoom.setItem(tempItem);
+            System.out.println("je hebt " + item + " achtergelaten in " + currentRoom + "!");
         }
     }
 
@@ -471,8 +504,9 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
-            historyList.add(currentRoom);
-            processLock(nextRoom);
+                historyList.add(currentRoom);
+                activePlayer.remMove();
+                processLock(nextRoom);     
         }
     }
 
@@ -525,6 +559,11 @@ public class Game
         roomIntroducer(currentRoom);
     }
 
+    /**
+     * Check iof a room is locked and unlock when possible
+     * 
+     * @param checkRoom the room you wanna check
+     */
     private void processLock(Room checkRoom){
 
         if (!checkRoom.getLock()){
