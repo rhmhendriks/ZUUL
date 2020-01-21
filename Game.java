@@ -62,16 +62,14 @@ public class Game
      * The main method for running outside of IDE
      */
     public static void main(String[] args) {
-        boolean boolvar = true;
-        while (boolvar){
-            Game game = null;
-            game = new Game();
+            Game game = new Game();
             game.play();
-            if (game.play()){
-                System.exit(0);
-                break;
+            if (!game.play()){
+                //Game game = null;
+                game = null;
+                game = new Game();
+                game.play();
             }
-        }
     }
 
     /**
@@ -290,13 +288,15 @@ public class Game
     /**
      *  Main play routine.  Loops until end of play.
      */
-    public boolean play() 
+    public Boolean play() 
     {            
         gameStarter();
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-        while (! finished && activeClock.getTimer() > 0 && activePlayer.getMoves() > 0 && activePlayer.getLiveStatus() > 0) {
+
+        while (true == true){
+            Command command = parser.getCommand();
             if (activeClock.getTimer() <= 0){
                 System.out.println();
                 System.out.println();
@@ -328,14 +328,15 @@ public class Game
                 System.out.println("Het spel wordt nu opnieuw geladen... Een ogenblik geduld...." + ANSI_RESET);
                 return false;
             } else {
-                Command command = parser.getCommand();
                 finished = processCommand(command);
             }
-        }
-        System.out.println(ANSI_CYAN + "Bedankt voor het spelen!     Tot de volgende keer");
-        System.out.println("Dit venster kan nu worden gesloten!" + ANSI_RESET);
-        System.exit(0);
-        return true;
+            
+            if (finished){
+                System.out.println(ANSI_CYAN + "Bedankt voor het spelen!     Tot de volgende keer");
+                System.out.println("Dit venster kan nu worden gesloten!" + ANSI_RESET);
+                System.exit(0);
+            }
+        }    
     }
 
     /**
