@@ -15,6 +15,7 @@ public class Clock
 
     /**
      * Constructor voor objects van class Clock
+     * @param timeLimit
      */
     public Clock(int timeLimit)
     {
