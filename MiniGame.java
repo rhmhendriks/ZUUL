@@ -61,6 +61,7 @@ import java.util.Timer;
         System.out.println("Vul een getal in dat tussen de 10000 en 99999 ligt.  >");
 
         try {
+            System.out.print("> ");
             answerGiven = answerInputBar.nextInt();
             error = false;
         } catch (InputMismatchException e) {
@@ -137,42 +138,90 @@ import java.util.Timer;
 
     }
      // fight game
-    /*public void endFight(Player activePlayer, Enemy activeEnemy) { 
+    public void endFight(Player activePlayer, Enemy activeEnemy) { 
+        // Lets setup some variables
+            Random rand;
+            boolean playerAlive;
+            boolean enenmyAlive;
+            Scanner endGameParser;
+            String userinput;
 
-        Random rand = new Random();
+        // lets initialize the variables where needed
+            rand = new Random();
+            playerAlive = true;
+            enenmyAlive = true;
+            endGameParser = new Scanner(System.in);
 
-        boolean playerAlive = true;
-        boolean enenmyAlive = true;
+        // The game is in a while loop where all the magic happends
+            while (playerAlive && enenmyAlive) {
 
-        while (playerAlive && enenmyAlive) {
+                // Let's use the custom parser to make sure no commands can be used
+                    System.out.print("> ");
+                    userinput = endGameParser.nextLine();
 
-            int damageDone = rand.nextInt(activePlayer.getmaxAttackDamage());
-            int damageTaken = rand.nextInt(activeEnemy.getEnemyMaxAttackDamage());
+                    // let's also check what the user wanted to do
+                        if (userinput.equalsIgnoreCase("status")){
+                            System.out.println("Jij hebt nog een gezondheid van: " + activePlayer.getHealth());
+                            System.out.println("De bewaker heeft nog een gezondheid van: " + activePlayer.getHealth());
 
-            activePlayer.setHealth(activePlayer.getHealth() - damageTaken);
-            activeEnemy.setEnemyHealth(activeEnemy.getEnemyHealth() - damageDone);
+                         } else if (userinput.equalsIgnoreCase("slaan")) {
+                            // Radom select what damage is beiing done
+                                int damageDone = rand.nextInt(activePlayer.getmaxAttackDamage());
+                                int damageTaken = rand.nextInt(activeEnemy.getEnemyMaxAttackDamage());
+                            
+                            // update objects healt parameters
+                                activePlayer.setHealth(activePlayer.getHealth() - damageTaken);
+                                activeEnemy.setEnemyHealth(activeEnemy.getEnemyHealth() - damageDone);
 
-            System.out.println("Je hebt de bewaker met " + damageDone + " geraakt, hij heeft nog " + activeEnemy.getEnemyHealth() + " levens");
-            System.out.println("De bewaker heeft jou een klap gegeven van " + damageTaken + " je hebt nog " + activePlayer.getHealth() + " levens");
+                            // tell the user what happaend
+                                System.out.println( ANSI_CYAN + "Je hebt de bewaker met " + damageDone + " geraakt, hij heeft nog " + activeEnemy.getEnemyHealth() + " vechtlevens" + ANSI_RESET);
+                                System.out.println( ANSI_YELLOW + "De bewaker heeft jou een klap gegeven van " + damageTaken + " je hebt nog " + activePlayer.getHealth() + " vechtlevens"  + ANSI_RESET);
+                                System.out.println();
+                                System.out.println();
 
-            if(activePlayer.getHealth() <= 0 || activeEnemy.getEnemyHealth() <= 0) {
-                
-                if (activeEnemy.getEnemyHealth() <= 0) {
-                    enenmyAlive = false;
-                } else {
-                    if (activePlayer.getLiveStatus() > 1) {
-                        activePlayer.lostLive();
-                       } else {
+                            
+                            // now check the consuquences
+                                if(activePlayer.getHealth() <= 0 || activeEnemy.getEnemyHealth() <= 0) {
+                                    // either the player or the enemy died now we find out who
+                                    if (activeEnemy.getEnemyHealth() <= 0) {
+                                        // the enemy died! the player won.
+                                        System.out.println( ANSI_GREEN + "Je hebt de bewaker uitgeschakeld! Gefeliciteerd! Je wordt nu teruggestuurd naar het spel als je op neter drukt."  + ANSI_RESET);
+                                        pressEnterToContinue();
+                                        System.out.println();
+                                        System.out.println();
+                                        System.out.println("---------------------------------------------------------------------------");
+                                        System.out.println();
+                                        System.out.println();
+                                        enenmyAlive = false;
+                                    } else {
+                                        // The player died
+                                        if (activePlayer.getLiveStatus() > 1) {
+                                            // can continue with a new live.
+                                            System.out.println(ANSI_RED + "De bewaker heeft je verslagen! Je zult een leven verliezen maar je krijgt nog een kans!" + ANSI_RESET);
+                                            System.out.println(ANSI_RED + "Versla de bewaker voor al je levens op zijn! Druk op enter om door te gaan" + ANSI_RESET);
+                                            pressEnterToContinue();
+                                            System.out.println();
+                                            activePlayer.lostLive();
+                                            System.out.println();
+                                            System.out.println();
+                                        } else {
+                                            // cant continue has to startover
+                                            System.out.println(ANSI_RED + "De bewaker heeft je verslagen en je hebt je laatste leven verloren!" + ANSI_RESET);
+                                            System.out.println(ANSI_RED + "Gebruik een willekeurig commado om het spel opnieuw te starten!" + ANSI_RESET);
+                                            System.out.println();
+                                            break;
+                                        } // no more lives
+                                    } // enemy still alive
+
+                                } else { 
+                                System.out.println("Blijf aanvallen, geef niet op!");
+                                }// both alive
+                        } // command was hit
+                //endGameParser.next();
+            } // Game while loop
+    }//method
 
 
-                       }
-
-            } else {
-                System.out.println("Blijf aanvallen, geef niet op!");
-            }
-        }
-    }
-*/
     public String generateString(int length){
         Clock gameTimer;
 
@@ -215,6 +264,7 @@ public void typingGame(){
 
                     //Print the currentword on the screen
                         System.out.println("Het woord dat je moet overtypen is: " + ANSI_BLUE + currentword + ANSI_RESET + " en je hebt nog " + gameTimer.getTimer() + " seconden om dit te doen!");
+                        System.out.print("> ");
                         answer = wordInputBar.nextLine();
 
                     // check if input matches the random string

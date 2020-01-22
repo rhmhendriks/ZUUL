@@ -220,6 +220,8 @@ public class Game
             activeClock.startClock();
             }
 
+            
+            miniGames.endFight(activePlayer, activeEnemy);
         // Now we will start the game in the first room. 
             currentRoom = cel; 
             roomIntroducer(cel);
