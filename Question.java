@@ -76,6 +76,10 @@ public void setQuestion(String newQuestion){
     question = newQuestion;
 }
 
+/**
+ * set the answers of the questions
+ * @param newAnswers
+ */
 public void setAnswers(String newAnswers){
 // Let's initialize some local variables
     String[] answerString;
@@ -94,6 +98,10 @@ public void setAnswers(String newAnswers){
 
 }
 
+/**
+ * set the difficulty of the questions
+ * @param newDifLevel
+ */
 public void setDifficulty(int newDifLevel){
     if (newDifLevel <= 6 && newDifLevel > 0){
         diffeculty = newDifLevel;
@@ -102,6 +110,10 @@ public void setDifficulty(int newDifLevel){
     }
 }
 
+/**
+ * set the categorys
+ * @param newCategory
+ */
 public void setCategory(int newCategory){
     category = newCategory;
 }
@@ -112,10 +124,18 @@ public void setCategory(int newCategory){
 // answers, the question or the category.      //
 /////////////////////////////////////////////////
 
+/**
+ * get the questions of the game
+ * @return the question
+ */
 public String getQuestion(){
     return question;
 }
 
+/**
+ * get an answer out of the arraylist
+ * @return 
+ */
 public ArrayList<String> getAnswers(){
     if (this.answers == null){
         return this.getAnswer();
@@ -124,17 +144,28 @@ public ArrayList<String> getAnswers(){
     }
 }
 
-
+/**
+ * to get the answers list.
+ * @return the answers
+ */
 public ArrayList<String> getAnswer(){
     ArrayList<String> returnarray = new ArrayList<String>();
     returnarray.add(answerString);
     return returnarray;
 }
 
+/**
+ * get the difficulty of the questions
+ * @return the difficulty
+ */
 public int getdiffeculty(){
     return diffeculty;
 }
 
+/**
+ * to get the category for they questions
+ * @return the category
+ */
 public int getCategory(){
     return category;
 }
