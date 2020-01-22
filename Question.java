@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Class Question - The questions of the games
@@ -29,6 +31,20 @@ public class Question
         private int diffeculty;
         private int category;
         private String answerString;
+        private String rightAnswer;
+        private ArrayList<String> alphabet;
+
+    
+    // enable the use of color in the text output. 
+        public static final String ANSI_RESET = "\u001B[0m";
+        public static final String ANSI_BLACK = "\u001B[30m";
+        public static final String ANSI_RED = "\u001B[31m";
+        public static final String ANSI_GREEN = "\u001B[32m";
+        public static final String ANSI_YELLOW = "\u001B[33m";
+        public static final String ANSI_BLUE = "\u001B[34m";
+        public static final String ANSI_PURPLE = "\u001B[35m";
+        public static final String ANSI_CYAN = "\u001B[36m";
+        public static final String ANSI_WHITE = "\u001B[37m";
 
     /** 
     * Below is the contructor of a basic question. 
@@ -55,10 +71,45 @@ public class Question
                 answerString = theAnswers;
             }
 
+        // Now we get the right answer from the arraylist
+        for (int i = 0; i < answers.size(); i++) {
+            if (answers.get(i).contains("*")){
+                rightAnswer = answers.get(i);
+            }
+          }
+
         // Now we will fill the other variables
             question = theQuestion;
             diffeculty = theDiffeculty;
             category = theCategory;
+
+        // create alphabet array
+          alphabet.add("A");
+          alphabet.add("B");
+          alphabet.add("C");
+          alphabet.add("D");
+          alphabet.add("E");
+          alphabet.add("F");
+          alphabet.add("G");
+          alphabet.add("H");
+          alphabet.add("I");
+          alphabet.add("J");
+          alphabet.add("K");
+          alphabet.add("L");
+          alphabet.add("M");
+          alphabet.add("N");
+          alphabet.add("O");
+          alphabet.add("P");
+          alphabet.add("Q");
+          alphabet.add("R");
+          alphabet.add("S");
+          alphabet.add("T");
+          alphabet.add("U");
+          alphabet.add("V");
+          alphabet.add("W");
+          alphabet.add("Q");
+          alphabet.add("Y");
+          alphabet.add("Z");
     }
 
 /////////////////////////////////////////////////
@@ -78,19 +129,23 @@ public void setQuestion(String newQuestion){
 
 public void setAnswers(String newAnswers){
 // Let's initialize some local variables
-    String[] answerString;
+    String[] answerStringMul;
     List<String> listOfCSV;
 
 // Clear the current answers Arraylist
     answers = null;
 
-// Now we will prepare the creaton of the arrayList
-    // Split the string up in a temporary array
-        answerString = newAnswers.split("\\s*[,]\\s*");
-    // Let's put the values in a temporary list
-        listOfCSV = Arrays.asList(answerString);
-    // Now we will create the definitive Arraylist for the question
-        answers = new ArrayList<String>(listOfCSV);
+    if (newAnswers.contains(",")){
+        // Split the string up in a temporary array
+            answerStringMul = newAnswers.split("\\s*[,]\\s*");
+        // Let's put the values in a temporary list
+            listOfCSV = Arrays.asList(answerStringMul);
+        // Now we will create the definitive Arraylist for the question
+            answers = new ArrayList<String>(listOfCSV);
+    } else { 
+        answers = null;
+        answerString = newAnswers;
+    }
 
 }
 
@@ -139,5 +194,106 @@ public int getCategory(){
     return category;
 }
 
+//////////////////////////////////////////////////////
+// Below whe have all of the advaced methods like   //
+// processing a question.                           //
+//////////////////////////////////////////////////////
+
+public void printAnswerOptions(){
+    if (answers != null){
+        Collections.shuffle(this.answers);
+        for (int i = 0; i < answers.size(); i++){
+            System.out.println("[" + alphabet.get(i) + "]" + " " + answers.get(i));
+        }
+    } else { 
+        System.out.println("Type het antwoord ");
+    }
 }
 
+public boolean processQuestion(){
+    // create local variables
+        Scanner answerBar = new Scanner(System.in);
+        String givenAnswer = null;
+        int givenAnswerint = 0;
+        Boolean rightAnswerGiven = false;
+
+    // Now we do the logic
+        while (!rightAnswerGiven){
+            // Print to screen
+                System.out.println("Om verder te gaan moet je de volgende vraag beantwoorden:");
+                System.out.println();
+                System.out.println(question);
+                System.out.println();
+                printAnswerOptions();
+                System.out.println();
+                System.out.println(">");
+                givenAnswer = answerBar.nextLine();
+
+            // Check the answer
+                if (givenAnswer == "A"){
+                    givenAnswerint = 0;
+                } else if (givenAnswer == "B") {
+                    givenAnswerint = 1;
+                } else if (givenAnswer == "C") {
+                    givenAnswerint = 2;
+                } else if (givenAnswer == "D") {
+                    givenAnswer = "D";
+                } else if (givenAnswer == "E") {
+                    givenAnswer = "E";
+                } else if (givenAnswer == "F") {
+                    givenAnswer = "F";
+                } else if (givenAnswer == "G") {
+                    givenAnswer = "G";
+                } else if (givenAnswer == "H") {
+                    givenAnswer = "H";
+                } else if (givenAnswer == "I") {
+                    givenAnswer = "I";
+                } else if (givenAnswer == "J") {
+                    givenAnswer = "J";
+                } else if (givenAnswer == "K") {
+                    givenAnswer = "K";
+                } else if (givenAnswer == "L") {
+                    givenAnswer = "L";
+                } else if (givenAnswer == "M") {
+                    givenAnswer = "M";
+                } else if (givenAnswer == "N") {
+                    givenAnswer = "N";
+                } else if (givenAnswer == "O") {
+                    givenAnswer = "O";
+                } else if (givenAnswer == "P") {
+                    givenAnswer = "P";
+                } else if (givenAnswer == "Q") {
+                    givenAnswer = "Q";
+                } else if (givenAnswer == "R") {
+                    givenAnswer = "R";
+                } else if (givenAnswer == "S") {
+                    givenAnswer = "S";
+                }else if (givenAnswer == "T") {
+                    givenAnswer = "T";
+                } else if (givenAnswer == "U") {
+                    givenAnswer = "U";
+                } else if (givenAnswer == "V") {
+                    givenAnswer = "V";
+                } else if (givenAnswer == "W") {
+                    givenAnswer = "W";
+                } else if (givenAnswer == "X") {
+                    givenAnswer = "X";
+                } else if (givenAnswer == "Y") {
+                    givenAnswer = "Y";
+                } else if (givenAnswer == "Z") {
+                    givenAnswer = "Z";
+                }
+
+                if (givenAnswer == null){
+                    System.out.println(ANSI_RED + "Je hebt geen antwoord ingevuld!" + ANSI_RESET);
+                } else if () {
+                    System.out.println(ANSI_RED + "Dit antwoord is helaas niet goed! Je hebt een leven verloren! Je kunt het nog een keer proberen." + ANSI_RESET);
+                } else ( ) {
+                    System.out.println(ANSI_RED + " " + ANSI_RESET);
+                }
+        }
+}
+
+}
+
+25
