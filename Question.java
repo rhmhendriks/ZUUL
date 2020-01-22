@@ -72,11 +72,15 @@ public class Question
             }
 
         // Now we get the right answer from the arraylist
-        for (int i = 0; i < answers.size(); i++) {
-            if (answers.get(i).contains("*")){
-                rightAnswer = answers.get(i);
+        if (answers != null){
+            for (int i = 0; i < answers.size(); i++) {
+                if (answers.get(i).contains("*")){
+                    rightAnswer = answers.get(i);
+                }
             }
-          }
+        } else {
+            rightAnswer = answerString;
+        }
 
         // Now we will fill the other variables
             question = theQuestion;
@@ -241,7 +245,7 @@ public void printAnswerOptions(){
     }
 }
 
-public boolean processQuestion(){
+public boolean processQuestion(Player activePlayer){
     // create local variables
         Scanner answerBar = new Scanner(System.in);
         String givenAnswer = null;
@@ -317,14 +321,22 @@ public boolean processQuestion(){
 
                 if (givenAnswer == null){
                     System.out.println(ANSI_RED + "Je hebt geen antwoord ingevuld!" + ANSI_RESET);
-                } else if () {
+                } else if (!answers.get(givenAnswerint).equalsIgnoreCase(rightAnswer)) {
                     System.out.println(ANSI_RED + "Dit antwoord is helaas niet goed! Je hebt een leven verloren! Je kunt het nog een keer proberen." + ANSI_RESET);
-                } else ( ) {
-                    System.out.println(ANSI_RED + " " + ANSI_RESET);
+                    activePlayer.lostLive();
+                    if (activePlayer.getLiveStatus() <= 0){
+                        System.out.println(ANSI_RED + "Je levens zijn op! Gebruik een willekeurig commando om opnieuw te starten." + ANSI_RESET);
+                        break;
+                    }
+                    System.out.println();
+                } else if (answers.get(givenAnswerint).equalsIgnoreCase(rightAnswer)) {
+                    System.out.println(ANSI_GREEN + "Goed zo! Dat was het juiste antwoord! Je kunt nu verder spelen " + ANSI_RESET);
+                    rightAnswerGiven = true;
+                } else if (answers.get(givenAnswerint).equals("CheatDontwantaquestion!")) {
+                    System.out.println(ANSI_GREEN + "Hmmmmm. Je hebt een cheat gebruikt, Valsspeler! De vraag is over geslagen." + ANSI_RESET);
+                    rightAnswerGiven = true;
                 }
         }
+        return rightAnswerGiven;
+    }
 }
-
-}
-
-25
