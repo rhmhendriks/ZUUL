@@ -24,7 +24,7 @@ import java.util.Timer;
  */
 
  public class MiniGame {
-    Random numberToGuessRand; // guessthenumber
+    Random numberToGuessRand = new Random();// guessthenumber
     
     // Colors for text output
         public static final String ANSI_RESET = "\u001B[0m";
@@ -84,6 +84,20 @@ import java.util.Timer;
         return answerGiven;
     }
 
+    /** 
+     * Help method witch is waiting for the user to press enter
+     */
+    private void pressEnterToContinue()
+    { 
+           System.out.println("Druk op enter om verder te gaan");
+           try
+           {
+               System.in.read();
+           }  
+           catch(Exception e)
+           {}  
+    }
+
     /**
      * This minigame is like lower or higher, at every time this game starts
      * a random number between 10000 and 99999
@@ -103,20 +117,19 @@ import java.util.Timer;
             
 
         // Now check what to to
-            answer = guessTheNumerInputReviewer();
-
             while (!result){
+                answer = guessTheNumerInputReviewer();
                 if (answer < numberToGuess){
                     System.out.println();
-                    System.out.println(ANSI_YELLOW + "[" + numberToGuess + "]  " + "Het ingevoerde getal is te laag!"  + ANSI_RESET);
+                    System.out.println(ANSI_YELLOW + "[" + answer + "]  " + "Het ingevoerde getal is te laag!"  + ANSI_RESET);
                 } else if (answer > numberToGuess) {;
                     System.out.println();
-                    System.out.println("[" + numberToGuess + "]  " + "Het ingevoerde getal is te hoog!!"  + ANSI_RESET);
+                    System.out.println(ANSI_RED + "[" + answer + "]  " + "Het ingevoerde getal is te hoog!!"  + ANSI_RESET);
                 } else if (answer == numberToGuess){
                     System.out.println();
                     System.out.println();
                     System.out.println();
-                    System.out.println(ANSI_GREEN + "Gefeliciteerd! Je hebt het getal geraden! Het was: " + numberToGuess);
+                    System.out.println(ANSI_GREEN + "Gefeliciteerd! Je hebt het getal geraden! Het was: " + numberToGuess + ANSI_RESET);
                     result = true;
                 }
             }
@@ -176,11 +189,13 @@ import java.util.Timer;
         //Now we return the generated String
         return randomStringBuilder.toString();
     }
+
 public void typingGame(){
             //Create the needed variables
                 String answer;
                 int rightanswers = 0;
                 String currentword;
+                Clock gameTimer;
 
             //Create the Scanner for inserting answers
                 Scanner wordInputBar = new Scanner(System.in);
@@ -189,31 +204,32 @@ public void typingGame(){
                 System.out.println("Bij dit spel krijg je een willekeurig gegenereerd woord te zien voor 10 seconden.");
                 System.out.println("Probeer in die tijd het woord juist te typen, voor elk juist woord krijg je een punt");
                 System.out.println("Als je vijf punten hebt behaald, kun je verder!");
-
-            //Timer van vijf seconden voordat het spel begint zodat speler de info kan lezen
-                Clock gameTimer = new Clock(10);
-                gameTimer.startClock();
+                pressEnterToContinue();
 
             //If the answer is equal to the String printed on screen, add a point to RightAnswer and print a different String
             while (rightanswers < 5){
+                System.out.println("hallo");
                 currentword = generateString(10); //Generate a random String and insert that String into currentword
-                gameTimer = new Clock(10);
-                while (gameTimer.getTimer() > 0){
+                gameTimer = new Clock(18);
+                gameTimer.startClock();
+
                     //Print the currentword on the screen
-                        System.out.println("Het woord dat je moet overtypen is: " + ANSI_RED + currentword + ANSI_RESET);
+                        System.out.println("Het woord dat je moet overtypen is: " + ANSI_BLUE + currentword + ANSI_RESET + " en je hebt nog " + gameTimer.getTimer() + " seconden om dit te doen!");
                         answer = wordInputBar.nextLine();
 
                     // check if input matches the random string
+                    if (gameTimer.getTimer() <= 0){
+                        System.out.println(ANSI_RED + "Je hebt niet op tijd geantwoord" + ANSI_RESET);
+                    } else {
                     if (!answer.equals(currentword)){
-                        System.out.println("Helaas, je hebt het woord fout getypt");
+                        System.out.println(ANSI_YELLOW + "Helaas, je hebt het woord fout getypt" + ANSI_RESET);
                     } else if (answer.equals(currentword)){
                         rightanswers = rightanswers + 1;
-                        System.out.println("Goed antwoord! Je hebt nu " + rightanswers + "/5 punten");
+                        System.out.println(ANSI_GREEN + "Goed antwoord! Je hebt nu " + rightanswers + "/5 punten" + ANSI_RESET);
                     }
 
-                } // while no time
-                System.out.println("Je hebt niet op tijd geantwoord");
-
+                } // time up!
+                
             } // while good < 5
             System.out.println(ANSI_GREEN + "Goed gedaan! Je hebt alle vijf punten, en kan weer verder!" + ANSI_RESET);
     }
