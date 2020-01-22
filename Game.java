@@ -33,6 +33,7 @@ public class Game
     private Clock activeClock;
     private Enemy activeEnemy;
     private boolean finished = false;
+    private MiniGame miniGames;
 
     // enable the use of color in the text output. 
         public static final String ANSI_RESET = "\u001B[0m";
@@ -52,9 +53,9 @@ public class Game
     public Game() 
     {
         createRooms();
-
         parser = new Parser();
         historyList = new Stack<Room>();
+        miniGames = new MiniGame();
     }
 
     /**
@@ -217,6 +218,8 @@ public class Game
             activeClock.startClock();
             }
         
+            miniGames.typingGame();
+
         // Now we will start the game in the first room. 
             currentRoom = cel; 
             roomIntroducer(cel);
