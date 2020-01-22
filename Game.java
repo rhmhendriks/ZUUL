@@ -52,9 +52,9 @@ public class Game
     public Game() 
     {
         createRooms();
+
         parser = new Parser();
         historyList = new Stack<Room>();
-        boolean wantToQuit = false;
     }
 
     /**
@@ -71,7 +71,61 @@ public class Game
             }
     }
 
+  
+    
     /**
+     *  Main play routine.  Loops until end of play.
+     */
+    public Boolean play() 
+    {            
+        gameStarter();
+
+        // Enter the main command loop.  Here we repeatedly read commands and
+        // execute them until the game is over.
+
+        while (true == true){
+            Command command = parser.getCommand();
+            if (activeClock.getTimer() <= 0){
+                System.out.println();
+                System.out.println();
+                System.out.println(ANSI_RED + "Je tijd is om!");
+                System.out.println("Het is je niet gelukt om op tijd te ontsnappen!");
+                System.out.println("De bewakers hebben je terug gebracht naar je Cel.");
+                System.out.println();
+                System.out.println();
+                System.out.println("Het spel wordt nu opnieuw geladen... Een ogenblik geduld...." + ANSI_RESET);
+                return false;
+            } else if ((activePlayer.getMoves() <= 0)){
+                System.out.println();
+                System.out.println();
+                System.out.println(ANSI_RED + "Je zetten zijn op!");
+                System.out.println("Je hebt niet genoeg energie meer om iets te doen, hierdoor kun je ook niet meer rennen.");
+                System.out.println("De bewakers hebben je meegesleept en terug geplaatst in je Cel. ");
+                System.out.println();
+                System.out.println();
+                System.out.println("Het spel wordt nu opnieuw geladen... Een ogenblik geduld...." + ANSI_RESET);
+                return false;
+            } else if (activePlayer.getLiveStatus() <= 0) {
+                System.out.println();
+                System.out.println();
+                System.out.println(ANSI_RED + "oh nee!, je hebt al je levens verloren!");
+                System.out.println("Zonder levens kun je je niet meer verzetten tegen de bewakers.");
+                System.out.println("De bewakers hebben je gevonden en weer naar de cel gebracht.");
+                System.out.println();
+                System.out.println();
+                System.out.println("Het spel wordt nu opnieuw geladen... Een ogenblik geduld...." + ANSI_RESET);
+                return false;
+            } else {
+                finished = processCommand(command);
+            }
+            
+            if (finished){
+                useQuit();
+            }
+        }    
+    }
+
+      /**
      * This method is used to get the game starting
      * by making a player with personal settings
      * like the player name and difficulty level
@@ -284,60 +338,7 @@ public class Game
         }
     }
 
-    
-    /**
-     *  Main play routine.  Loops until end of play.
-     */
-    public Boolean play() 
-    {            
-        gameStarter();
 
-        // Enter the main command loop.  Here we repeatedly read commands and
-        // execute them until the game is over.
-
-        while (true == true){
-            Command command = parser.getCommand();
-            if (activeClock.getTimer() <= 0){
-                System.out.println();
-                System.out.println();
-                System.out.println(ANSI_RED + "Je tijd is om!");
-                System.out.println("Het is je niet gelukt om op tijd te ontsnappen!");
-                System.out.println("De bewakers hebben je terug gebracht naar je Cel.");
-                System.out.println();
-                System.out.println();
-                System.out.println("Het spel wordt nu opnieuw geladen... Een ogenblik geduld...." + ANSI_RESET);
-                return false;
-            } else if ((activePlayer.getMoves() <= 0)){
-                System.out.println();
-                System.out.println();
-                System.out.println(ANSI_RED + "Je zetten zijn op!");
-                System.out.println("Je hebt niet genoeg energie meer om iets te doen, hierdoor kun je ook niet meer rennen.");
-                System.out.println("De bewakers hebben je meegesleept en terug geplaatst in je Cel. ");
-                System.out.println();
-                System.out.println();
-                System.out.println("Het spel wordt nu opnieuw geladen... Een ogenblik geduld...." + ANSI_RESET);
-                return false;
-            } else if (activePlayer.getLiveStatus() <= 0) {
-                System.out.println();
-                System.out.println();
-                System.out.println(ANSI_RED + "oh nee!, je hebt al je levens verloren!");
-                System.out.println("Zonder levens kun je je niet meer verzetten tegen de bewakers.");
-                System.out.println("De bewakers hebben je gevonden en weer naar de cel gebracht.");
-                System.out.println();
-                System.out.println();
-                System.out.println("Het spel wordt nu opnieuw geladen... Een ogenblik geduld...." + ANSI_RESET);
-                return false;
-            } else {
-                finished = processCommand(command);
-            }
-            
-            if (finished){
-                useQuit();
-            }
-        }    
-    }
-
-  /**
     private void cleanUpItems(){
         cel.removeAllItemsFromRoom();
         gang.removeAllItemsFromRoom();
@@ -356,7 +357,6 @@ public class Game
         bos.removeAllItemsFromRoom();
         thuis.removeAllItemsFromRoom();
     }
-*/
 
     /**
      * Print out the opening message for the player.
@@ -441,7 +441,7 @@ public class Game
             Item tempItem = activePlayer.getItemAsObject(item);
             activePlayer.removeFromInventory(tempItem.getDescription());
             currentRoom.setItem(tempItem);
-            System.out.println("je hebt " + item + " achtergelaten in " + currentRoom + "!");
+            System.out.println("je hebt " + item + " achtergelaten in " + currentRoom.getShortDescription() + "!");
         }
     }
 
