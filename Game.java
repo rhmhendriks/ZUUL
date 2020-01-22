@@ -278,7 +278,7 @@ public class Game
             hal.setLookDescription("Je ziet een harnas aan de zijkant van de hal staan, je besluit daar snel achter te gaan staan. De kok komt steeds dichterbij. Je moet zo stil mogelijk blijven staan, zodat de kok jou niet opmerkt. Beantwoord deze vraag goed om ervoor te zorgen dat jij zo stil mogelijk blijft staan.");
             valkuil3.setLookDescription("Er is niet veel te zien");
             keuken.setLookDescription("Je ziet een metalen pan in een open kastje staan. 'pak de pan'");
-            keukenTafeltje.setLookDescription("Je ziet een aantal borden met een deksel daarop staan op het keukentafeltje.");
+            keukenTafeltje.setLookDescription("Je ziet een aantal borden met een deksel daarop, op het keukentafeltje staan.");
             eetzaal.setLookDescription("Er is niet veel te zien");
             muur.setLookDescription("Er is niet veel te zien");
             gracht.setLookDescription("Er is niet veel te zien");
