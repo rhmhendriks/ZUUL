@@ -86,6 +86,7 @@ public class Question
             question = theQuestion;
             diffeculty = theDiffeculty;
             category = theCategory;
+            alphabet = new ArrayList<String>();
 
         // create alphabet array
           alphabet.add("A");
@@ -238,7 +239,8 @@ public void printAnswerOptions(){
     if (answers != null){
         Collections.shuffle(this.answers);
         for (int i = 0; i < answers.size(); i++){
-            System.out.println("[" + alphabet.get(i) + "]" + " " + answers.get(i));
+            String   tmpString = answers.get(i).replace('*', ' ');
+            System.out.println("[" + alphabet.get(i) + "]" + " " + tmpString);
         }
     } else { 
         System.out.println("Type het antwoord ");
@@ -249,9 +251,12 @@ public boolean processQuestion(Player activePlayer){
     // create local variables
         Scanner answerBar = new Scanner(System.in);
         String givenAnswer = null;
-        int givenAnswerint = 0;
+        int givenAnswerint = 999;
         Boolean rightAnswerGiven = false;
         int numberOfTries = activePlayer.getChances();
+        String answerForTesting = null;
+        Boolean useArrayList;
+        int numberOfAnswers;
 
 
     // Now we do the logic
@@ -267,85 +272,112 @@ public boolean processQuestion(Player activePlayer){
                 givenAnswer = answerBar.nextLine();
 
             // Check the answer
-                if (givenAnswer == "A"){
+            if (givenAnswer != null){
+                if (givenAnswer.equalsIgnoreCase("A")){
                     givenAnswerint = 0;
-                } else if (givenAnswer == "B") {
+                } else if (givenAnswer.equalsIgnoreCase("B")) {
                     givenAnswerint = 1;
-                } else if (givenAnswer == "C") {
+                } else if (givenAnswer.equalsIgnoreCase("C")) {
                     givenAnswerint = 2;
-                } else if (givenAnswer == "D") {
+                } else if (givenAnswer.equalsIgnoreCase("D")) {
                     givenAnswerint = 3;
-                } else if (givenAnswer == "E") {
+                } else if (givenAnswer.equalsIgnoreCase("E")) {
                     givenAnswerint = 4;
-                } else if (givenAnswer == "F") {
+                } else if (givenAnswer.equalsIgnoreCase("F")) {
                     givenAnswerint = 5;
-                } else if (givenAnswer == "G") {
+                } else if (givenAnswer.equalsIgnoreCase("G")) {
                     givenAnswerint = 6;
-                } else if (givenAnswer == "H") {
+                } else if (givenAnswer.equalsIgnoreCase("H")) {
                     givenAnswerint = 7;
-                } else if (givenAnswer == "I") {
+                } else if (givenAnswer.equalsIgnoreCase("I")) {
                     givenAnswerint = 8;
-                } else if (givenAnswer == "J") {
+                } else if (givenAnswer.equalsIgnoreCase("J")) {
                     givenAnswerint = 9;
-                } else if (givenAnswer == "K") {
+                } else if (givenAnswer.equalsIgnoreCase("K")) {
                     givenAnswerint = 10;
-                } else if (givenAnswer == "L") {
+                } else if (givenAnswer.equalsIgnoreCase("L")) {
                     givenAnswerint = 11;
-                } else if (givenAnswer == "M") {
+                } else if (givenAnswer.equalsIgnoreCase("M")) {
                     givenAnswerint = 12;
-                } else if (givenAnswer == "N") {
+                } else if (givenAnswer.equalsIgnoreCase("N")) {
                     givenAnswerint = 13;
-                } else if (givenAnswer == "O") {
+                } else if (givenAnswer.equalsIgnoreCase("O")) {
                     givenAnswerint = 14;
-                } else if (givenAnswer == "P") {
+                } else if (givenAnswer.equalsIgnoreCase( "P")) {
                     givenAnswerint = 15;
-                } else if (givenAnswer == "Q") {
+                } else if (givenAnswer.equalsIgnoreCase("Q")) {
                     givenAnswerint = 16;
-                } else if (givenAnswer == "R") {
+                } else if (givenAnswer.equalsIgnoreCase("R")) {
                     givenAnswerint = 17;
-                } else if (givenAnswer == "S") {
+                } else if (givenAnswer.equalsIgnoreCase("S")) {
                     givenAnswerint = 18;
-                }else if (givenAnswer == "T") {
+                }else if (givenAnswer.equalsIgnoreCase("T")) {
                     givenAnswerint = 19;
-                } else if (givenAnswer == "U") {
+                } else if (givenAnswer.equalsIgnoreCase( "U")) {
                     givenAnswerint = 20;
-                } else if (givenAnswer == "V") {
+                } else if (givenAnswer.equalsIgnoreCase("V")) {
                     givenAnswerint = 21;
-                } else if (givenAnswer == "W") {
+                } else if (givenAnswer.equalsIgnoreCase("W")) {
                     givenAnswerint = 22;
-                } else if (givenAnswer == "X") {
+                } else if (givenAnswer.equalsIgnoreCase("X")) {
                     givenAnswerint = 23;
-                } else if (givenAnswer == "Y") {
+                } else if (givenAnswer.equalsIgnoreCase("Y")) {
                     givenAnswerint = 24;
-                } else if (givenAnswer == "Z") {
+                } else if (givenAnswer.equalsIgnoreCase("Z")) {
                     givenAnswerint = 25;
+                } else {
+                    
+                }
+            }
+
+            // now we will set the answer to a dynamicly checkable variable
+                if (givenAnswerint != 999){
+                    useArrayList = true;
+                    if (givenAnswerint <= answers.size()){
+                        answerForTesting = answers.get(givenAnswerint);
+                    } 
+                } else {
+                    useArrayList = false;
+                    answerForTesting = givenAnswer;
                 }
 
-                if (givenAnswer == null){
+                if (answerForTesting == null){
                     System.out.println(ANSI_YELLOW + "Je hebt geen antwoord ingevuld!" + ANSI_RESET);
-                } else if (!answers.get(givenAnswerint).equalsIgnoreCase(rightAnswer)) {
+                } else if (!answerForTesting.equalsIgnoreCase(rightAnswer)) {
                     activePlayer.lostLive();
-                    if (answers != null && answers.size() >= 2 && numberOfTries >= 1){
-                        numberOfTries--;
-                        answers.remove(givenAnswerint);
-                        System.out.println(ANSI_RED + "Dit antwoord is helaas niet goed! Je kunt het nog een keer proberen." + ANSI_RESET);
-                        System.out.println();
-                    } else if (answerString != null || numberOfTries < 1 || answers.size() < 2){
-                        System.out.println(ANSI_RED + "Dit antwoord is helaas niet goed!" + ANSI_RESET);
-                        System.out.println();
-                        break;
-                    }
-                    if (activePlayer.getLiveStatus() <= 0){
-                        System.out.println(ANSI_RED + "Je levens zijn op! Gebruik een willekeurig commando om opnieuw te starten." + ANSI_RESET);
-                        System.out.println();
-                        break;
-                    }
+
+                    // Let's find out how to check if user can continue
+                        if (useArrayList){
+                            numberOfAnswers = answers.size()-1;
+                        } else {
+                            numberOfAnswers = 10;
+                        }
+
+
+                        if (answers != null && numberOfAnswers >= 2 && numberOfTries >= 1){
+                            numberOfTries--;
+                            if (useArrayList){answers.remove(givenAnswerint);}
+                            System.out.println(ANSI_RED + "Dit antwoord is helaas niet goed! Je kunt het nog een keer proberen." + ANSI_RESET + numberOfAnswers);
+                            System.out.println();
+
+                        } else if (answerString != null || numberOfTries < 1 || numberOfAnswers < 2){
+                            System.out.println(ANSI_RED + "Dit antwoord is helaas niet goed!" + ANSI_RESET);
+                            System.out.println();
+                            break;
+                        }
+                        if (activePlayer.getLiveStatus() <= 0){
+                            System.out.println(ANSI_RED + "Je levens zijn op! Gebruik een willekeurig commando om opnieuw te starten." + ANSI_RESET);
+                            System.out.println();
+                            break;
+                        }
                     System.out.println();
-                } else if (answers.get(givenAnswerint).equalsIgnoreCase(rightAnswer)) {
+
+                } else if (answerForTesting.equalsIgnoreCase(rightAnswer)) {
                     System.out.println(ANSI_GREEN + "Goed zo! Dat was het juiste antwoord! Je kunt nu verder spelen " + ANSI_RESET);
                     System.out.println();
                     rightAnswerGiven = true;
-                } else if (answers.get(givenAnswerint).equals("CheatDontwantaquestion!")) {
+
+                } else if (answerForTesting.equals("CheatDontwantaquestion!")) {
                     System.out.println(ANSI_PURPLE + "Hmmmmm. Je hebt een cheat gebruikt, Valsspeler! De vraag is over geslagen." + ANSI_RESET);
                     System.out.println();
                     rightAnswerGiven = true;
