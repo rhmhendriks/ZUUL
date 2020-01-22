@@ -52,9 +52,9 @@ public class Game
     public Game() 
     {
         createRooms();
-
         parser = new Parser();
         historyList = new Stack<Room>();
+        MiniGame miniGames = new MiniGame();
     }
 
     /**
@@ -218,6 +218,8 @@ public class Game
             activeClock.startClock();
             }
         
+            MiniGame
+
         // Now we will start the game in the first room. 
             currentRoom = cel; 
             roomIntroducer(cel);
