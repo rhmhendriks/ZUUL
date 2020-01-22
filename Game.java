@@ -70,11 +70,10 @@ public class Game
                 game.play();
             }
     }
-
-  
     
     /**
-     *  Main play routine.  Loops until end of play.
+     * Main play routine.  Loops until end of play.
+     * @return false if you have or to time, moves or lives
      */
     public Boolean play() 
     {            
@@ -350,7 +349,9 @@ public class Game
         }
     }
 
-
+    /**
+     * removes all items from all rooms
+     */
     private void cleanUpItems(){
         cel.removeAllItemsFromRoom();
         gang.removeAllItemsFromRoom();
@@ -510,6 +511,9 @@ public class Game
         parser.showCommands();
     }
 
+    /**
+     * print the help
+     */
     private void printHelp() 
     {
         Scanner helpConfirmation;
@@ -542,9 +546,10 @@ public class Game
         }
     }
 
-    /** 
+    /**
      * Try to in to one direction. If there is an exit, enter the new
      * room, otherwise print an error message.
+     * @param command
      */
     private void goRoom(Command command) 
     {
@@ -568,9 +573,10 @@ public class Game
         }
     }
 
-    /** 
+    /**
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
+     * @param command
      * @return true, if this command quits the game, false otherwise.
      */
     private boolean quit(Command command) 
