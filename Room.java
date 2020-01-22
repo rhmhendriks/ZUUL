@@ -210,6 +210,10 @@ public class Room
         return output;
     }
 
+    public void removeAllItemsFromRoom(){
+        this.items.clear();
+    }
+
     public void setLock(boolean trueFalse){
         locked = trueFalse;
     }

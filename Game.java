@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -26,12 +27,11 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Stack<Room> historyList;
-    Room cel, gang, valkuil1, trap, valkuil2, hal, valkuil3, keuken, eetzaal, muur, gracht, trap2, valkuil4, poort, bos, thuis;
-    Item keychain, glass, pan, rope, firestone, sword; 
+    public Room cel, gang, valkuil1, trap, valkuil2, hal, valkuil3, keuken, eetzaal, muur, gracht, trap2, valkuil4, poort, bos, thuis;
+    private Item keychain, glass, pan, rope, firestone, sword; 
     private Player activePlayer;
     private Clock activeClock;
     private Enemy activeEnemy;
-    private boolean wantToQuit;
     private boolean finished = false;
 
     // enable the use of color in the text output. 
@@ -65,7 +65,6 @@ public class Game
             Game game = new Game();
             game.play();
             if (!game.play()){
-                //Game game = null;
                 game = null;
                 game = new Game();
                 game.play();
@@ -285,6 +284,7 @@ public class Game
         }
     }
 
+    
     /**
      *  Main play routine.  Loops until end of play.
      */
@@ -332,12 +332,31 @@ public class Game
             }
             
             if (finished){
-                System.out.println(ANSI_CYAN + "Bedankt voor het spelen!     Tot de volgende keer");
-                System.out.println("Dit venster kan nu worden gesloten!" + ANSI_RESET);
-                System.exit(0);
+                useQuit();
             }
         }    
     }
+
+  /**
+    private void cleanUpItems(){
+        cel.removeAllItemsFromRoom();
+        gang.removeAllItemsFromRoom();
+        valkuil1.removeAllItemsFromRoom();
+        trap.removeAllItemsFromRoom();
+        valkuil2.removeAllItemsFromRoom();
+        hal.removeAllItemsFromRoom();
+        valkuil3.removeAllItemsFromRoom();
+        keuken.removeAllItemsFromRoom();
+        eetzaal.removeAllItemsFromRoom();
+        muur.removeAllItemsFromRoom();
+        gracht.removeAllItemsFromRoom();
+        trap2.removeAllItemsFromRoom();
+        valkuil4.removeAllItemsFromRoom();
+        poort.removeAllItemsFromRoom();
+        bos.removeAllItemsFromRoom();
+        thuis.removeAllItemsFromRoom();
+    }
+*/
 
     /**
      * Print out the opening message for the player.
@@ -358,6 +377,7 @@ public class Game
      */
     private boolean processCommand(Command command) 
     {
+        boolean wantToQuit = false;
 
         if(command.isUnknown()) {
             System.out.println("Sorry, ik weet niet wat je bedoeld.");
@@ -372,7 +392,7 @@ public class Game
             goRoom(command);
         }
         else if (commandWord.equals("quit")) {
-            wantToQuit = quit(command);
+            wantToQuit = useQuit();
         }
         else if (commandWord.equals("rugzak")) {
             System.out.println(activePlayer.getInventory());
@@ -395,6 +415,8 @@ public class Game
             } else {
                 System.out.println("De moeilijkheidsgraad die jij hebt gekozen bevat geen tijdslimiet");
             }
+        } else if (commandWord.equals("zetten")){
+            System.out.println("Je hebt nog: " + activePlayer.getMoves() + " zetten over!");
         }
         // else command not recognised.
         return wantToQuit;
@@ -431,7 +453,7 @@ public class Game
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
-            System.out.println("Je hebt niet aangegeven wat je wil opakken!");
+            System.out.println(ANSI_RED + "Je hebt niet aangegeven wat je wil opakken!"  + ANSI_RESET);
         }
 
         String item = command.getSecondWord();
@@ -440,12 +462,17 @@ public class Game
         Item newItem = currentRoom.pickupItem(item);
 
         if (newItem == null) {
-            System.out.println("Helaas. Dit voorwerp is niet aanwezig in deze kamer!");
+            System.out.println(ANSI_RED + "Helaas. Dit voorwerp is niet aanwezig in deze kamer!"  + ANSI_RESET);
         }
         else {
-            activePlayer.addToInventory(newItem);
-            currentRoom.removeItem(item);
-            System.out.println("je hebt " + item + " opgepakt en draagt het nu bij je in je tas!");
+            
+            if (activePlayer.addToInventory(newItem)){
+                currentRoom.removeItem(item);
+                System.out.println(ANSI_GREEN + "je hebt " + item + " opgepakt en draagt het nu bij je in je tas!" + ANSI_RESET);
+            } else {
+                System.out.println(ANSI_RED + "Je tas zit vol! Je moet eerst een item achterlaten om " + item + " te kunnen meenemen!" + ANSI_RESET);
+            }
+            
         }
     }
 
@@ -475,7 +502,6 @@ public class Game
     {
         Scanner helpConfirmation;
         Boolean confirmation;
-        
         
         helpConfirmation = new Scanner(System.in);
 
@@ -526,7 +552,6 @@ public class Game
         }
         else {
                 historyList.add(currentRoom);
-                activePlayer.remMove();
                 processLock(nextRoom);     
         }
     }
@@ -576,8 +601,45 @@ public class Game
     
     private void useBack(){
         Room roomtogobackto = historyList.pop();
+        activePlayer.withdrawMove();
         currentRoom = roomtogobackto;
         roomIntroducer(currentRoom);
+    }
+
+    private Boolean useQuit(){
+        // creating variables for confirmation
+            Scanner quitInput = new Scanner(System.in);
+            Boolean answered = null;
+            Boolean returnVar = false;
+            Boolean answer = null;
+
+        // ask the user if he wants to quit, and quit the game when asked. 
+            while (answer == null){
+                    System.out.println();
+                    System.out.println("Wil je stoppen met het spel? Type 'true' voor ja of 'false' voor nee");
+                try {
+                    answer = quitInput.nextBoolean();
+                    } catch (InputMismatchException e) {
+                    System.out.println(ANSI_RED + "Je kunt alleen 'true' typen voor ja en 'false' voor nee!" + ANSI_RESET);
+                    quitInput.next();
+                }
+                answered = true;
+            }
+
+            while (answered != null){
+                if (answer){
+                    System.out.println(ANSI_CYAN + "Bedankt voor het spelen!     Tot de volgende keer");
+                    System.out.println("Dit venster kan nu worden gesloten!" + ANSI_RESET);
+                    //cleanUpItems();
+                    System.exit(0);
+                    returnVar = true;
+                } else if (!answer) {
+                    returnVar = false;
+                    roomIntroducer(currentRoom);
+                    break;
+                }
+            }
+        return returnVar;
     }
 
     /**
@@ -589,6 +651,7 @@ public class Game
 
         if (!checkRoom.getLock()){
             currentRoom = checkRoom;
+            activePlayer.withdrawMove();
             roomIntroducer(currentRoom);
         } else {
             Item neededForUnlock = checkRoom.getItemForUnlocking();
@@ -596,6 +659,7 @@ public class Game
                 System.out.println(checkRoom.getLockInstruction());
             } else {
                 checkRoom.setLock(false);
+                activePlayer.withdrawMove();
                 currentRoom = checkRoom;
                 roomIntroducer(currentRoom);
             }

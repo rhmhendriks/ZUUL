@@ -108,8 +108,8 @@ public class Player
          * Used to remove 1 singele move point
          */
         
-        public void remMove(){
-            moves--;
+        public void withdrawMove(){
+            this.moves--;
         }
 
         /**
@@ -172,8 +172,8 @@ public class Player
                 this.inventorySize = 1;
                 this.health = 10;
                 this.maxAttackDamage = 3;
-                this.moves = 25;
-                this.timeLimit = 4;
+                this.moves = 2;
+                this.timeLimit = 120;
                 isGood = true;
             }
             return isGood;
