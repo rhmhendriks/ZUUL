@@ -71,11 +71,10 @@ public class Game
                 game.play();
             }
     }
-
-  
     
     /**
-     *  Main play routine.  Loops until end of play.
+     * Main play routine.  Loops until end of play.
+     * @return false if you have or to time, moves or lives
      */
     public Boolean play() 
     {            
@@ -241,7 +240,7 @@ public class Game
             hal = new Room("Je loopt rustig en voorzichtig door de hal. Gelukkig maar dat je zo voorzichtig doet. Wanneer je halverwege de hal bent komt er een kok uit een van de deuren. Kijk rond om een verstop plek te vinden.", true); // must have the keychain 
             valkuil3 = new Room("Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Beantwoord eerst de volgende vraag. Gebruik daarna back om terug naar de hal te gaan.", false);
             keuken = new Room("Je doet de deur van de keuken zachtjes open en kruipt naar binnen achter een kastje. Je kijkt over het randje van het kastje om te zien of er koks in de keuken zijn. En ja, er staan 2 koks, druk bezig met het bereiden van het avond eten. Ze staan beiden met hun gezicht naar de deur waar jij naartoe moet. De enige optie is om ze allebei uit te schakelen. Je moet om je heen kijken om iets te vinden om de koks mee uit te schakelen.", true); // must have the sword
-            keukenTafeltje = new Room("Je ziet een aantal borden met een deksel daarop staan op het keukentafeltje.", false);
+            keukenTafeltje = new Room("Je ziet een aantal borden met een deksel daarop, op het keukentafeltje staan.", false);
             eetzaal = new Room("De koks in de keuken waren nog druk bezig met het voorbereiden van het avond eten, dus de eetzaal is gelukkig nog leeg. Je staat voor een keuze. Je ziet namelijk een stuk touw in de hoek van de eetzaal liggen. Er is een raam in de eetzaal waardoor je zou kunnen ontsnappen met het touw. De andere keuze is de vuursteen te pakken die bij de openhaard ligt en de trap naar beneden te pakken. Kies welk voorwerp je wilt pakken. ga daarna naar de bijbehoorde kamer. maar voordat je dit gaat doen moet je eerst de volgende vraag beantwoorden.", false);
             muur = new Room("Je hebt blijkbaar voor het touw gekozen. Je hangt aan het touw langs de muur. Onder je zit water, er zit namelijk een gracht om het kasteel heen. Je moet je heel langzaam laten zakken, om ervoor te zorgen dat de bewakers in de wachttorens je niet zien. Speel het volgende spel om ervoor te zorgen dat je je zo stil mogelijk naar beneden laat zakken. ", true); // must have the rope
             gracht = new Room("De gracht wordt erg goed in de gaten gehouden vanaf de bewakers toren. Een kleine beweging in het water en je wordt ontdekt. Het is al erg donker buiten, dus ze kunnen niet goed in het water kijken, maar ze horen het wel gelijk. Je besluit onderwater te zwemmen om op die manier zo min mogelijk geluid te maken. Het is een Breede gracht. Beantwoord de volgende vraag goed om ervoor te zorgen dat je lang genoeg je adem kan inhouden. ", false);
@@ -353,7 +352,9 @@ public class Game
         }
     }
 
-
+    /**
+     * removes all items from all rooms
+     */
     private void cleanUpItems(){
         cel.removeAllItemsFromRoom();
         gang.removeAllItemsFromRoom();
@@ -513,6 +514,9 @@ public class Game
         parser.showCommands();
     }
 
+    /**
+     * print the help
+     */
     private void printHelp() 
     {
         Scanner helpConfirmation;
@@ -545,9 +549,10 @@ public class Game
         }
     }
 
-    /** 
+    /**
      * Try to in to one direction. If there is an exit, enter the new
      * room, otherwise print an error message.
+     * @param command
      */
     private void goRoom(Command command) 
     {
@@ -571,9 +576,10 @@ public class Game
         }
     }
 
-    /** 
+    /**
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
+     * @param command
      * @return true, if this command quits the game, false otherwise.
      */
     private boolean quit(Command command) 
@@ -621,6 +627,10 @@ public class Game
         roomIntroducer(currentRoom);
     }
 
+    /**
+     * the quit function of the game
+     * @return the returnVar
+     */
     private Boolean useQuit(){
         // creating variables for confirmation
             Scanner quitInput = new Scanner(System.in);
@@ -658,8 +668,7 @@ public class Game
     }
 
     /**
-     * Check iof a room is locked and unlock when possible
-     * 
+     * Check iof a room is locked and unlock when possibles
      * @param checkRoom the room you wanna check
      */
     private void processLock(Room checkRoom){

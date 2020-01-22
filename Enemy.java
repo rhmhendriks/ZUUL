@@ -23,27 +23,35 @@ public class Enemy
         
     }
 
+    /**
+     * set the enemy health
+     * @param numbEnenmyHealth 
+     */
     public void setEnemyHealth(int numbEnenmyHealth){
         this.enemyHealth = numbEnenmyHealth;
     }
 
+    /**
+     * set the enemy max attack damage
+     * @param numbEnemyMaxAttackDamage
+     */
     public void setEnemyMaxAttackDamage(int numbEnemyMaxAttackDamage){
         this.enemyMaxAttackDamage = numbEnemyMaxAttackDamage;
     }
 
+    /**
+     * get the enemey health
+     * @return the enemey health
+     */
     public int getEnemyHealth() {
         return enemyHealth;
     }
 
+    /**
+     * get the enemy max attack damage
+     * @return the enemy max attack damage
+     */
     public int getEnemyMaxAttackDamage() {
         return enemyMaxAttackDamage;
     }
-
-    /**
-     * Voorbeeld van een method - schrijf hier jouw comment
-     *
-     * @param  y    deze method krijgt deze parameter mee in de aanroep
-     * @return    deze method geeft de som van x en y terug
-     */
-    
 }

@@ -61,7 +61,7 @@ public class Player
 
         /**
          * Define the inventory size.
-         * @param numbInventorySize the integer you wanna set the inventorysize to
+         * @param numbInventorySize the integer you wanna set the inventorysize to.
          */
         public void setInventorySize(int numbInventorySize)
         {
@@ -70,7 +70,7 @@ public class Player
 
         /**
          * Define the output of the health command
-         * @param numbHealth The wanted output when a user uses "look" in this room.
+         * @param numbHealth The interger you wanne set the health to.
          */
         public void setHealth(int numbHealth)
         {
@@ -79,7 +79,7 @@ public class Player
 
         /**
          * Define the output of the damage command
-         * @param numbdamage The wanted output when a user uses "look" in this room.
+         * @param numbdamage The interger you wanna set the max attack damage to.
          */
         public void setmaxAttackDamage(int numbmaxAttackDamage)
         {
@@ -88,7 +88,7 @@ public class Player
 
         /**
          * Define the output of the moves command
-         * @param numbMoves The wanted output when a user uses "look" in this room.
+         * @param numbMoves The interger you wanne set the moves to.
          */
         public void setMoves(int numbMoves) 
         {
@@ -182,7 +182,6 @@ public class Player
 
         /**
          * This method is used to add lives to a player
-         * 
          */
         public void addLives(int NumberOfNewLives){
             this.lives = this.lives + NumberOfNewLives;
@@ -205,7 +204,6 @@ public class Player
 
         /**
          * This method is returning the name of the player
-         * 
          * @return A string with the player's name
          */
         public String getName() {
@@ -214,7 +212,6 @@ public class Player
 
         /**
          * This method is returning the health of the player
-         * 
          * @return A integer with the health level of the player
          */
         public int getHealth() {
@@ -223,7 +220,6 @@ public class Player
 
         /**
          * This method is returning the attack damage of the player
-         * 
          * @return A integer with the attack damage level of the player
          */
         public int getmaxAttackDamage() {
@@ -232,7 +228,6 @@ public class Player
 
         /**
          * This method is returning the difficulty of the player
-         * 
          * @return A integer with the difficulty level of the player
          */
         public int getDifficulty() {
@@ -241,7 +236,6 @@ public class Player
 
         /**
          * This method is looking at the amount of lives the player has left
-         * 
          * @return An integer with the current amount of lives ♥. 
          */
         public int getLiveStatus() {
@@ -250,7 +244,6 @@ public class Player
 
         /**
          * This method is used to view the size of the players inventory
-         * 
          * @return An integer with the size of the player his inventory
          */
         public int getInventSize() {
@@ -259,7 +252,6 @@ public class Player
 
         /**
          * This method is used to return the moves
-         * 
          * @return The time limit in seconds as integer. 
          */
         public int getMoves()
@@ -269,7 +261,6 @@ public class Player
 
         /**
          * This method is used to return the timelimit
-         * 
          * @return The time limit in seconds as integer. 
          */
         public int getTimeLimit() {
@@ -278,7 +269,6 @@ public class Player
 
         /**
          * This method creates a graphical livestatus-bar
-         * 
          * @return An string containing the graphical livebar
          */
         public String createLivebar() {
@@ -297,7 +287,6 @@ public class Player
         /**
          * This method is used to add an item to 
          * the players personal inventory. 
-         * 
          * @param itemToAdd The item you want to add to the inventory
          * @return True is its added, False if it isn't
          */
@@ -312,6 +301,10 @@ public class Player
             return result;
         }
 
+        /**
+         * This method is used to view the players inventory
+         * @return An integer with the size of the player his inventory
+         */
         public String getInventory() {
             // Lets initialize some local variables
                 StringBuilder output = new StringBuilder();
@@ -327,6 +320,12 @@ public class Player
             return output.toString();
         }
 
+        /**
+         * This method is used to check if an item is in inventory
+         * the players personal inventory. 
+         * @param toCheck The item you want to check in the inventory
+         * @return True if its in inventory, False if its not in inventory
+         */
         public boolean inInventory(String toCheck){
             if (this.bag.containsValue(toCheck)){
                 return true;
@@ -335,6 +334,12 @@ public class Player
             }
         }
 
+        /**
+         * picks up the actually item form the inventory
+         * the players personal inventory. 
+         * @param itemToGet The item you want to pick up form inventory
+         * @return the flipped bag
+         */
         public Item getItemAsObject(String itemToGet){
             HashMap<String, Item> flippedBag = new HashMap<String, Item>();
 

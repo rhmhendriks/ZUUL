@@ -185,6 +185,11 @@ public class Room
         System.out.println(this.getRoomItems());
     }
 
+    /**
+     * picks up the item
+     * @param itemName name of the  item you picked up
+     * @return null
+     */
     public Item pickupItem(String itemName) {
         for(int i = 0; i < items.size(); i++) {
             if(items.get(i).getDescription().equals(itemName)) {
@@ -194,6 +199,10 @@ public class Room
         return null;
     }
 
+    /**
+     * remove the item 
+     * @param itemName name of the item you want to geremove
+     */
     public void removeItem(String itemName) {
         for(int i = 0; i < items.size(); i++) {
             if(items.get(i).getDescription().equals(itemName)) {
@@ -202,11 +211,19 @@ public class Room
         }
     }
 
-    // set item in the room
+    /**
+     * set item in the room
+     * @param newitem item name
+     */
     public void setItem(Item newitem) {
         items.add(newitem);
     }
-    // get description of the items in the room
+
+    
+    /**
+     * get description of the items in the room
+     * @return De items in the rooms
+     */
     public String getRoomItems() {
         String output = "";
         for(int i = 0; i < items.size(); i++) {
@@ -215,26 +232,49 @@ public class Room
         return output;
     }
 
+    /**
+     * remove all the items from the room
+     */
     public void removeAllItemsFromRoom(){
         this.items.clear();
     }
 
+    /**
+     * to lock the rooms
+     * @param trueFalse if its open or closed
+     */
     public void setLock(boolean trueFalse){
         locked = trueFalse;
     }
 
+    /**
+     * to look if the room is locked
+     * @return if locked
+     */
     public Boolean getLock(){
         return locked;
     }
 
+    /**
+     * setting an item to unlock the room
+     * @param theItem name of the item you need to unlock the item
+     */
     public void setItemForUnlocking(Item theItem){
         needForUnlock = theItem;
     }
 
+    /**
+     * get the item you nee to unlock the room
+     * @return which item you need to have to unlock the room
+     */
     public Item getItemForUnlocking(){
         return needForUnlock;
     }
 
+    /**
+     * to get see which item you need to unlock the room
+     * @return the item you need
+     */
     public String getLockInstruction(){
         StringBuilder output = new StringBuilder();
         output.append("Deze kamer kun je niet openen! Je hebt het volgende item nodig om deze kamer te openen ");
