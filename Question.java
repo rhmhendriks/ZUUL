@@ -272,51 +272,51 @@ public boolean processQuestion(Player activePlayer){
                 } else if (givenAnswer == "C") {
                     givenAnswerint = 2;
                 } else if (givenAnswer == "D") {
-                    givenAnswer = "D";
+                    givenAnswerint = 3;
                 } else if (givenAnswer == "E") {
-                    givenAnswer = "E";
+                    givenAnswerint = 4;
                 } else if (givenAnswer == "F") {
-                    givenAnswer = "F";
+                    givenAnswerint = 5;
                 } else if (givenAnswer == "G") {
-                    givenAnswer = "G";
+                    givenAnswerint = 6;
                 } else if (givenAnswer == "H") {
-                    givenAnswer = "H";
+                    givenAnswerint = 7;
                 } else if (givenAnswer == "I") {
-                    givenAnswer = "I";
+                    givenAnswerint = 8;
                 } else if (givenAnswer == "J") {
-                    givenAnswer = "J";
+                    givenAnswerint = 9;
                 } else if (givenAnswer == "K") {
-                    givenAnswer = "K";
+                    givenAnswerint = 10;
                 } else if (givenAnswer == "L") {
-                    givenAnswer = "L";
+                    givenAnswerint = 11;
                 } else if (givenAnswer == "M") {
-                    givenAnswer = "M";
+                    givenAnswerint = 12;
                 } else if (givenAnswer == "N") {
-                    givenAnswer = "N";
+                    givenAnswerint = 13;
                 } else if (givenAnswer == "O") {
-                    givenAnswer = "O";
+                    givenAnswerint = 14;
                 } else if (givenAnswer == "P") {
-                    givenAnswer = "P";
+                    givenAnswerint = 15;
                 } else if (givenAnswer == "Q") {
-                    givenAnswer = "Q";
+                    givenAnswerint = 16;
                 } else if (givenAnswer == "R") {
-                    givenAnswer = "R";
+                    givenAnswerint = 17;
                 } else if (givenAnswer == "S") {
-                    givenAnswer = "S";
+                    givenAnswerint = 18;
                 }else if (givenAnswer == "T") {
-                    givenAnswer = "T";
+                    givenAnswerint = 19;
                 } else if (givenAnswer == "U") {
-                    givenAnswer = "U";
+                    givenAnswerint = 20;
                 } else if (givenAnswer == "V") {
-                    givenAnswer = "V";
+                    givenAnswerint = 21;
                 } else if (givenAnswer == "W") {
-                    givenAnswer = "W";
+                    givenAnswerint = 22;
                 } else if (givenAnswer == "X") {
-                    givenAnswer = "X";
+                    givenAnswerint = 23;
                 } else if (givenAnswer == "Y") {
-                    givenAnswer = "Y";
+                    givenAnswerint = 24;
                 } else if (givenAnswer == "Z") {
-                    givenAnswer = "Z";
+                    givenAnswerint = 25;
                 }
 
                 if (givenAnswer == null){
