@@ -29,6 +29,10 @@ public class Room
     private Stack<String> colors;
     private boolean locked;
     private Item needForUnlock;
+    private int questionLocation;
+    private int gameLocation;
+    private MiniGame miniGames;
+    private Questions questionLists;
 
     /**
      * Create a room described "description". Initially, it has
@@ -36,12 +40,16 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description, boolean lockedYN) 
+    public Room(String description, boolean lockedYN, int theQuestionLocation, int theGameLocation) 
     {
         this.description = description;
         locked = lockedYN;
+        questionLocation = theQuestionLocation;
+        gameLocation = theGameLocation;
         exits = new HashMap<>();
         colors = new Stack<String>();
+        miniGames = new MiniGame();
+        questionLists = new Questions();
 
 
         // adding colors
@@ -108,18 +116,26 @@ public class Room
      *     Exits: north west
      * @return A long description of this room
      */
-    public String getLongDescription()
+    public void printLongDescription(Player activePlayer)
     {
-        return description + ".\n" + getExitString();
+        System.out.println(description + ".\n" + getExitString());
+        if (questionLocation == 1 || gameLocation == 1){
+            int difficulty = activePlayer.getDifficulty();
+            questionLists.getRandomQuestion(0, difficulty, activePlayer);
+        }
     }
 
     /**
      * Return the second description of the room
      * @return A second description of this room
      */
-    public String getSecondDescription()
+    public void printSecondDescription(Player activePlayer)
     {
-        return secondDescription;
+        System.out.println(secondDescription);
+        if (questionLocation == 3 || gameLocation == 3){
+            int difficulty = activePlayer.getDifficulty();
+            questionLists.getRandomQuestion(0, difficulty, activePlayer);
+        }
     }
 
     /**
@@ -179,10 +195,16 @@ public class Room
     /**
      * Method used to print the look descriptions about the room
      */
-    public void look(){
+    public void look(Player activePlayer){
         System.out.println(this.lookDescription);
         System.out.println(" ");
         System.out.println(this.getRoomItems());
+        System.out.println(description + ".\n" + getExitString());
+        if (questionLocation == 2 || gameLocation == 2){
+            int difficulty = activePlayer.getDifficulty();
+            questionLists.getRandomQuestion(0, difficulty, activePlayer);
+        }
+    
     }
 
     /**

@@ -346,7 +346,7 @@ public class Game
         }
         System.out.println(" ");
 
-        System.out.println(introducingRoom.getLongDescription()); // print room introduction
+        introducingRoom.printLongDescription(activePlayer); // print room introduction
         System.out.println(" ");
         
         if (introducingRoom == cel){
@@ -600,7 +600,7 @@ public class Game
      * of the current room.
      */
     private void useLook(){
-        currentRoom.look();
+        currentRoom.look(activePlayer);
     }
 
     /** 
