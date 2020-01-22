@@ -217,18 +217,18 @@ public class Game
             cel.setLookDescription("Je ziet dat de bewaker een sleutelbos aan zijn broek heeft hangen. Aan jou de taak om ervoor te zorgen dat de bewaker dichter bijkomt, zodat jij de bewaker kan uitschakelen en zijn sleutel kan pakken om de cel te openen. Om dit te doen moet je de volgende vraag goed beantwoorden:");
             gang.setLookDescription("In de hoek van de gang zie je kast, wanneer je in de kast kijkt zie je een glas liggen. pak dit glas om beter te kunnen luisteren wat er zich achter de deur bevindt. Om te weten te komen wat je hoort achter de deuren, moet je eerste de volgende vraag goed beantwoorden.");
             valkuil1.setLookDescription("er is niet veel te zien");
-            trap.setLookDescription("er is niet veel te zien");
+            trap.setLookDescription("Er is niet veel te zien");
             valkuil2.setLookDescription("er is niet veel te zien");
             hal.setLookDescription("Je ziet een harnas aan de zijkant van de hal staan, je besluit daar snel achter te gaan staan. De kok komt steeds dichterbij. Je moet zo stil mogelijk blijven staan, zodat de kok jou niet opmerkt. Beantwoord deze vraag goed om ervoor te zorgen dat jij zo stil mogelijk blijft staan.");
-            valkuil3.setLookDescription("er is niet veel te zien");
+            valkuil3.setLookDescription("Er is niet veel te zien");
             keuken.setLookDescription("Je ziet een metalen pan in een open kastje staan. 'pak de pan'");
             keukenTafeltje.setLookDescription("Je ziet een aantal borden met een deksel daarop staan op het keukentafeltje.");
-            eetzaal.setLookDescription("er is niet veel te zien");
-            muur.setLookDescription("er is niet veel te zien");
-            gracht.setLookDescription("er is niet veel te zien");
+            eetzaal.setLookDescription("Er is niet veel te zien");
+            muur.setLookDescription("Er is niet veel te zien");
+            gracht.setLookDescription("Er is niet veel te zien");
             trap2.setLookDescription("Je ziet door de spleet van de deur dat er nog maar 2 wachters bij de poort van het kasteel zijn.");
-            valkuil4.setLookDescription("er is niet veel te zien");
-            poort.setLookDescription("er is niet veel te zien");
+            valkuil4.setLookDescription("Er is niet veel te zien");
+            poort.setLookDescription("Er is niet veel te zien");
             bos.setLookDescription("Wanneer je op kijkt zie je dat je tegen een bewaker aan ben gelopen. Gelukkig heb je een zwaard bij je. De bewaker rent namelijk op je af met getrokken zwaard. Ga het gevecht aan en schakel hem uit! gebruik hit ");
 
         // adding description 
