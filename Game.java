@@ -627,6 +627,10 @@ public class Game
         roomIntroducer(currentRoom);
     }
 
+    /**
+     * the quit function of the game
+     * @return the returnVar
+     */
     private Boolean useQuit(){
         // creating variables for confirmation
             Scanner quitInput = new Scanner(System.in);
@@ -664,8 +668,7 @@ public class Game
     }
 
     /**
-     * Check iof a room is locked and unlock when possible
-     * 
+     * Check iof a room is locked and unlock when possibles
      * @param checkRoom the room you wanna check
      */
     private void processLock(Room checkRoom){
