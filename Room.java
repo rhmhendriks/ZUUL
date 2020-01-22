@@ -110,7 +110,7 @@ public class Room
      */
     public String getLongDescription()
     {
-        return " Je bent in: " + description + ".\n" + getExitString();
+        return description + ".\n" + getExitString();
     }
 
     /**
