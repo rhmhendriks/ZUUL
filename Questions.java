@@ -210,61 +210,45 @@ public class Questions
     ////////////////////////////////////////////////////
 
         public boolean getRandomQuestion(int Category, int difficulty, Player activePlayer){
-             // Create some variables
-                Boolean requestedListFulll;
-                String stackToUse;
-
+           boolean noMoreQuestions = false;
              // lets findout what list to use
              if (Category == 0){
                  // category is IT now we select the dif level to find the right stack
                  if (difficulty == 1){
                      
                      if (!it1.isEmpty()){
-                        it1.pop().processQuestion(activePlayer);
+                        while(!it1.pop().processQuestion(activePlayer));
                      } else if (!it2.isEmpty()){
-                            stackToUse = "it2";
+                        while(!it2.pop().processQuestion(activePlayer));
                       } else if (!it3.isEmpty()){
-                            stackToUse = "it3";
+                        while(!it3.pop().processQuestion(activePlayer));
                        } else { 
-                            return false;
+                        noMoreQuestions = false;
                          }
                      }
-                 } else if (difficulty == 2){
-                     stackToUse = "it2";
-                     if (it2.isEmpty()){
-                        if (!it3.isEmpty()){
-                           stackToUse = "it3";
-                        } else if (!it1.isEmpty()){
-                           stackToUse = "it1";
-                        } else { 
-                           return false;
-                        }
-                    } 
 
-                    // now we're gonna pop the question
-
-                 } else if (difficulty == 3){
-                     stackToUse = "it3";
-                     if (it3.isEmpty()){
+                  } else if (difficulty == 2){
                         if (!it2.isEmpty()){
-                           stackToUse = "it2";
+                           while(!it2.pop().processQuestion(activePlayer));
+                        } else if (!it3.isEmpty()){
+                           while(!it3.pop().processQuestion(activePlayer));
                         } else if (!it1.isEmpty()){
-                           stackToUse = "it1";
+                           while(!it1.pop().processQuestion(activePlayer));
                         } else { 
-                           return false;
+                           noMoreQuestions = false;
                         }
-                    } 
-                 }
-             } // voor andere cat: else if (category == <cat int>){ if (difficulty == <difint>){ else if (difficulty == <difint>){ } } }
-               else {
-                   return false;
-               }
 
-             // 
-
-        }
-
-
-
-
+                      } else if (difficulty == 3){
+                        if (it3.isEmpty()){
+                           while(!it3.pop().processQuestion(activePlayer));
+                        } else if (!it2.isEmpty()){
+                           while(!it2.pop().processQuestion(activePlayer));
+                        } else if (!it1.isEmpty()){
+                           while(!it1.pop().processQuestion(activePlayer));
+                        } else { 
+                           noMoreQuestions = false;
+                        }
+                     } // voor andere cat: else if (category == <cat int>){ if (difficulty == <difint>){ else if (difficulty == <difint>){ } } }
+                     return noMoreQuestions;
+                  }  
 }

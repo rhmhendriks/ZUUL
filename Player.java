@@ -31,6 +31,7 @@ public class Player
     private int inventorySize;
     private int timeLimit;
     private int moves;
+    private int questionChances;
     ArrayList<Item> inventory; 
     HashMap<Item, String> bag;
 
@@ -122,6 +123,7 @@ public class Player
                 this.maxAttackDamage = 5;
                 this.moves = 45;
                 this.timeLimit = 999;
+                this.questionChances = 3;
                 isGood = true;
             } else if (difficulty == 2){
                 this.difficulty = difficulty;
@@ -131,6 +133,7 @@ public class Player
                 this.maxAttackDamage = 4;
                 this.moves = 35;
                 this.timeLimit = 999;
+                this.questionChances = 2;
                 isGood = true;
             } else if (difficulty == 3){
                 this.difficulty = difficulty;
@@ -140,6 +143,7 @@ public class Player
                 this.maxAttackDamage = 3;
                 this.moves = 25;
                 this.timeLimit = 999;
+                this.questionChances = 1;
                 isGood = true;
             } else if (difficulty == 4){
                 this.difficulty = difficulty;
@@ -149,6 +153,7 @@ public class Player
                 this.maxAttackDamage = 5;
                 this.moves = 45;
                 this.timeLimit = 900;
+                this.questionChances = 3;
                 isGood = true;
             } else if (difficulty == 5){
                 this.difficulty = difficulty;
@@ -158,6 +163,7 @@ public class Player
                 this.maxAttackDamage = 4;
                 this.moves = 35;
                 this.timeLimit = 600;
+                this.questionChances = 2;
                 isGood = true;
             } else if (difficulty == 6){
                 this.difficulty = difficulty;
@@ -167,6 +173,7 @@ public class Player
                 this.maxAttackDamage = 3;
                 this.moves = 2;
                 this.timeLimit = 120;
+                this.questionChances = 1;
                 isGood = true;
             }
             return isGood;
@@ -265,6 +272,14 @@ public class Player
          */
         public int getTimeLimit() {
             return this.timeLimit;
+        }
+
+         /**
+         * This method is used to return the number of chances for a question
+         * @return The chances as integer. 
+         */
+        public int getChances() {
+            return this.questionChances;
         }
 
         /**

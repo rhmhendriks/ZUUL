@@ -30,7 +30,7 @@ public class Question
         private ArrayList<String> answers;
         private int diffeculty;
         private int category;
-        private String answerString;
+        private String answerString = null;
         private String rightAnswer;
         private ArrayList<String> alphabet;
 
@@ -251,6 +251,8 @@ public boolean processQuestion(Player activePlayer){
         String givenAnswer = null;
         int givenAnswerint = 0;
         Boolean rightAnswerGiven = false;
+        int numberOfTries = activePlayer.getChances();
+
 
     // Now we do the logic
         while (!rightAnswerGiven){
@@ -320,20 +322,32 @@ public boolean processQuestion(Player activePlayer){
                 }
 
                 if (givenAnswer == null){
-                    System.out.println(ANSI_RED + "Je hebt geen antwoord ingevuld!" + ANSI_RESET);
+                    System.out.println(ANSI_YELLOW + "Je hebt geen antwoord ingevuld!" + ANSI_RESET);
                 } else if (!answers.get(givenAnswerint).equalsIgnoreCase(rightAnswer)) {
-                    System.out.println(ANSI_RED + "Dit antwoord is helaas niet goed! Je hebt een leven verloren! Je kunt het nog een keer proberen." + ANSI_RESET);
                     activePlayer.lostLive();
+                    if (answers != null && answers.size() >= 2 && numberOfTries >= 1){
+                        numberOfTries--;
+                        answers.remove(givenAnswerint);
+                        System.out.println(ANSI_RED + "Dit antwoord is helaas niet goed! Je kunt het nog een keer proberen." + ANSI_RESET);
+                        System.out.println();
+                    } else if (answerString != null || numberOfTries < 1 || answers.size() < 2){
+                        System.out.println(ANSI_RED + "Dit antwoord is helaas niet goed!" + ANSI_RESET);
+                        System.out.println();
+                        break;
+                    }
                     if (activePlayer.getLiveStatus() <= 0){
                         System.out.println(ANSI_RED + "Je levens zijn op! Gebruik een willekeurig commando om opnieuw te starten." + ANSI_RESET);
+                        System.out.println();
                         break;
                     }
                     System.out.println();
                 } else if (answers.get(givenAnswerint).equalsIgnoreCase(rightAnswer)) {
                     System.out.println(ANSI_GREEN + "Goed zo! Dat was het juiste antwoord! Je kunt nu verder spelen " + ANSI_RESET);
+                    System.out.println();
                     rightAnswerGiven = true;
                 } else if (answers.get(givenAnswerint).equals("CheatDontwantaquestion!")) {
-                    System.out.println(ANSI_GREEN + "Hmmmmm. Je hebt een cheat gebruikt, Valsspeler! De vraag is over geslagen." + ANSI_RESET);
+                    System.out.println(ANSI_PURPLE + "Hmmmmm. Je hebt een cheat gebruikt, Valsspeler! De vraag is over geslagen." + ANSI_RESET);
+                    System.out.println();
                     rightAnswerGiven = true;
                 }
         }
