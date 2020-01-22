@@ -1,5 +1,4 @@
 import java.util.Set;
-
 import java.util.Stack;
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -111,7 +110,7 @@ public class Room
      */
     public String getLongDescription()
     {
-        return " Je bent in: " + description + ".\n" + getExitString();
+        return description + ".\n" + getExitString();
     }
 
     /**
@@ -138,6 +137,11 @@ public class Room
         return returnString;
     }
 
+    /**
+     * Return a string describing the room's exits, for example
+     * "Exits: north west".
+     * @return Details of the room's exits.
+     */
     public String getDirection(Room askedDirection)
     {
         // lets initilize some local variables
@@ -209,6 +213,10 @@ public class Room
             output += i + " " + items.get(i).getDescription() + "   ";
         }
         return output;
+    }
+
+    public void removeAllItemsFromRoom(){
+        this.items.clear();
     }
 
     public void setLock(boolean trueFalse){

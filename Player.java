@@ -104,13 +104,6 @@ public class Player
             this.timeLimit = numbTimeLimit;
         }
 
-        /**
-         * Used to remove 1 singele move point
-         */
-        
-        public void remMove(){
-            moves--;
-        }
 
         /**
          * This method is used to set the difficulty of the game
@@ -172,8 +165,8 @@ public class Player
                 this.inventorySize = 1;
                 this.health = 10;
                 this.maxAttackDamage = 3;
-                this.moves = 25;
-                this.timeLimit = 4;
+                this.moves = 2;
+                this.timeLimit = 120;
                 isGood = true;
             }
             return isGood;
@@ -193,6 +186,15 @@ public class Player
          */
         public void addLives(int NumberOfNewLives){
             this.lives = this.lives + NumberOfNewLives;
+        }
+
+
+        /**
+         * Used to remove 1 singele move point
+         */
+        
+        public void withdrawMove(){
+            moves = moves-1;
         }
 
 

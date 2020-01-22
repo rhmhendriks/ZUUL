@@ -35,7 +35,7 @@ public class CommandWords {
         theCommandWords.put("latenvallen", "Laat een voorwerp achter in de huidige ruimte.");
         theCommandWords.put("kijk", "Kijk door de ruimte en vind verborgen geheimen...");
         theCommandWords.put("tijd", "Kijk hoeveel tijd je nog over hebt.");
-
+        theCommandWords.put("zetten", "Vind uit hoeveel zetten je nog hebt om het spel te spelen.");
     }
 
     /**
