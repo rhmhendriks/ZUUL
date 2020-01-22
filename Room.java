@@ -137,6 +137,11 @@ public class Room
         return returnString;
     }
 
+    /**
+     * Return a string describing the room's exits, for example
+     * "Exits: north west".
+     * @return Details of the room's exits.
+     */
     public String getDirection(Room askedDirection)
     {
         // lets initilize some local variables
