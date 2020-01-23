@@ -2,6 +2,7 @@ import java.util.Stack;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 
 /**
@@ -138,7 +139,8 @@ public class Game
                 Scanner playerName = new Scanner(System.in);
                 Scanner playerNameConfirm = new Scanner(System.in);
                 String choosenName;
-                boolean confirmInputName;
+                boolean confirmInputName = false;
+                int confirmationRecieved = 0;
             
             // Difficulty selection
                 Scanner difLevel = new Scanner(System.in);
@@ -160,7 +162,17 @@ public class Game
 
                 System.out.println("De door jouw gekozen naam is: " + choosenName);
                 System.out.println("Is dit juist? [Ja (true) / Nee (false)]");
-                confirmInputName = playerNameConfirm.nextBoolean();
+                
+                while (confirmationRecieved == 0) {
+                    try {
+                        confirmInputName = playerNameConfirm.nextBoolean();
+                        confirmationRecieved = 1;
+                    } catch (InputMismatchException e) {
+                        System.out.println("Je kan alleen 'true' of 'false' invullen");
+                        System.out.println("");
+                    }
+
+                }
 
                 while (!confirmInputName){
                     System.out.println(" ");
@@ -427,6 +439,9 @@ public class Game
         else if (commandWord.equals("terug")) {
             useBack();
         }
+        else if (commandWord.equals("info")) {
+            useAbout();
+        }
         else if (commandWord.equals("tijd")) {
             if (activePlayer.getDifficulty() >= 4) {
             System.out.println(activeClock.getTimer());
@@ -627,6 +642,12 @@ public class Game
         activePlayer.withdrawMove();
         currentRoom = roomtogobackto;
         roomIntroducer(currentRoom);
+    }
+
+    private void useAbout() {
+        System.out.println("Dit is een ontsnappings leerspel. Het idee van het spel is dat je ontsnapt uit een kasteel, dit doe je door voorwerpen op te pakken en spellen goed te beantwoorden. Dit spel is gemaakt voor een school project.");
+        System.out.println("De auteurs van dit school project zijn:");
+        System.out.println("Luc Willemse & Ronald Hendriks & Nivard Ypey");
     }
 
     /**
