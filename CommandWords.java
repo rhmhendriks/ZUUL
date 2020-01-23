@@ -31,7 +31,7 @@ public class CommandWords {
         theCommandWords.put("help", "Laat dit helpvenster zien, maar dit kost wel één leven.");
         theCommandWords.put("terug", "Ga terug naar de vorige kamer.");
         theCommandWords.put("rugzak", "Laat zien wat er in je tas zit.");
-        theCommandWords.put("oppakken", "Pak een voorwerp op uit de huidige ruimte met 'pickup <voorwerp>'");
+        theCommandWords.put("pak", "Pak een voorwerp op uit de huidige ruimte met 'pickup <voorwerp>'");
         theCommandWords.put("latenvallen", "Laat een voorwerp achter in de huidige ruimte.");
         theCommandWords.put("kijk", "Kijk door de ruimte en vind verborgen geheimen...");
         theCommandWords.put("tijd", "Kijk hoeveel tijd je nog over hebt.");

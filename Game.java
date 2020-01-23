@@ -147,13 +147,13 @@ public class Game
                 Scanner playerName = new Scanner(System.in);
                 Scanner playerNameConfirm = new Scanner(System.in);
                 String choosenName;
-                boolean confirmInputName;
+                String confirmInputName;
             
             // Difficulty selection
                 Scanner difLevel = new Scanner(System.in);
                 Scanner difLevelConfirm = new Scanner(System.in);
                 String choosenDifLevel;
-                boolean confirmInputDifLevel;
+                String confirmInputDifLevel;
                 int usableDifLevel;
 
         // Now we put the things on the screen
@@ -168,10 +168,10 @@ public class Game
                 System.out.println(" ");
 
                 System.out.println("De door jouw gekozen naam is: " + choosenName);
-                System.out.println("Is dit juist? [Ja (true) / Nee (false)]");
-                confirmInputName = playerNameConfirm.nextBoolean();
+                System.out.println("Is dit juist? [Ja / Nee]");
+                confirmInputName = playerNameConfirm.nextLine();
 
-                while (!confirmInputName){
+                while (!confirmInputName.equalsIgnoreCase("ja")){
                     System.out.println(" ");
                     System.out.println("Wat is jouw naam?");
                     choosenName = playerName.nextLine();
@@ -179,8 +179,8 @@ public class Game
                     System.out.println(" ");
 
                     System.out.println("De door jouw gekozen naam is: " + choosenName);
-                    System.out.println("Is dit juist? [Ja (true) / Nee (false)]");
-                    confirmInputName = playerNameConfirm.nextBoolean();
+                    System.out.println("Is dit juist? [Ja / Nee]");
+                    confirmInputName = playerNameConfirm.nextLine();
                 }
                 
             // create some room
@@ -201,10 +201,10 @@ public class Game
                 System.out.println(" ");
 
                 System.out.println("Het door jouw gekozen niveau is: " + choosenDifLevel);
-                System.out.println("Is dit juist? [Ja (true) / Nee (false)]");
-                confirmInputDifLevel = difLevelConfirm.nextBoolean();
+                System.out.println("Is dit juist? [Ja / Nee]");
+                confirmInputDifLevel = difLevelConfirm.nextLine();
 
-                while (!confirmInputDifLevel || usableDifLevel < 1 || usableDifLevel > 6){
+                while (!confirmInputDifLevel.equalsIgnoreCase("ja") || usableDifLevel < 1 || usableDifLevel > 6){
                     System.out.println(" ");
                     System.out.println("Op welk niveau wil je dit spel spelen? [nummer bijv. '2'] ");
                     choosenDifLevel = difLevel.nextLine();
@@ -212,8 +212,8 @@ public class Game
                     System.out.println(" ");
 
                     System.out.println("Het door jouw gekozen niveau is: " + choosenDifLevel);
-                    System.out.println("Is dit juist? [Ja (true) / Nee (false)]");
-                    confirmInputDifLevel = difLevelConfirm.nextBoolean();
+                    System.out.println("Is dit juist? [Ja / Nee]");
+                    confirmInputDifLevel = difLevelConfirm.nextLine();
                 }
 
                 System.out.println(" ");
@@ -444,7 +444,7 @@ public class Game
         else if (commandWord.equals("rugzak")) {
             System.out.println(activePlayer.getInventory());
         }
-        else if (commandWord.equals("oppakken")) {
+        else if (commandWord.equals("pak")) {
             pickupItem(command);
         }
         else if (commandWord.equals("latenvallen")) {
