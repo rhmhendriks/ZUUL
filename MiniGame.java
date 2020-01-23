@@ -65,7 +65,7 @@ import java.util.Scanner;
         Boolean error = true;
 
         // now we let the user answer and we check for errors
-        System.out.println("Vul een getal in dat tussen de 10000 en 99999 ligt.");
+        System.out.println("Vul een getal in dat tussen de 0 en 99999 ligt.");
 
         try {
             System.out.print("> ");

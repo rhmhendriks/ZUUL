@@ -346,7 +346,7 @@ public boolean processQuestion(Player activePlayer){
             // now we will set the answer to a dynamicly checkable variable
                 if (givenAnswerint != 999){
                     useArrayList = true;
-                    if (givenAnswerint <= answers.size()){
+                    if (givenAnswerint <= answers.size()-1){
                         answerForTesting = answers.get(givenAnswerint);
                     } 
                 } else {
