@@ -58,20 +58,6 @@ import java.util.Scanner;
      * 
      */
     private int guessTheNumerInputReviewer(){
-        System.out.println();
-                System.out.println();
-                System.out.println("-----------------------------------------------------------------------------------");
-                System.out.println();
-                System.out.println("Om verder te kunnen gaan met het spel moet je de volgende game gaan spelen.");
-                System.out.println("Het is spelletje is eigenlijk hoger en lager je voert een getal van 5 CIJFERS");
-                System.out.println("je ziet dan of je hoger of lager moet gaan om tot het juiste getal te komen.");
-                System.out.println();
-                System.out.println("Je hebt het spel gewonnnen wanneer je het juiste getal hebt ingevuld.");
-                System.out.println();
-                System.out.println("het spel start wanneer je op enter drukt. ");
-                System.out.println();
-                System.out.println();
-                pressEnterToContinue();
 
         // create the stuff we need
         Scanner answerInputBar = new Scanner(System.in); 
@@ -79,7 +65,7 @@ import java.util.Scanner;
         Boolean error = true;
 
         // now we let the user answer and we check for errors
-        System.out.println("Vul een getal in dat tussen de 10000 en 99999 ligt.  >");
+        System.out.println("Vul een getal in dat tussen de 10000 en 99999 ligt.");
 
         try {
             System.out.print("> ");
@@ -87,19 +73,19 @@ import java.util.Scanner;
             error = false;
         } catch (InputMismatchException e) {
             System.out.println();
-            System.out.println(ANSI_RED + "Je kunt alleen cijfers invullen tussen 10000 en 99999!"  + ANSI_RESET);
+            System.out.println(ANSI_RED + "Je kunt alleen cijfers invullen tussen 0 en 99999!"  + ANSI_RESET);
             error = true;
         }
 
         while(error){
-                System.out.println("Vul een getal in dat tussen de 10000 en 99999 ligt.  >");
+                System.out.println("Vul een getal in dat tussen de 0 en 99999 ligt. ");
 
             try {
                 answerGiven = answerInputBar.nextInt();
                 error = false;
             } catch (InputMismatchException e) {
                 System.out.println();
-                System.out.println(ANSI_RED + "Je kunt alleen cijfers invullen tussen 10000 en 99999!" + ANSI_RESET);
+                System.out.println(ANSI_RED + "Je kunt alleen cijfers invullen tussen 0 en 99999!" + ANSI_RESET);
                 error = true;
             }
         }
@@ -136,10 +122,15 @@ import java.util.Scanner;
         System.out.println();
         System.out.println();
         System.out.println("-----------------------------------------------------------------------------------");
-        System.out.println();
         System.out.println("Voor deze opdracht moet je een getal van 5 tekens raden.");
         System.out.println("Voor elke waarde die je invoert wordt er verteld of je getal te hoog of te laag is.");
         System.out.println("Blijf raden totdat je het juiste getal hebt, dan kun je verder!");
+        System.out.println();
+        System.out.println("het spel start wanneer je op enter drukt. ");
+        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println();
+        System.out.println();
+        pressEnterToContinue();
             
 
         // Now check what to to

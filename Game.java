@@ -95,8 +95,16 @@ public class Game
         // execute them until the game is over.
 
         while (true == true){
+            int timeleft;
+
+            if (activePlayer.getTimeLimit() == 999){
+                timeleft = 999;
+            } else {
+                timeleft = activeClock.getTimer();
+            }
+
             Command command = parser.getCommand();
-            if (activeClock.getTimer() <= 0){
+            if (timeleft <= 0){
                 System.out.println();
                 System.out.println();
                 System.out.println(ANSI_RED + "Je tijd is om!");
