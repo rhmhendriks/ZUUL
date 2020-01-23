@@ -229,6 +229,7 @@ public class Room
         System.out.println(" ");
         System.out.println(this.getRoomItems());
         System.out.println(description + ".\n" + getExitString());
+        System.out.println(lookDescription);
         if (questionLocation == 2 || gameLocation == 2){
             if (questionLocation == 2) {
             int difficulty = activePlayer.getDifficulty();
@@ -242,7 +243,6 @@ public class Room
                     miniGames.endFight(activePlayer, activeEnemy);
                 }
             }
-            System.out.println(lookDescription);
         }
     }
 
