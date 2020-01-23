@@ -33,6 +33,7 @@ public class Room
     private int gameLocation;
     private MiniGame miniGames;
     private Questions questionLists;
+    private String roomName;
 
     // enable the use of color in the text output. 
     public static final String ANSI_RESET = "\u001B[0m";
@@ -60,7 +61,7 @@ public class Room
      * @param description The room's description.
      * @param theQuestionLocation 1 long 2 look 3 second
      */
-    public Room(String description, boolean lockedYN, int theQuestionLocation, int theGameLocation) 
+    public Room(String theRoomName, String description, boolean lockedYN, int theQuestionLocation, int theGameLocation) 
     {
         this.description = description;
         locked = lockedYN;
@@ -70,6 +71,7 @@ public class Room
         colors = new Stack<String>();
         miniGames = new MiniGame();
         questionLists = new Questions();
+        roomName = theRoomName;
 
 
         // adding colors
@@ -136,12 +138,23 @@ public class Room
      *     Exits: north west
      * @return A long description of this room
      */
-    public void printLongDescription(Player activePlayer)
+    public void printLongDescription(Player activePlayer, Enemy activeEnemy)
     {
         System.out.println(description + ".\n" + getExitString());
         if (questionLocation == 1 || gameLocation == 1){
-            int difficulty = activePlayer.getDifficulty();
-            questionLists.getRandomQuestion(0, difficulty, activePlayer);
+            if(questionLocation == 1) {
+                int difficulty = activePlayer.getDifficulty();
+                questionLists.getRandomQuestion(0, difficulty, activePlayer);
+            } else {
+                if(roomName == "cel") {
+                    miniGames.guessTheNumber();
+                } else if (roomName == "trap") {
+                    miniGames.typingGame();
+                } else if (roomName == "bos") {
+                    miniGames.endFight(activePlayer, activeEnemy);
+                }
+            }
+            System.out.println(secondDescription);
         }
     }
 
@@ -152,10 +165,6 @@ public class Room
     public void printSecondDescription(Player activePlayer)
     {
         System.out.println(secondDescription);
-        if (questionLocation == 3 || gameLocation == 3){
-            int difficulty = activePlayer.getDifficulty();
-            questionLists.getRandomQuestion(0, difficulty, activePlayer);
-        }
     }
 
     /**
@@ -215,16 +224,26 @@ public class Room
     /**
      * Method used to print the look descriptions about the room
      */
-    public void look(Player activePlayer){
+    public void look(Player activePlayer, Enemy activeEnemy){
         System.out.println(this.lookDescription);
         System.out.println(" ");
         System.out.println(this.getRoomItems());
         System.out.println(description + ".\n" + getExitString());
         if (questionLocation == 2 || gameLocation == 2){
+            if (questionLocation == 2) {
             int difficulty = activePlayer.getDifficulty();
             questionLists.getRandomQuestion(0, difficulty, activePlayer);
+            } else {
+                if (roomName == "cel") {
+                    miniGames.guessTheNumber();
+                } else if (roomName == "trap") {
+                    miniGames.typingGame();
+                } else if (roomName == "bos") {
+                    miniGames.endFight(activePlayer, activeEnemy);
+                }
+            }
+            System.out.println(lookDescription);
         }
-    
     }
 
     /**

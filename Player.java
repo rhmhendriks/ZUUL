@@ -34,6 +34,7 @@ public class Player
     private int questionChances;
     ArrayList<Item> inventory; 
     HashMap<Item, String> bag;
+    private boolean hasTimeLimit; 
 
     // enable the use of color in the text output. 
         public static final String ANSI_RESET = "\u001B[0m";
@@ -143,6 +144,7 @@ public class Player
                 this.moves = 45;
                 this.timeLimit = 999;
                 this.questionChances = 3;
+                this.hasTimeLimit = false;
                 isGood = true;
             } else if (difficulty == 2){
                 this.difficulty = difficulty;
@@ -153,6 +155,7 @@ public class Player
                 this.moves = 35;
                 this.timeLimit = 999;
                 this.questionChances = 2;
+                this.hasTimeLimit = false;
                 isGood = true;
             } else if (difficulty == 3){
                 this.difficulty = difficulty;
@@ -163,6 +166,7 @@ public class Player
                 this.moves = 25;
                 this.timeLimit = 999;
                 this.questionChances = 1;
+                this.hasTimeLimit = false;
                 isGood = true;
             } else if (difficulty == 4){
                 this.difficulty = difficulty;
@@ -173,6 +177,7 @@ public class Player
                 this.moves = 45;
                 this.timeLimit = 900;
                 this.questionChances = 3;
+                this.hasTimeLimit = true;
                 isGood = true;
             } else if (difficulty == 5){
                 this.difficulty = difficulty;
@@ -183,6 +188,7 @@ public class Player
                 this.moves = 35;
                 this.timeLimit = 600;
                 this.questionChances = 2;
+                this.hasTimeLimit = true;
                 isGood = true;
             } else if (difficulty == 6){
                 this.difficulty = difficulty;
@@ -193,6 +199,7 @@ public class Player
                 this.moves = 2;
                 this.timeLimit = 120;
                 this.questionChances = 1;
+                this.hasTimeLimit = true;
                 isGood = true;
             }
             return isGood;
