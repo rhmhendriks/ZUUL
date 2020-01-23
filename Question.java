@@ -45,6 +45,14 @@ public class Question
         public static final String ANSI_PURPLE = "\u001B[35m";
         public static final String ANSI_CYAN = "\u001B[36m";
         public static final String ANSI_WHITE = "\u001B[37m";
+        public static final String ANSI_BOLD = "\u001b[1m";
+        public static final String ANSI_UNDERLINE= "\u001B[1m";
+        public static final String ANSI_bBlack  = "\u001b[30;1m";
+        public static final String ANSI_bGREEN = "\u001b[32;1m";
+        public static final String ANSI_bRED = "\u001b[31;1m";
+        public static final String ANSI_bYELLOW = "\u001b[33;1m";
+        public static final String ANSI_bBLUE = "\u001b[34;1m";
+        public static final String ANSI_bMAGENTA= "\u001b[35;1m;";
 
     /** 
     * Below is the contructor of a basic question. 
@@ -268,11 +276,11 @@ public boolean processQuestion(Player activePlayer){
                 System.out.println();
                 System.out.println("Om verder te gaan moet je de volgende vraag beantwoorden:");
                 System.out.println();
-                System.out.println(question);
+                System.out.println(ANSI_bBLUE + question + ANSI_RESET);
                 System.out.println();
                 printAnswerOptions();
                 System.out.println();
-                System.out.println(">");
+                System.out.print(">");
                 givenAnswer = answerBar.nextLine();
                 System.out.println();
 

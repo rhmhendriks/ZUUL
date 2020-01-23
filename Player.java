@@ -35,6 +35,25 @@ public class Player
     ArrayList<Item> inventory; 
     HashMap<Item, String> bag;
 
+    // enable the use of color in the text output. 
+        public static final String ANSI_RESET = "\u001B[0m";
+        public static final String ANSI_BLACK = "\u001B[30m";
+        public static final String ANSI_RED = "\u001B[31m";
+        public static final String ANSI_GREEN = "\u001B[32m";
+        public static final String ANSI_YELLOW = "\u001B[33m";
+        public static final String ANSI_BLUE = "\u001B[34m";
+        public static final String ANSI_PURPLE = "\u001B[35m";
+        public static final String ANSI_CYAN = "\u001B[36m";
+        public static final String ANSI_WHITE = "\u001B[37m";
+        public static final String ANSI_BOLD = "\u001b[1m";
+        public static final String ANSI_UNDERLINE= "\u001B[1m";
+        public static final String ANSI_bBlack  = "\u001b[30;1m";
+        public static final String ANSI_bGREEN = "\u001b[32;1m";
+        public static final String ANSI_bRED = "\u001b[31;1m";
+        public static final String ANSI_bYELLOW = "\u001b[33;1m";
+        public static final String ANSI_bBLUE = "\u001b[34;1m";
+        public static final String ANSI_bMAGENTA= "\u001b[35;1m;";
+
     /**
      * Intitialization of a player with the default settings but 
      * also with the wishes of the user. 

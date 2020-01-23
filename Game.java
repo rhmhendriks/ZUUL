@@ -46,6 +46,15 @@ public class Game
         public static final String ANSI_PURPLE = "\u001B[35m";
         public static final String ANSI_CYAN = "\u001B[36m";
         public static final String ANSI_WHITE = "\u001B[37m";
+        public static final String ANSI_BOLD = "\u001b[1m";
+        public static final String ANSI_UNDERLINE= "\u001B[1m";
+        public static final String ANSI_bBlack  = "\u001b[30;1m";
+        public static final String ANSI_bGREEN = "\u001b[32;1m";
+        public static final String ANSI_bRED = "\u001b[31;1m";
+        public static final String ANSI_bYELLOW = "\u001b[33;1m";
+        public static final String ANSI_bBLUE = "\u001b[34;1m";
+        public static final String ANSI_bMAGENTA= "\u001b[35;1m;";
+
 
     
     /**
@@ -337,13 +346,19 @@ public class Game
      * @param introducingRoom The room to be introduced
      */
     private void roomIntroducer(Room introducingRoom){
-        System.out.println("Speler: " + activePlayer.getName() + "   " + "Levens: " + activePlayer.createLivebar() + "   " + "Gezondheid: " + activePlayer.getHealth());
-        System.out.println("Je bezit:" + activePlayer.getInventory());
+        System.out.println();
+        System.out.println();
+        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println("Speler: " + ANSI_BOLD + activePlayer.getName() + ANSI_RESET + "   " + "Levens: " + ANSI_RED + activePlayer.createLivebar() + ANSI_RESET + "   " + "Gezondheid: " + ANSI_BOLD +  activePlayer.getHealth() + ANSI_RESET);
         if(activePlayer.getDifficulty() != 999) {
-          System.out.println(activeClock.getTimer()/60 + " minuten");
-        } else {
-
-        }
+            System.out.println("Je hebt nog" + ANSI_BOLD + activeClock.getTimer()/60 + ANSI_RESET + " minuten te spelen.");
+            System.out.println(" ");
+          } else {
+            System.out.println(" ");
+          }
+        System.out.println("Jouw rugzak bevat:" + ANSI_BOLD +  activePlayer.getInventory() + ANSI_RESET);
+        System.out.println(" ");
+        System.out.println("-----------------------------------------------------------------------------------");
         System.out.println(" ");
 
         introducingRoom.printLongDescription(activePlayer); // print room introduction
@@ -506,13 +521,13 @@ public class Game
         System.out.println("Op de muur staat geschreven welke acties je kunt");
         System.out.println("gebruiken tijdens deze game.");
         System.out.println();
-        System.out.println("Je kunt deze lijst opnieuw tonen met 'help', ");
-        System.out.println("maar denk eraan: het tonen van deze lijst kost");
-        System.out.println("je één leven.");
+        System.out.println("Je kunt deze lijst bekijken met 'help'. ");
         System.out.println();
-        System.out.println("Natuurlijk kun je ook altijd weer naar de cel om ");
-        System.out.println("om de lijst op de muur te bekijken. ");
+        System.out.println("Let op: het tonen van deze lijst kost je één leven, " );
+        System.out.println("je mag ook naar de cel om de lijst te bijken. ");
         System.out.println();
+        System.out.println();
+        pressEnterToContinue();
         parser.showCommands();
     }
 
