@@ -53,7 +53,7 @@ public class Game
         public static final String ANSI_bRED = "\u001b[31;1m";
         public static final String ANSI_bYELLOW = "\u001b[33;1m";
         public static final String ANSI_bBLUE = "\u001b[34;1m";
-        public static final String ANSI_bMAGENTA= "\u001b[35;1m;";
+        public static final String ANSI_bMAGENTA= "\u001b[35;1m";
 
 
     
@@ -396,11 +396,25 @@ public class Game
      */
     private void printWelcome()
     {
+        System.out.println(ANSI_PURPLE + "Welkom bij de nieuwe en verbeterde versie van ......");
         System.out.println();
-        System.out.println("Welkom bij ons spel!");
-        System.out.println("Dit is een nieuwe minder saaie verzie van ZUUL");
+        System.out.println(ANSI_WHITE + "# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #");
+        System.out.println("#								        #");
+        System.out.println("# " + ANSI_bMAGENTA + "   /////////////" +  ANSI_bGREEN + "   ///        ///" +   ANSI_bRED + "   ///        ///" +   ANSI_bYELLOW + "  ///          " + ANSI_WHITE + "     #");
+        System.out.println("# " + ANSI_bMAGENTA + "   //////////// " +  ANSI_bGREEN + "   ///        ///" +   ANSI_bRED + "   ///        ///" +   ANSI_bYELLOW + "  ///          " + ANSI_WHITE + "     #");
+        System.out.println("# " + ANSI_bMAGENTA + "           ///  " +  ANSI_bGREEN + "   ///        ///" +   ANSI_bRED + "   ///        ///" +   ANSI_bYELLOW + "  ///          " + ANSI_WHITE + "     #");
+        System.out.println("# " + ANSI_bMAGENTA + "          ///   " +  ANSI_bGREEN + "   ///        ///" +   ANSI_bRED + "   ///        ///" +   ANSI_bYELLOW + "  ///          " + ANSI_WHITE + "     #");
+        System.out.println("# " + ANSI_bMAGENTA + "         ///    " +  ANSI_bGREEN + "   ///        ///" +   ANSI_bRED + "   ///        ///" +   ANSI_bYELLOW + "  ///          " + ANSI_WHITE + "     #");
+        System.out.println("# " + ANSI_bMAGENTA + "        ///     " +  ANSI_bGREEN + "   ///        ///" +   ANSI_bRED + "   ///        ///" +   ANSI_bYELLOW + "  ///          " + ANSI_WHITE + "     #");
+        System.out.println("# " + ANSI_bMAGENTA + "       ///      " +  ANSI_bGREEN + "   ///        ///" +   ANSI_bRED + "   ///        ///" +   ANSI_bYELLOW + "  ///          " + ANSI_WHITE + "     #");
+        System.out.println("# " + ANSI_bMAGENTA + "      ///       " +  ANSI_bGREEN + "   ///        ///" +   ANSI_bRED + "   ///        ///" +   ANSI_bYELLOW + "  ///          " + ANSI_WHITE + "     #");
+        System.out.println("# " + ANSI_bMAGENTA + "     ///        " +  ANSI_bGREEN + "   ///        ///" +   ANSI_bRED + "   ///        ///" +   ANSI_bYELLOW + "  ///          " + ANSI_WHITE + "     #");
+        System.out.println("# " + ANSI_bMAGENTA + "    ////////////" +  ANSI_bGREEN + "    ///      /// " +   ANSI_bRED + "    ///      /// " +   ANSI_bYELLOW + "  /////////////" + ANSI_WHITE + "     #");  
+        System.out.println("# " + ANSI_bMAGENTA + "   /////////////" +  ANSI_bGREEN + "     //////////  " +   ANSI_bRED + "     //////////  " +   ANSI_bYELLOW + "  /////////////" + ANSI_WHITE + "     #");       
+        System.out.println("#								        #");
+        System.out.println("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #" + ANSI_RESET);
         System.out.println();
-        pressEnterToContinue();
+        System.out.println(ANSI_PURPLE + "Ontwikkeld door: Nivard Ypey, Luc Willemse en Ronald Hendrik Muelenkamp Hendriks" + ANSI_RESET);
     }
 
     /**
