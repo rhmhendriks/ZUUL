@@ -362,30 +362,32 @@ public boolean processQuestion(Player activePlayer){
                         if (answers != null && numberOfAnswers >= 2 && numberOfTries >= 1){
                             numberOfTries--;
                             if (useArrayList){answers.remove(givenAnswerint);}
-                            System.out.println(ANSI_RED + "Dit antwoord is helaas niet goed! Je kunt het nog een keer proberen." + ANSI_RESET + numberOfAnswers);
-                            System.out.println();
+                            System.out.println(ANSI_RED + "Dit antwoord is helaas niet goed! Je kunt het nog een keer proberen." + ANSI_RESET);
+                            if (answerForTesting.equals("CheatDontwantaquestion!")) {
+                                System.out.println(ANSI_PURPLE + "Hmmmmm. Je hebt een cheat gebruikt, Valsspeler! De vraag is over geslagen. Je hebt het leven terug!" + ANSI_RESET);
+                                activePlayer.setHealth(activePlayer.getHealth()+1);
+                                rightAnswerGiven = true;
+                            }
 
                         } else if (answerString != null || numberOfTries < 1 || numberOfAnswers < 2){
                             System.out.println(ANSI_RED + "Dit antwoord is helaas niet goed!" + ANSI_RESET);
-                            System.out.println();
+                            if (answerForTesting.equals("CheatDontwantaquestion!")) {
+                                System.out.println(ANSI_PURPLE + "Hmmmmm. Je hebt een cheat gebruikt, Valsspeler! De vraag is over geslagen. Je hebt het leven terug!" + ANSI_RESET);
+                                activePlayer.setHealth(activePlayer.getHealth()+1);
+                                rightAnswerGiven = true;
+                            }
                             break;
                         }
-                        if (activePlayer.getLiveStatus() <= 0){
+                        if (activePlayer.getLiveStatus() <= 1){
                             System.out.println(ANSI_RED + "Je levens zijn op! Gebruik een willekeurig commando om opnieuw te starten." + ANSI_RESET);
-                            System.out.println();
                             break;
                         }
                     System.out.println();
 
                 } else if (answerForTesting.equalsIgnoreCase(rightAnswer)) {
                     System.out.println(ANSI_GREEN + "Goed zo! Dat was het juiste antwoord! Je kunt nu verder spelen " + ANSI_RESET);
-                    System.out.println();
                     rightAnswerGiven = true;
 
-                } else if (answerForTesting.equals("CheatDontwantaquestion!")) {
-                    System.out.println(ANSI_PURPLE + "Hmmmmm. Je hebt een cheat gebruikt, Valsspeler! De vraag is over geslagen." + ANSI_RESET);
-                    System.out.println();
-                    rightAnswerGiven = true;
                 }
         }
         return rightAnswerGiven;
