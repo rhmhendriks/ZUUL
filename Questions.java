@@ -214,7 +214,7 @@ public class Questions
              // lets findout what list to use
              if (Category == 0){
                  // category is IT now we select the dif level to find the right stack
-                 if (difficulty == 1){
+                 if (difficulty == 1 || difficulty == 4){
                      
                      if (!it1.isEmpty()){
                         while(!it1.pop().processQuestion(activePlayer));
@@ -227,7 +227,7 @@ public class Questions
                          }
                      }
 
-                  } else if (difficulty == 2){
+                  } else if (difficulty == 2 || difficulty == 5){
                         if (!it2.isEmpty()){
                            while(!it2.pop().processQuestion(activePlayer));
                         } else if (!it3.isEmpty()){
@@ -238,7 +238,7 @@ public class Questions
                            noMoreQuestions = false;
                         }
 
-                      } else if (difficulty == 3){
+                      } else if (difficulty == 3 || difficulty == 6){
                         if (it3.isEmpty()){
                            while(!it3.pop().processQuestion(activePlayer));
                         } else if (!it2.isEmpty()){

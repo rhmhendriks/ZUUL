@@ -45,11 +45,25 @@ import java.util.Scanner;
         ;
     }
 
-
     /**
      * 
      */
     private int guessTheNumerInputReviewer(){
+        System.out.println();
+                System.out.println();
+                System.out.println("-----------------------------------------------------------------------------------");
+                System.out.println();
+                System.out.println("Om verder te kunnen gaan met het spel moet je de volgende game gaan spelen.");
+                System.out.println("Het is spelletje is eigenlijk hoger en lager je voert een getal van 5 CIJFERS");
+                System.out.println("je ziet dan of je hoger of lager moet gaan om tot het juiste getal te komen.");
+                System.out.println();
+                System.out.println("Je hebt het spel gewonnnen wanneer je het juiste getal hebt ingevuld.");
+                System.out.println();
+                System.out.println("het spel start wanneer je op enter drukt. ");
+                System.out.println();
+                System.out.println();
+                pressEnterToContinue();
+
         // create the stuff we need
         Scanner answerInputBar = new Scanner(System.in); 
         int answerGiven = 1;
@@ -110,6 +124,10 @@ import java.util.Scanner;
             int numberToGuess = numberToGuessRand.nextInt(99999);
 
         // explain the game
+        System.out.println();
+        System.out.println();
+        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println();
         System.out.println("Voor deze opdracht moet je een getal van 5 tekens raden.");
         System.out.println("Voor elke waarde die je invoert wordt er verteld of je getal te hoog of te laag is.");
         System.out.println("Blijf raden totdat je het juiste getal hebt, dan kun je verder!");
@@ -149,6 +167,13 @@ import java.util.Scanner;
             playerAlive = true;
             enenmyAlive = true;
             endGameParser = new Scanner(System.in);
+
+        // Print to the screen
+
+            System.out.println();
+            System.out.println();
+            System.out.println("-----------------------------------------------------------------------------------");
+            System.out.println();
 
         // The game is in a while loop where all the magic happends
             while (playerAlive && enenmyAlive) {

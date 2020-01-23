@@ -39,6 +39,7 @@ public class Room
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
      * @param description The room's description.
+     * @param theQuestionLocation 1 long 2 look 3 second
      */
     public Room(String description, boolean lockedYN, int theQuestionLocation, int theGameLocation) 
     {

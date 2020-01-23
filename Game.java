@@ -151,7 +151,7 @@ public class Game
             // Set the Player Name
                 printWelcome();
                 System.out.println(" ");
-                System.out.println("---------------------------------------------------------");
+                System.out.println("-----------------------------------------------------------------------------------");
                 System.out.println(" ");
                 System.out.println("Wat is jouw naam?");
                 choosenName = playerName.nextLine();
@@ -220,11 +220,11 @@ public class Game
             activeClock.startClock();
             }
 
-            
-            miniGames.endFight(activePlayer, activeEnemy);
+            //miniGames.endFight(activePlayer, activeEnemy);
         // Now we will start the game in the first room. 
             currentRoom = cel; 
             roomIntroducer(cel);
+            
         
     }
 
@@ -234,23 +234,23 @@ public class Game
     private void createRooms(){
       
         // create the rooms
-            cel = new Room("Je zit in de cel. Er zit een bewaker voor de cel. De bewaker zit op veilige afstand, zodat jij hem niet kan aanraken.", false);
-            gang = new Room("Je bent ontsnapt uit de cel. Je staat nu in een lange gang met twee deuren aan het eind van deze gang. Je zit op de hoogste verdieping van het kasteel. Om bij de uitgang te komen, moet je opzoek naar de trap. Om te weten te komen door welke deur je moet, moet je goed luisteren wat er achter deze deur zich afspeelt. De deuren in het kasteel zijn erg dik, het is onmogelijk om met het blote oor te horen wat zich achter de deur bevindt. Kijk om je heen om te kijken of je iets om je heen kan gebruiken.", true); // must have the keychain
-            valkuil1 = new Room("Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Beantwoord eerst de volgende vraag. Gebruik daarna back om terug naar de hal te gaan.", true); // must have glass
-            trap = new Room("Deze trap gaat maar tot en met de eerste verdieping van het kasteel. Je moet zo stil mogelijk van de trap af lopen. Beantwoord de volgende vraag goed, om ervoor te zorgen dat je zo stil mogelijk bent en je niet gesnapt wordt.", true); // must have glass
-            valkuil2 = new Room("Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Beantwoord eerst de volgende vraag. Gebruik daarna back om terug naar de hal te gaan.", false);
-            hal = new Room("Je loopt rustig en voorzichtig door de hal. Gelukkig maar dat je zo voorzichtig doet. Wanneer je halverwege de hal bent komt er een kok uit een van de deuren. Kijk rond om een verstop plek te vinden.", true); // must have the keychain 
-            valkuil3 = new Room("Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Beantwoord eerst de volgende vraag. Gebruik daarna back om terug naar de hal te gaan.", false);
-            keuken = new Room("Je doet de deur van de keuken zachtjes open en kruipt naar binnen achter een kastje. Je kijkt over het randje van het kastje om te zien of er koks in de keuken zijn. En ja, er staan 2 koks, druk bezig met het bereiden van het avond eten. Ze staan beiden met hun gezicht naar de deur waar jij naartoe moet. De enige optie is om ze allebei uit te schakelen. Je moet om je heen kijken om iets te vinden om de koks mee uit te schakelen.", true); // must have the sword
-            keukenTafeltje = new Room("Je ziet een aantal borden met een deksel daarop, op het keukentafeltje staan.", false);
-            eetzaal = new Room("De koks in de keuken waren nog druk bezig met het voorbereiden van het avond eten, dus de eetzaal is gelukkig nog leeg. Je staat voor een keuze. Je ziet namelijk een stuk touw in de hoek van de eetzaal liggen. Er is een raam in de eetzaal waardoor je zou kunnen ontsnappen met het touw. De andere keuze is de vuursteen te pakken die bij de openhaard ligt en de trap naar beneden te pakken. Kies welk voorwerp je wilt pakken. ga daarna naar de bijbehoorde kamer. maar voordat je dit gaat doen moet je eerst de volgende vraag beantwoorden.", false);
-            muur = new Room("Je hebt blijkbaar voor het touw gekozen. Je hangt aan het touw langs de muur. Onder je zit water, er zit namelijk een gracht om het kasteel heen. Je moet je heel langzaam laten zakken, om ervoor te zorgen dat de bewakers in de wachttorens je niet zien. Speel het volgende spel om ervoor te zorgen dat je je zo stil mogelijk naar beneden laat zakken. ", true); // must have the rope
-            gracht = new Room("De gracht wordt erg goed in de gaten gehouden vanaf de bewakers toren. Een kleine beweging in het water en je wordt ontdekt. Het is al erg donker buiten, dus ze kunnen niet goed in het water kijken, maar ze horen het wel gelijk. Je besluit onderwater te zwemmen om op die manier zo min mogelijk geluid te maken. Het is een Breede gracht. Beantwoord de volgende vraag goed om ervoor te zorgen dat je lang genoeg je adem kan inhouden. ", false);
-            trap2 = new Room("Je hebt blijkbaar voor de vuursteen gekozen. Je loopt de trap af, wanneer je bijna beneden bent hoor je geroesemoes en zie je dat de deur langzaam opengaat. Je moet zo snel mogelijk een verstop plek vinden. Beantwoord de volgende vraag goed, zodat je zo snel mogelijk een verstopplek kan vinden.", true); // must have the firestone
-            valkuil4 = new Room("Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Beantwoord eerst de volgende vraag. Gebruik daarna back om terug naar de hal te gaan.", false);
-            poort = new Room("De bewakers zijn druk in gesprek en letten niet goed op. Je doet de deur op een kiertje en kruipt stilletjes achter een kast die 2 meter van je vandaan staat. Je pakt je vuursteen. Met de vuursteen probeer je de kast in de brand te zetten. Beantwoord de volgende vraag goed, om de kast in brand te zetten ", false);
-            bos = new Room("Je zit in het bos, je rent zo hardt als je kan weg, zodat je al zo ver mogelijk weg bent voordat ze erachter komen dat je ontsnapt bent. Je kijkt nog eens om er zeker van te zijn dat je niet achtervolgt wordt. Terwijl je achteromkijkt bots je tegen iets of iemand aan en val je op de grond. Kijk om je heen wat er is gebeurd.", false);
-            thuis = new Room("Je bent veilig aangekomen bij je eigen kasteel, je hebt je koning gewaarschuwd voor de aanvalsplannen. nu maar lekker slapen en herstellen van het heftige avontuur.", false);
+            cel = new Room("Je zit in de cel. Er zit een bewaker voor de cel. De bewaker zit op veilige afstand, zodat jij hem niet kan aanraken.", false, 2, 0);
+            gang = new Room("Je bent ontsnapt uit de cel. Je staat nu in een lange gang met twee deuren aan het eind van deze gang. Je zit op de hoogste verdieping van het kasteel. Om bij de uitgang te komen, moet je opzoek naar de trap. Om te weten te komen door welke deur je moet, moet je goed luisteren wat er achter deze deur zich afspeelt. De deuren in het kasteel zijn erg dik, het is onmogelijk om met het blote oor te horen wat zich achter de deur bevindt. Kijk om je heen om te kijken of je iets om je heen kan gebruiken.", true, 2, 0); // must have the keychain
+            valkuil1 = new Room("Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Beantwoord eerst de volgende vraag. Gebruik daarna back om terug naar de hal te gaan.", true, 1, 0); // must have glass
+            trap = new Room("Deze trap gaat maar tot en met de eerste verdieping van het kasteel. Je moet zo stil mogelijk van de trap af lopen. Beantwoord de volgende vraag goed, om ervoor te zorgen dat je zo stil mogelijk bent en je niet gesnapt wordt.", true, 1, 0); // must have glass
+            valkuil2 = new Room("Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Beantwoord eerst de volgende vraag. Gebruik daarna back om terug naar de hal te gaan.", false, 1 ,0);
+            hal = new Room("Je loopt rustig en voorzichtig door de hal. Gelukkig maar dat je zo voorzichtig doet. Wanneer je halverwege de hal bent komt er een kok uit een van de deuren. Kijk rond om een verstop plek te vinden.", true, 2, 0); // must have the keychain 
+            valkuil3 = new Room("Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Beantwoord eerst de volgende vraag. Gebruik daarna back om terug naar de hal te gaan.", false, 1, 0);
+            keuken = new Room("Je doet de deur van de keuken zachtjes open en kruipt naar binnen achter een kastje. Je kijkt over het randje van het kastje om te zien of er koks in de keuken zijn. En ja, er staan 2 koks, druk bezig met het bereiden van het avond eten. Ze staan beiden met hun gezicht naar de deur waar jij naartoe moet. De enige optie is om ze allebei uit te schakelen. Je moet om je heen kijken om iets te vinden om de koks mee uit te schakelen.", true, 3, 0); // must have the sword
+            keukenTafeltje = new Room("Je ziet een aantal borden met een deksel daarop, op het keukentafeltje staan.", false, 1, 0);
+            eetzaal = new Room("De koks in de keuken waren nog druk bezig met het voorbereiden van het avond eten, dus de eetzaal is gelukkig nog leeg. Je staat voor een keuze. Je ziet namelijk een stuk touw in de hoek van de eetzaal liggen. Er is een raam in de eetzaal waardoor je zou kunnen ontsnappen met het touw. De andere keuze is de vuursteen te pakken die bij de openhaard ligt en de trap naar beneden te pakken. Kies welk voorwerp je wilt pakken. ga daarna naar de bijbehoorde kamer. maar voordat je dit gaat doen moet je eerst de volgende vraag beantwoorden.", false, 1, 0);
+            muur = new Room("Je hebt blijkbaar voor het touw gekozen. Je hangt aan het touw langs de muur. Onder je zit water, er zit namelijk een gracht om het kasteel heen. Je moet je heel langzaam laten zakken, om ervoor te zorgen dat de bewakers in de wachttorens je niet zien. Speel het volgende spel om ervoor te zorgen dat je je zo stil mogelijk naar beneden laat zakken. ", true, 1, 0); // must have the rope
+            gracht = new Room("De gracht wordt erg goed in de gaten gehouden vanaf de bewakers toren. Een kleine beweging in het water en je wordt ontdekt. Het is al erg donker buiten, dus ze kunnen niet goed in het water kijken, maar ze horen het wel gelijk. Je besluit onderwater te zwemmen om op die manier zo min mogelijk geluid te maken. Het is een Breede gracht. Beantwoord de volgende vraag goed om ervoor te zorgen dat je lang genoeg je adem kan inhouden. ", false, 1, 0);
+            trap2 = new Room("Je hebt blijkbaar voor de vuursteen gekozen. Je loopt de trap af, wanneer je bijna beneden bent hoor je geroesemoes en zie je dat de deur langzaam opengaat. Je moet zo snel mogelijk een verstop plek vinden. Beantwoord de volgende vraag goed, zodat je zo snel mogelijk een verstopplek kan vinden.", true, 1, 0); // must have the firestone
+            valkuil4 = new Room("Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Beantwoord eerst de volgende vraag. Gebruik daarna back om terug naar de hal te gaan.", false, 1, 0);
+            poort = new Room("De bewakers zijn druk in gesprek en letten niet goed op. Je doet de deur op een kiertje en kruipt stilletjes achter een kast die 2 meter van je vandaan staat. Je pakt je vuursteen. Met de vuursteen probeer je de kast in de brand te zetten. Beantwoord de volgende vraag goed, om de kast in brand te zetten ", false, 1, 0);
+            bos = new Room("Je zit in het bos, je rent zo hardt als je kan weg, zodat je al zo ver mogelijk weg bent voordat ze erachter komen dat je ontsnapt bent. Je kijkt nog eens om er zeker van te zijn dat je niet achtervolgt wordt. Terwijl je achteromkijkt bots je tegen iets of iemand aan en val je op de grond. Kijk om je heen wat er is gebeurd.", false, 2, 0);
+            thuis = new Room("Je bent veilig aangekomen bij je eigen kasteel, je hebt je koning gewaarschuwd voor de aanvalsplannen. nu maar lekker slapen en herstellen van het heftige avontuur.", false, 1, 0);
 
         // initialise room exits
             cel.setExit("rcolor", gang);

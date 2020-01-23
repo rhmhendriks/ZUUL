@@ -262,6 +262,10 @@ public boolean processQuestion(Player activePlayer){
     // Now we do the logic
         while (!rightAnswerGiven){
             // Print to screen
+                System.out.println();
+                System.out.println();
+                System.out.println("-----------------------------------------------------------------------------------");
+                System.out.println();
                 System.out.println("Om verder te gaan moet je de volgende vraag beantwoorden:");
                 System.out.println();
                 System.out.println(question);
@@ -270,6 +274,7 @@ public boolean processQuestion(Player activePlayer){
                 System.out.println();
                 System.out.println(">");
                 givenAnswer = answerBar.nextLine();
+                System.out.println();
 
             // Check the answer
             if (givenAnswer != null){
