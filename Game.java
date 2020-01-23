@@ -357,7 +357,7 @@ public class Game
         System.out.println();
         System.out.println();
         System.out.println("-----------------------------------------------------------------------------------");
-        System.out.println("Speler: " + ANSI_BOLD + activePlayer.getName() + ANSI_RESET + "   " + "Levens: " + ANSI_RED + activePlayer.createLivebar() + ANSI_RESET + "   " + "Gezondheid: " + ANSI_BOLD +  activePlayer.getHealth() + ANSI_RESET);
+        System.out.println("Speler: " + ANSI_BOLD + activePlayer.getName() + ANSI_RESET + "   " + "Levens: " + ANSI_RED + activePlayer.createLivebar() + ANSI_RESET + "   " + "Gezondheid: " + ANSI_BOLD +  activePlayer.getHealth() + ANSI_RESET + " " + "zetten: " + ANSI_BOLD + activePlayer.getMoves() + ANSI_RESET);
         if(activePlayer.getTimeLimit() != 999) {
             System.out.println("Je hebt nog" + ANSI_BOLD + activeClock.getTimer()/60 + ANSI_RESET + " minuten te spelen.");
             System.out.println(" ");
@@ -422,7 +422,7 @@ public class Game
         System.out.println("#								        #");
         System.out.println("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #" + ANSI_RESET);
         System.out.println();
-        System.out.println(ANSI_PURPLE + "Ontwikkeld door: Nivard Ypey, Luc Willemse en Ronald Hendrik Muelenkamp Hendriks" + ANSI_RESET);
+        System.out.println(ANSI_PURPLE + "Ontwikkeld door: Nivard Ypey, Luc Willemse en Ronald Hendrik Meulenkamp Hendriks" + ANSI_RESET);
     }
 
     /**
@@ -565,7 +565,7 @@ public class Game
 
         System.out.println("Je hebt 'help' gebruikt! Dat kost je één leven.");
         System.out.println("weet je zeker dat je een leven wilt betalen om ");
-        System.out.println("hulp te krijgen? [Ja (true) / Nee (false)] ");
+        System.out.println("hulp te krijgen? [Ja / Nee] ");
         confirmation = helpConfirmation.nextBoolean();
         
 
