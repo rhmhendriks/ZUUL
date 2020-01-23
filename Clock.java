@@ -15,6 +15,7 @@ public class Clock
 
     /**
      * Constructor voor objects van class Clock
+     * @param timeLimit
      */
     public Clock(int timeLimit)
     {
@@ -27,25 +28,30 @@ public class Clock
         };
     }
 
+    /**
+     * start the clock
+     */
     public void startClock(){
         timer.scheduleAtFixedRate(task, 1000, 1000);
     }
 
     /**
-         * Define the output of the timer command
-         * @param numbTimer The wanted output when a user uses "time".
-         */
-        public void setTimer(Timer numbTimer)
-        {
-            this.timer = numbTimer;
-        }
-        /**
-         * This method is returning the time thats remaining
-         * 
-         * @return A integer with the time of the game
-         */
-        public int getTimer() {
-            return this.secondsPassed;
-        }
+     * Define the output of the timer command
+     * @param numbTimer The wanted output when a user uses "time".
+    */
+    public void setTimer(Timer numbTimer)
+    {
+        this.timer = numbTimer;
+    }
+        
+    /**
+    * This method is returning the time thats remaining
+    * 
+    * @return A integer with the time of the game
+    */
+    public int getTimer() 
+    {
+        return this.secondsPassed;
+    }
 }
 

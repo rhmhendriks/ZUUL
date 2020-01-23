@@ -1,5 +1,4 @@
 import java.util.Set;
-
 import java.util.Stack;
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -30,6 +29,10 @@ public class Room
     private Stack<String> colors;
     private boolean locked;
     private Item needForUnlock;
+    private int questionLocation;
+    private int gameLocation;
+    private MiniGame miniGames;
+    private Questions questionLists;
 
     /**
      * Create a room described "description". Initially, it has
@@ -37,12 +40,16 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description, boolean lockedYN) 
+    public Room(String description, boolean lockedYN, int theQuestionLocation, int theGameLocation) 
     {
         this.description = description;
         locked = lockedYN;
+        questionLocation = theQuestionLocation;
+        gameLocation = theGameLocation;
         exits = new HashMap<>();
         colors = new Stack<String>();
+        miniGames = new MiniGame();
+        questionLists = new Questions();
 
 
         // adding colors
@@ -109,18 +116,26 @@ public class Room
      *     Exits: north west
      * @return A long description of this room
      */
-    public String getLongDescription()
+    public void printLongDescription(Player activePlayer)
     {
-        return " Je bent in: " + description + ".\n" + getExitString();
+        System.out.println(description + ".\n" + getExitString());
+        if (questionLocation == 1 || gameLocation == 1){
+            int difficulty = activePlayer.getDifficulty();
+            questionLists.getRandomQuestion(0, difficulty, activePlayer);
+        }
     }
 
     /**
      * Return the second description of the room
      * @return A second description of this room
      */
-    public String getSecondDescription()
+    public void printSecondDescription(Player activePlayer)
     {
-        return secondDescription;
+        System.out.println(secondDescription);
+        if (questionLocation == 3 || gameLocation == 3){
+            int difficulty = activePlayer.getDifficulty();
+            questionLists.getRandomQuestion(0, difficulty, activePlayer);
+        }
     }
 
     /**
@@ -138,6 +153,11 @@ public class Room
         return returnString;
     }
 
+    /**
+     * Return a string describing the room's exits, for example
+     * "Exits: north west".
+     * @return Details of the room's exits.
+     */
     public String getDirection(Room askedDirection)
     {
         // lets initilize some local variables
@@ -175,12 +195,23 @@ public class Room
     /**
      * Method used to print the look descriptions about the room
      */
-    public void look(){
+    public void look(Player activePlayer){
         System.out.println(this.lookDescription);
         System.out.println(" ");
         System.out.println(this.getRoomItems());
+        System.out.println(description + ".\n" + getExitString());
+        if (questionLocation == 2 || gameLocation == 2){
+            int difficulty = activePlayer.getDifficulty();
+            questionLists.getRandomQuestion(0, difficulty, activePlayer);
+        }
+    
     }
 
+    /**
+     * picks up the item
+     * @param itemName name of the  item you picked up
+     * @return null
+     */
     public Item pickupItem(String itemName) {
         for(int i = 0; i < items.size(); i++) {
             if(items.get(i).getDescription().equals(itemName)) {
@@ -190,6 +221,10 @@ public class Room
         return null;
     }
 
+    /**
+     * remove the item 
+     * @param itemName name of the item you want to geremove
+     */
     public void removeItem(String itemName) {
         for(int i = 0; i < items.size(); i++) {
             if(items.get(i).getDescription().equals(itemName)) {
@@ -198,11 +233,19 @@ public class Room
         }
     }
 
-    // set item in the room
+    /**
+     * set item in the room
+     * @param newitem item name
+     */
     public void setItem(Item newitem) {
         items.add(newitem);
     }
-    // get description of the items in the room
+
+    
+    /**
+     * get description of the items in the room
+     * @return De items in the rooms
+     */
     public String getRoomItems() {
         String output = "";
         for(int i = 0; i < items.size(); i++) {
@@ -211,22 +254,49 @@ public class Room
         return output;
     }
 
+    /**
+     * remove all the items from the room
+     */
+    public void removeAllItemsFromRoom(){
+        this.items.clear();
+    }
+
+    /**
+     * to lock the rooms
+     * @param trueFalse if its open or closed
+     */
     public void setLock(boolean trueFalse){
         locked = trueFalse;
     }
 
+    /**
+     * to look if the room is locked
+     * @return if locked
+     */
     public Boolean getLock(){
         return locked;
     }
 
+    /**
+     * setting an item to unlock the room
+     * @param theItem name of the item you need to unlock the item
+     */
     public void setItemForUnlocking(Item theItem){
         needForUnlock = theItem;
     }
 
+    /**
+     * get the item you nee to unlock the room
+     * @return which item you need to have to unlock the room
+     */
     public Item getItemForUnlocking(){
         return needForUnlock;
     }
 
+    /**
+     * to get see which item you need to unlock the room
+     * @return the item you need
+     */
     public String getLockInstruction(){
         StringBuilder output = new StringBuilder();
         output.append("Deze kamer kun je niet openen! Je hebt het volgende item nodig om deze kamer te openen ");
