@@ -237,6 +237,8 @@ public class Game
             activeClock.startClock();
             }
 
+            miniGames.plateGame(activePlayer);
+
             //miniGames.endFight(activePlayer, activeEnemy);
         // Now we will start the game in the first room. 
             currentRoom = cel; 
@@ -357,14 +359,14 @@ public class Game
         System.out.println();
         System.out.println();
         System.out.println("-----------------------------------------------------------------------------------");
-        System.out.println("Speler: " + ANSI_BOLD + activePlayer.getName() + ANSI_RESET + "   " + "Levens: " + ANSI_RED + activePlayer.createLivebar() + ANSI_RESET + "   " + "Gezondheid: " + ANSI_BOLD +  activePlayer.getHealth() + ANSI_RESET + " " + "zetten: " + ANSI_BOLD + activePlayer.getMoves() + ANSI_RESET);
+        System.out.println("Speler: " + ANSI_BOLD + activePlayer.getName() + ANSI_RESET + "   " + "Levens: " + ANSI_RED + activePlayer.createLivebar() + ANSI_RESET + "   " + "Gezondheid: " + ANSI_BOLD +  activePlayer.getHealth() + ANSI_RESET + "   " + "zetten: " + ANSI_BOLD + activePlayer.getMoves() + ANSI_RESET);
         if(activePlayer.getTimeLimit() != 999) {
             System.out.println("Je hebt nog" + ANSI_BOLD + activeClock.getTimer()/60 + ANSI_RESET + " minuten te spelen.");
             System.out.println(" ");
           } else {
             System.out.println(" ");
           }
-        System.out.println("Jouw rugzak bevat:" + ANSI_BOLD +  activePlayer.getInventory() + ANSI_RESET);
+        System.out.println("Jouw rugzak bevat: " + ANSI_BOLD +  activePlayer.getInventory() + ANSI_RESET);
         System.out.println(" ");
         System.out.println("-----------------------------------------------------------------------------------");
         System.out.println(" ");

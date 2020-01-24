@@ -107,6 +107,15 @@ public class Player
         }
 
         /**
+         * Add some lives to the player
+         * @param livesToAdd het aantal levens om toe te voegen
+         */
+        public void addLives(int livesToAdd)
+        {
+            this.lives = this.lives + livesToAdd;
+        }
+
+        /**
          * Define the output of the moves command
          * @param numbMoves The interger you wanne set the moves to.
          */
@@ -205,14 +214,6 @@ public class Player
             this.lives = this.lives - 1;
             System.out.println("Je hebt een leven verloren! Je hebt er nog " + this.getLiveStatus() + " over!");
         }
-
-        /**
-         * This method is used to add lives to a player
-         */
-        public void addLives(int NumberOfNewLives){
-            this.lives = this.lives + NumberOfNewLives;
-        }
-
 
         /**
          * Used to remove 1 singele move point

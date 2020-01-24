@@ -52,7 +52,8 @@ public class Room
     public static final String ANSI_bRED = "\u001b[31;1m";
     public static final String ANSI_bYELLOW = "\u001b[33;1m";
     public static final String ANSI_bBLUE = "\u001b[34;1m";
-    public static final String ANSI_bMAGENTA= "\u001b[35;1m;";
+    public static final String ANSI_bMAGENTA= "\u001b[35;1m";
+    public static final String ANSI_ORANGE= "\033[48:2:255:165:0m%s\033[m\n";
 
     /**
      * Create a room described "description". Initially, it has
@@ -77,7 +78,7 @@ public class Room
         // adding colors
             colors.add("blauw"); 
             colors.add("groen");
-            colors.add("rood");
+            colors.add( "rood");
             colors.add("oranje");
             colors.add("geel");
             colors.add("paars");

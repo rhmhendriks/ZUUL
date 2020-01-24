@@ -1,6 +1,10 @@
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Stack;
+import java.util.HashMap;
 
 /**
  * This class is part of the "World of Zuul" application. 
@@ -23,6 +27,7 @@ import java.util.Scanner;
 
  public class MiniGame {
     Random numberToGuessRand = new Random();// guessthenumber
+    private Stack<String> colors;
     
     // Colors for text output
     // enable the use of color in the text output. 
@@ -32,6 +37,7 @@ import java.util.Scanner;
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_ORANGE= "\033[48:2:255:165:0m%s\033[m\n";
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
@@ -42,7 +48,7 @@ import java.util.Scanner;
     public static final String ANSI_bRED = "\u001b[31;1m";
     public static final String ANSI_bYELLOW = "\u001b[33;1m";
     public static final String ANSI_bBLUE = "\u001b[34;1m";
-    public static final String ANSI_bMAGENTA= "\u001b[35;1m;";;
+    public static final String ANSI_bMAGENTA= "\u001b[35;1m";
 
 
     /**
@@ -50,7 +56,20 @@ import java.util.Scanner;
      * 
      */
     public MiniGame(){
-        // There is nothing to do here!
+        colors = new Stack<String>();
+
+        // adding colors
+        colors.add("blauw"); 
+        colors.add("groen");
+        colors.add( "rood");
+        colors.add("oranje");
+        colors.add("geel");
+        colors.add("paars");
+        colors.add("zwart");
+        colors.add("wit");
+        colors.add("roze");
+        colors.add("grijs");
+
         ;
     }
 
@@ -306,4 +325,99 @@ public void typingGame(){
             } // while good < 5
             System.out.println(ANSI_GREEN + "Goed gedaan! Je hebt alle vijf punten, en kan weer verder!" + ANSI_RESET);
     }
+
+
+    public void plateGame(Player activePlayer){
+        // Now whe create the needed variables
+            Scanner plateInputBar = new Scanner(System.in);
+            int numberOfPlates = 0;
+            Stack<Integer> contentsPossibilities = new Stack<Integer>();
+            HashMap<String, Integer> platesContent = new HashMap<String, Integer>();
+            int numberEmpty = 0;
+            Boolean plateChoosen = false;
+            String choice;
+
+        //Explain the game
+            System.out.println();
+            System.out.println();
+            System.out.println("Je hebt trek gekregen van al het rennen door het kasteel, dus besluit om te kijken wat er op de borden ligt.  ");
+            System.out.println("Elk bord heeft een andere kleur deksel, het is aan jouw om een kluer te kiezen. ");
+            System.out.println("Je mag er maar een kiezen, als het bord leeg is zul je met lege maag door moeten spelen!");
+            System.out.println();
+            pressEnterToContinue();
+
+        // set parameters
+            if (activePlayer.getDifficulty() == 1 || activePlayer.getDifficulty() == 4){
+                numberOfPlates = 3;
+                numberEmpty = 0;
+            } else if(activePlayer.getDifficulty() == 2 || activePlayer.getDifficulty() == 5){
+                numberOfPlates = 4;
+                numberEmpty = 1;
+            } else if (activePlayer.getDifficulty() == 3 || activePlayer.getDifficulty() == 6){
+                numberOfPlates = 5;
+                numberEmpty = 2;
+            }
+        
+        // initialize the game
+            contentsPossibilities.add(1);
+            contentsPossibilities.add(2);
+            contentsPossibilities.add(3);
+
+            for (int j=0; j < numberEmpty; j++){
+                contentsPossibilities.add(0);
+            }
+
+            Collections.shuffle(contentsPossibilities);
+            Collections.shuffle(colors);
+
+            for (int i=0; i < numberOfPlates; i++){
+                String color = colors.pop();
+                platesContent.put(color, contentsPossibilities.pop());
+            }
+
+        // Now lets start the game
+            while (!plateChoosen){
+
+                // present the plates to the user
+                    System.out.print("De deksels hebben de volgende kleuren: ");
+                    for (String c : platesContent.keySet()) {
+                        System.out.print(c + "  ");
+                      }
+
+                // we ask the user for input
+                    System.out.println("> ");
+                    choice = plateInputBar.nextLine();
+
+                // check if the color platye exitst
+                    if (platesContent.containsKey(choice)){
+                        int livesToAdd = platesContent.get(choice);
+                        if (livesToAdd > 0){
+                            System.out.println(ANSI_GREEN + "Je hebt een bord gekozen met een heerlijke energiereep! Deze heeft jouw " + livesToAdd + " levens opgeleverd!" + ANSI_RESET);
+                            activePlayer.addLives(livesToAdd);
+                            pressEnterToContinue();
+                            System.out.println();
+                            plateChoosen = true;
+                        } else if (livesToAdd == 0){
+                            System.out.println(ANSI_YELLOW + "Jammer dit bord was leeg! dit levert je helemaal niets op. Druk op enter om verder spelen! " + ANSI_RESET);
+                            activePlayer.addLives(livesToAdd);
+                            pressEnterToContinue();
+                            System.out.println();
+                            plateChoosen = true;
+                    }
+            }
+            
+
+
+
+
+            
+        
+
+
+
+
+    }
+}
+
+
 }
