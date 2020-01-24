@@ -238,7 +238,9 @@ public class Game
             activeClock.startClock();
             }
             
-        
+        // Lets start the game
+            currentRoom = cel;
+            roomIntroducer(cel);
     }
 
     /**
