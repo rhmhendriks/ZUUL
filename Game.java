@@ -426,6 +426,12 @@ public class Game
         System.out.println("# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #" + ANSI_RESET);
         System.out.println();
         System.out.println(ANSI_PURPLE + "Ontwikkeld door: Nivard Ypey, Luc Willemse en Ronald Hendrik Meulenkamp Hendriks" + ANSI_RESET);
+        System.out.println();
+        System.out.println(" In deze versie van het spel moet je zien te ontsnappen uit een middeleeuws kasteel.");
+        System.out.println(" Tijdens dit avontuur kom je verschillende vragen en mini-games tegen welke je moet ");
+        System.out.println(" beantwoorden/spelen om het spel te kunnen winnen. Je wint wanneer je vrij bent.");
+        System.out.println();
+        System.out.println(ANSI_CYAN + ANSI_BOLD + "Wij wensen je veel plezier bij je ontsnappingspoging!" + ANSI_RESET);
     }
 
     /**

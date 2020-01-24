@@ -190,7 +190,7 @@ public class Player
                 this.health = 12;
                 this.maxAttackDamage = 4;
                 this.moves = 35;
-                this.timeLimit = 600;
+                this.timeLimit = 775;
                 this.questionChances = 2;
                 isGood = true;
             } else if (difficulty == 6){
@@ -199,8 +199,8 @@ public class Player
                 this.inventorySize = 1;
                 this.health = 10;
                 this.maxAttackDamage = 3;
-                this.moves = 2;
-                this.timeLimit = 120;
+                this.moves = 25;
+                this.timeLimit = 660;
                 this.questionChances = 1;
                 isGood = true;
             }
