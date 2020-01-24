@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.EmptyStackException;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -660,10 +661,15 @@ public class Game
      */
     
     private void useBack(){
+        try {
         Room roomtogobackto = historyList.pop();
         activePlayer.withdrawMove();
         currentRoom = roomtogobackto;
         roomIntroducer(currentRoom);
+        } catch (EmptyStackException e) {
+            System.out.println("Je kunt nog geen 'terug' gebruiken, omdat dit de eerste kamer is");
+        }
+        
     }
 
     /**
