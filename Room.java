@@ -157,6 +157,7 @@ public class Room
             }
         }
         System.out.println(secondDescription);
+        System.out.println();
     }
 
     /**
@@ -258,6 +259,7 @@ public class Room
             }
         }
         System.out.println(secondDescription);
+        System.out.println();
     }
 
     /**
