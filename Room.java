@@ -147,16 +147,31 @@ public class Room
             } else {
                 if(roomName == "cel") {
                     miniGames.guessTheNumber();
+                    System.out.println();
+                    miniGames.endFight(activePlayer, activeEnemy);
+                    System.out.println(secondDescription);
+                    System.out.println();
                 } else if (roomName == "trap") {
                     miniGames.typingGame();
+                    System.out.println();
+                    miniGames.endFight(activePlayer, activeEnemy);
+                    System.out.println(secondDescription);
+                    System.out.println();
                 } else if (roomName == "bos") {
                     miniGames.endFight(activePlayer, activeEnemy);
+                    System.out.println();
+                    miniGames.endFight(activePlayer, activeEnemy);
+                    System.out.println(secondDescription);
+                    System.out.println();
                 } else if (roomName == "keukenTafeltje") {
                     miniGames.plateGame(activePlayer);
+                    System.out.println();
+                    miniGames.endFight(activePlayer, activeEnemy);
+                    System.out.println(secondDescription);
+                    System.out.println();
                 }
             }
         }
-        System.out.println(secondDescription);
         System.out.println();
     }
 
@@ -251,15 +266,30 @@ public class Room
             } else {
                 if (roomName == "cel") {
                     miniGames.guessTheNumber();
+                    System.out.println();
+                    miniGames.endFight(activePlayer, activeEnemy);
+                    System.out.println(secondDescription);
+                    System.out.println();
                 } else if (roomName == "trap") {
                     miniGames.typingGame();
-                } else if (roomName == "bos") {
+                    System.out.println();
                     miniGames.endFight(activePlayer, activeEnemy);
+                    System.out.println(secondDescription);
+                    System.out.println();
+                } else if (roomName == "bos") {
+                    System.out.println();
+                    miniGames.endFight(activePlayer, activeEnemy);
+                    System.out.println(secondDescription);
+                    System.out.println();
+                } else if (roomName == "keukenTafeltje") {
+                    miniGames.plateGame(activePlayer);
+                    System.out.println();
+                    miniGames.endFight(activePlayer, activeEnemy);
+                    System.out.println(secondDescription);
+                    System.out.println();
                 }
             }
         }
-        System.out.println(secondDescription);
-        System.out.println();
     }
 
     /**
