@@ -151,10 +151,12 @@ public class Room
                     miniGames.typingGame();
                 } else if (roomName == "bos") {
                     miniGames.endFight(activePlayer, activeEnemy);
+                } else if (roomName == "keukenTafeltje") {
+                    miniGames.plateGame(activePlayer);
                 }
             }
-            System.out.println(secondDescription);
         }
+        System.out.println(secondDescription);
     }
 
     /**
