@@ -338,7 +338,7 @@ public void typingGame(){
             System.out.println();
             System.out.println();
             System.out.println("Je hebt trek gekregen van al het rennen door het kasteel, dus besluit om te kijken wat er op de borden ligt.  ");
-            System.out.println("Elk bord heeft een andere kleur deksel, het is aan jouw om een kluer te kiezen. ");
+            System.out.println("Elk bord heeft een andere kleur deksel, het is aan jouw om een kleur te kiezen. ");
             System.out.println("Je mag er maar een kiezen, als het bord leeg is zul je met lege maag door moeten spelen!");
             System.out.println();
             pressEnterToContinue();
