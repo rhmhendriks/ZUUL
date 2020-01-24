@@ -237,13 +237,6 @@ public class Game
             activeClock = new Clock(activePlayer.getTimeLimit());
             activeClock.startClock();
             }
-
-            miniGames.plateGame(activePlayer);
-
-            //miniGames.endFight(activePlayer, activeEnemy);
-        // Now we will start the game in the first room. 
-            currentRoom = cel; 
-            roomIntroducer(cel);
             
         
     }
