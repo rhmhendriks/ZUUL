@@ -287,7 +287,7 @@ public class Game
             bos.setExit("rcolor", thuis);
             
         // adding lookdescription to the rooms  
-            cel.setLookDescription("Je ziet dat de bewaker een sleutelbos aan zijn broek heeft hangen. Aan jou de taak om ervoor te zorgen dat de bewaker dichter bijkomt, zodat jij de bewaker kan uitschakelen en zijn sleutel kan pakken om de cel te openen. Om dit te doen moet je het volgende spelletje spelen. Je ziet hier de volgende items:");
+            cel.setLookDescription("Je ziet dat de bewaker een sleutelbos aan zijn broek heeft hangen. Aan jou de taak om ervoor te zorgen dat de bewaker dichter bijkomt, zodat jij de bewaker kan uitschakelen en zijn sleutelbos kan pakken om de cel te openen. Om dit te doen moet je het volgende spelletje spelen. Je ziet hier de volgende items:");
             gang.setLookDescription("In de hoek van de gang zie je kast, wanneer je in de kast kijkt zie je een glas liggen. pak dit glas om beter te kunnen luisteren wat er zich achter de deur bevindt. Om te weten te komen wat je hoort achter de deuren, moet je eerste de volgende vraag goed beantwoorden.");
             valkuil1.setLookDescription("er is niet veel te zien");
             trap.setLookDescription("Er is niet veel te zien");
@@ -305,7 +305,7 @@ public class Game
             bos.setLookDescription("Wanneer je op kijkt zie je dat je tegen een bewaker aan ben gelopen. Gelukkig heb je een zwaard bij je. De bewaker rent namelijk op je af met getrokken zwaard. Ga het gevecht aan en schakel hem uit! gebruik hit ");
 
         // adding description 
-            cel.setSecondDescription("het is je gelukt om de bewaker uit te schakelen. Pak nu de sleutel op, zodat je naar de volgende ruimt kan.");
+            cel.setSecondDescription("het is je gelukt om de bewaker uit te schakelen. Pak nu de " + ANSI_BOLD + "sleutelbos" + " op door 'pak' te gebruiken, zodat je naar de volgende ruimt kunt.");
             gang.setSecondDescription("Je zet het glas tegen de deur en drukt vervolgens je oor er tegenaan. Achter deur " + gang.getDirection(valkuil1) + " hoor je gekling van borden, achter de " + gang.getDirection(trap) + " deur hoor je helemaal niks, welke deur kies je? ");
             trap.setSecondDescription("Je bent gelukkig stil genoeg geweest. Omdat je tijdens jouw spionage missie al op de eerste verdieping bent geweest van het kasteel, weet je dat de trap naar de begane grond zich aan de andere kant van het kasteel bevindt. Dit is de laatste deur waarvoor je een sleutel nodig hebt, maar er zijn 2 deuren. Kies door welke deur je wilt gaan.");
             hal.setSecondDescription("De kok loopt voorbij. Er staat een zwaard bij het harnas, neem deze mee, misschien komt die nog van pas! Je loopt door en komt weer voor 2 deuren te staan. Je hebt helaas niet gezien uit welke deur de kok kwam. Je wil naar de keuken. Maar welke deur lijdt naar de keuken? kies een deur");
