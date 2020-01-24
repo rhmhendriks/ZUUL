@@ -76,16 +76,14 @@ public class Room
 
 
         // adding colors
-            colors.add("blauw"); 
-            colors.add("groen");
-            colors.add( "rood");
-            colors.add("oranje");
-            colors.add("geel");
-            colors.add("paars");
-            colors.add("zwart");
-            colors.add("wit");
-            colors.add("roze");
-            colors.add("grijs");
+            colors.add(ANSI_BLUE + "blauw" + ANSI_RESET); 
+            colors.add(ANSI_GREEN + "groen" + ANSI_RESET);
+            colors.add(ANSI_RED + "rood" + ANSI_RESET);
+            colors.add(ANSI_YELLOW + "geel" + ANSI_RESET);
+            colors.add(ANSI_PURPLE + "paars" + ANSI_RESET);
+            colors.add(ANSI_BLACK + "zwart" + ANSI_RESET);
+            colors.add(ANSI_WHITE + "wit" + ANSI_RESET);
+            colors.add(ANSI_bMAGENTA + "roze" + ANSI_RESET);
         
         // now we shuffle the stack
             Collections.shuffle(colors);
@@ -220,6 +218,10 @@ public class Room
      */
     public Item getItem(int index) {
         return items.get(index);
+    }
+
+    public String getRoomName(){
+        return this.roomName; 
     }
 
     /**

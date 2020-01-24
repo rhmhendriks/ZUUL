@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.EmptyStackException;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -268,7 +269,7 @@ public class Game
             trap2 = new Room("trap2", "Je hebt blijkbaar voor de vuursteen gekozen. Je loopt de trap af, wanneer je bijna beneden bent hoor je geroesemoes en zie je dat de deur langzaam opengaat. Je moet zo snel mogelijk een verstop plek vinden. Beantwoord de volgende vraag goed, zodat je zo snel mogelijk een verstopplek kan vinden.", true, 1, 0); // must have the firestone
             valkuil4 = new Room("valkuil4", "Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Beantwoord eerst de volgende vraag. Gebruik daarna back om terug naar de hal te gaan.", false, 1, 0);
             poort = new Room("poort", "De bewakers zijn druk in gesprek en letten niet goed op. Je doet de deur op een kiertje en kruipt stilletjes achter een kast die 2 meter van je vandaan staat. Je pakt je vuursteen. Met de vuursteen probeer je de kast in de brand te zetten. Beantwoord de volgende vraag goed, om de kast in brand te zetten ", false, 1, 0);
-            bos = new Room("bos", "Je zit in het bos, je rent zo hardt als je kan weg, zodat je al zo ver mogelijk weg bent voordat ze erachter komen dat je ontsnapt bent. Je kijkt nog eens om er zeker van te zijn dat je niet achtervolgt wordt. Terwijl je achteromkijkt bots je tegen iets of iemand aan en val je op de grond. Kijk om je heen wat er is gebeurd.", false, 0, 2);
+            bos = new Room("bos", "Je zit in het bos, je rent zo hard als je kan weg, zodat je al zo ver mogelijk weg bent voordat ze erachter komen dat je ontsnapt bent. Je kijkt nog eens om er zeker van te zijn dat je niet achtervolgt wordt. Terwijl je achteromkijkt bots je tegen iets of iemand aan en val je op de grond. Kijk om je heen wat er is gebeurd.", false, 0, 2);
             thuis = new Room("thuis", "Je bent veilig aangekomen bij je eigen kasteel, je hebt je koning gewaarschuwd voor de aanvalsplannen. nu maar lekker slapen en herstellen van het heftige avontuur.", false, 1, 0);
 
         // initialise room exits
@@ -498,7 +499,7 @@ public class Game
             Item tempItem = activePlayer.getItemAsObject(item);
             activePlayer.removeFromInventory(tempItem.getDescription());
             currentRoom.setItem(tempItem);
-            System.out.println("je hebt " + item + " achtergelaten in " + currentRoom.getShortDescription() + "!");
+            System.out.println("je hebt " + item + " achtergelaten in " + currentRoom.getRoomName() + "!");
         }
     }
 
@@ -561,17 +562,17 @@ public class Game
     private void printHelp() 
     {
         Scanner helpConfirmation;
-        Boolean confirmation;
+        String confirmation;
         
         helpConfirmation = new Scanner(System.in);
 
         System.out.println("Je hebt 'help' gebruikt! Dat kost je één leven.");
         System.out.println("weet je zeker dat je een leven wilt betalen om ");
         System.out.println("hulp te krijgen? [Ja / Nee] ");
-        confirmation = helpConfirmation.nextBoolean();
+        confirmation = helpConfirmation.nextLine();
         
 
-        if (confirmation) {
+        if (confirmation.equalsIgnoreCase("ja")) {
             activePlayer.lostLive();
             System.out.println();
             System.out.println("Op de muur staat geschreven welke acties je kunt");
@@ -662,10 +663,15 @@ public class Game
      */
     
     private void useBack(){
+        try {
         Room roomtogobackto = historyList.pop();
         activePlayer.withdrawMove();
         currentRoom = roomtogobackto;
         roomIntroducer(currentRoom);
+        } catch (EmptyStackException e) {
+            System.out.println("Je kunt nog geen 'terug' gebruiken, omdat dit de eerste kamer is");
+        }
+        
     }
 
     /**
