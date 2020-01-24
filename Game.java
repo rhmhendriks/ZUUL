@@ -176,7 +176,7 @@ public class Game
 
                 System.out.println(" ");
 
-                System.out.println("De door jouw gekozen naam is: " + choosenName);
+                System.out.println("De door jouw gekozen naam is: " + ANSI_BOLD + choosenName + ANSI_RESET);
                 System.out.println("Is dit juist? [Ja / Nee]");
                 confirmInputName = playerNameConfirm.nextLine();
 
@@ -187,7 +187,7 @@ public class Game
 
                     System.out.println(" ");
 
-                    System.out.println("De door jouw gekozen naam is: " + choosenName);
+                    System.out.println("De door jouw gekozen naam is: " + ANSI_BOLD + choosenName + ANSI_RESET);
                     System.out.println("Is dit juist? [Ja / Nee]");
                     confirmInputName = playerNameConfirm.nextLine();
                 }
@@ -209,7 +209,7 @@ public class Game
 
                 System.out.println(" ");
 
-                System.out.println("Het door jouw gekozen niveau is: " + choosenDifLevel);
+                System.out.println("Het door jouw gekozen niveau is: " + ANSI_BOLD + choosenDifLevel + ANSI_RESET);
                 System.out.println("Is dit juist? [Ja / Nee]");
                 confirmInputDifLevel = difLevelConfirm.nextLine();
 
@@ -220,7 +220,7 @@ public class Game
 
                     System.out.println(" ");
 
-                    System.out.println("Het door jouw gekozen niveau is: " + choosenDifLevel);
+                    System.out.println("Het door jouw gekozen niveau is: " + ANSI_BOLD +  choosenDifLevel + ANSI_RESET);
                     System.out.println("Is dit juist? [Ja / Nee]");
                     confirmInputDifLevel = difLevelConfirm.nextLine();
                 }
@@ -287,7 +287,7 @@ public class Game
             bos.setExit("rcolor", thuis);
             
         // adding lookdescription to the rooms  
-            cel.setLookDescription("Je ziet dat de bewaker een sleutelbos aan zijn broek heeft hangen. Aan jou de taak om ervoor te zorgen dat de bewaker dichter bijkomt, zodat jij de bewaker kan uitschakelen en zijn sleutel kan pakken om de cel te openen. Om dit te doen moet je de volgende vraag goed beantwoorden:");
+            cel.setLookDescription("Je ziet dat de bewaker een sleutelbos aan zijn broek heeft hangen. Aan jou de taak om ervoor te zorgen dat de bewaker dichter bijkomt, zodat jij de bewaker kan uitschakelen en zijn sleutel kan pakken om de cel te openen. Om dit te doen moet je het volgende spelletje spelen. Je ziet hier de volgende items:");
             gang.setLookDescription("In de hoek van de gang zie je kast, wanneer je in de kast kijkt zie je een glas liggen. pak dit glas om beter te kunnen luisteren wat er zich achter de deur bevindt. Om te weten te komen wat je hoort achter de deuren, moet je eerste de volgende vraag goed beantwoorden.");
             valkuil1.setLookDescription("er is niet veel te zien");
             trap.setLookDescription("Er is niet veel te zien");

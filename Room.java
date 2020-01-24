@@ -148,17 +148,14 @@ public class Room
                 if(roomName == "cel") {
                     miniGames.guessTheNumber();
                     System.out.println();
-                    miniGames.endFight(activePlayer, activeEnemy);
                     System.out.println(secondDescription);
                     System.out.println();
                 } else if (roomName == "trap") {
                     miniGames.typingGame();
                     System.out.println();
-                    miniGames.endFight(activePlayer, activeEnemy);
                     System.out.println(secondDescription);
                     System.out.println();
                 } else if (roomName == "bos") {
-                    miniGames.endFight(activePlayer, activeEnemy);
                     System.out.println();
                     miniGames.endFight(activePlayer, activeEnemy);
                     System.out.println(secondDescription);
@@ -166,10 +163,13 @@ public class Room
                 } else if (roomName == "keukenTafeltje") {
                     miniGames.plateGame(activePlayer);
                     System.out.println();
-                    miniGames.endFight(activePlayer, activeEnemy);
                     System.out.println(secondDescription);
                     System.out.println();
                 }
+                System.out.println(" ");
+                System.out.println(" ");
+                System.out.println(description + ".\n" + getExitString());
+                System.out.println(lookDescription);
             }
         }
         System.out.println();
@@ -257,8 +257,6 @@ public class Room
         System.out.println(this.lookDescription);
         System.out.println(" ");
         System.out.println(this.getRoomItems());
-        System.out.println(description + ".\n" + getExitString());
-        System.out.println(lookDescription);
         if (questionLocation == 2 || gameLocation == 2){
             if (questionLocation == 2) {
             int difficulty = activePlayer.getDifficulty();
@@ -267,13 +265,11 @@ public class Room
                 if (roomName == "cel") {
                     miniGames.guessTheNumber();
                     System.out.println();
-                    miniGames.endFight(activePlayer, activeEnemy);
                     System.out.println(secondDescription);
                     System.out.println();
                 } else if (roomName == "trap") {
                     miniGames.typingGame();
                     System.out.println();
-                    miniGames.endFight(activePlayer, activeEnemy);
                     System.out.println(secondDescription);
                     System.out.println();
                 } else if (roomName == "bos") {
@@ -284,10 +280,13 @@ public class Room
                 } else if (roomName == "keukenTafeltje") {
                     miniGames.plateGame(activePlayer);
                     System.out.println();
-                    miniGames.endFight(activePlayer, activeEnemy);
                     System.out.println(secondDescription);
                     System.out.println();
                 }
+        System.out.println(" ");
+        System.out.println(" ");
+        System.out.println(description + ".\n" + getExitString());
+        System.out.println(lookDescription);
             }
         }
     }
@@ -334,7 +333,7 @@ public class Room
     public String getRoomItems() {
         String output = "";
         for(int i = 0; i < items.size(); i++) {
-            output += i + " " + items.get(i).getDescription() + "   ";
+            output += items.get(i).getDescription() + "   ";
         }
         return output;
     }
