@@ -29,7 +29,7 @@ public class Game
     private Room currentRoom;
     private Stack<Room> historyList;
     public Room cel, gang, valkuil1, trap, valkuil2, hal, valkuil3, keuken, keukenTafeltje, eetzaal, muur, gracht, trap2, valkuil4, poort, bos, thuis;
-    private Item keychain, glass, pan, rope, firestone, sword; 
+    private Item keychain, glass, pan, rope, firestone, sword, cloth, rock, fork, candle, painting; 
     private Player activePlayer;
     private Clock activeClock;
     private Enemy activeEnemy;
@@ -305,7 +305,7 @@ public class Game
             bos.setLookDescription("Wanneer je op kijkt zie je dat je tegen een bewaker aan ben gelopen. Gelukkig heb je een zwaard bij je. De bewaker rent namelijk op je af met getrokken zwaard. Ga het gevecht aan en schakel hem uit! gebruik hit ");
 
         // adding description 
-            cel.setSecondDescription("het is je gelukt om de bewaker uit te schakelen. Pak nu de " + ANSI_BOLD + "sleutelbos" + " op door 'pak' te gebruiken, zodat je naar de volgende ruimt kunt.");
+            cel.setSecondDescription("het is je gelukt om de bewaker uit te schakelen. Pak nu de " + ANSI_BOLD + "sleutelbos" + ANSI_RESET +" op door 'pak' te gebruiken, zodat je naar de volgende ruimt kunt.");
             gang.setSecondDescription("Je zet het glas tegen de deur en drukt vervolgens je oor er tegenaan. Achter deur " + gang.getDirection(valkuil1) + " hoor je gekling van borden, achter de " + gang.getDirection(trap) + " deur hoor je helemaal niks, welke deur kies je? ");
             trap.setSecondDescription("Je bent gelukkig stil genoeg geweest. Omdat je tijdens jouw spionage missie al op de eerste verdieping bent geweest van het kasteel, weet je dat de trap naar de begane grond zich aan de andere kant van het kasteel bevindt. Dit is de laatste deur waarvoor je een sleutel nodig hebt, maar er zijn 2 deuren. Kies door welke deur je wilt gaan.");
             hal.setSecondDescription("De kok loopt voorbij. Er staat een zwaard bij het harnas, neem deze mee, misschien komt die nog van pas! Je loopt door en komt weer voor 2 deuren te staan. Je hebt helaas niet gezien uit welke deur de kok kwam. Je wil naar de keuken. Maar welke deur lijdt naar de keuken? kies een deur");
@@ -316,15 +316,22 @@ public class Game
             trap2.setSecondDescription("Je rent zo snel mogelijk de trap af en verstopt je onder de trap. Je blijft er stil zitten. De mensen die op weg zijn naar de eetzaal lopen de trap op en merken niet dat jij er bent. Je wacht totdat ze de eetzaal in zijn. Je loopt naar de deur, kijk of je iets kan zien.");
             poort.setSecondDescription("Het is je gelukt je hebt de kast in brand gezet. Het is nog een klein vuurtje en het is de bewakers nog niet opgevallen. Snel kruip je weer terug naar de deur van de trap. De kast staat nu bijna helemaal in brand. De bewakers schrikken op uit in gesprek en rennen naar een andere kamer om emmers met water te pakken. Wanneer ze uit de kamer zijn loop je snel naar de poort. verlaat de kamer. ");
             bos.setSecondDescription("Je hebt de bewaker verslagen! Nu kan je eindelijk door rennen naar je eigen kasteel!");
-        
+
+
         // create and assign items to an room
             // Create the items
-                keychain = new Item("sleutelbos");  
-                glass = new Item("glas");
-                sword = new Item("zwaard");
-                pan = new Item("pan");
-                rope = new Item("touw");
-                firestone = new Item("vuursteen");
+                keychain = new Item("sleutelbos", true);  
+                glass = new Item("glas", true);
+                sword = new Item("zwaard", true);
+                pan = new Item("pan", true);
+                rope = new Item("touw", true);
+                firestone = new Item("vuursteen", true);
+                cloth = new Item("oudeDoek", false);
+                rock = new Item("steen", false);
+                fork = new Item("vork", false);
+                candle = new Item("kandelaar", false);
+                painting = new Item("schilderij", false);
+
 
 
             // Assign items to a room
@@ -333,7 +340,12 @@ public class Game
                 hal.setItem(sword);
                 keuken.setItem(pan);
                 eetzaal.setItem(rope);
+                cel.setItem(cloth); 
+                gang.setItem(painting);
+                hal.setItem(rock);
+                eetzaal.setItem(fork);
                 eetzaal.setItem(firestone);
+
 
             // set items for unlock
                 gang.setItemForUnlocking(keychain);
@@ -529,13 +541,18 @@ public class Game
             System.out.println();
         }
         else {
-            
-            if (activePlayer.addToInventory(newItem)){
-                currentRoom.removeItem(item);
-                System.out.println(ANSI_GREEN + "je hebt " + item + " opgepakt en draagt het nu bij je in je tas!" + ANSI_RESET);
-                System.out.println();
+            if (newItem.getPickable()){
+
+                if (activePlayer.addToInventory(newItem)){
+                    currentRoom.removeItem(item);
+                    System.out.println(ANSI_GREEN + "je hebt " + item + " opgepakt en draagt het nu bij je in je tas!" + ANSI_RESET);
+                    System.out.println();
+                } else {
+                    System.out.println(ANSI_RED + "Je tas zit vol! Je moet eerst een item achterlaten om " + item + " te kunnen meenemen!" + ANSI_RESET);
+                    System.out.println();
+                }
             } else {
-                System.out.println(ANSI_RED + "Je tas zit vol! Je moet eerst een item achterlaten om " + item + " te kunnen meenemen!" + ANSI_RESET);
+                System.out.println(ANSI_RED + "Dit item kun je helaas niet meenemen, het is nutteloos." + ANSI_RESET);
                 System.out.println();
             }
             

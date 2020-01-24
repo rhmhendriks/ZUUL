@@ -215,7 +215,6 @@ public class Questions
              if (Category == 0){
                  // category is IT now we select the dif level to find the right stack
                  if (difficulty == 1 || difficulty == 4){
-                     
                      if (!it1.isEmpty()){
                         while(!it1.pop().processQuestion(activePlayer));
                      } else if (!it2.isEmpty()){
@@ -225,9 +224,7 @@ public class Questions
                        } else { 
                         noMoreQuestions = false;
                          }
-                     }
-
-                  } else if (difficulty == 2 || difficulty == 5){
+                     } else if (difficulty == 2 || difficulty == 5){
                         if (!it2.isEmpty()){
                            while(!it2.pop().processQuestion(activePlayer));
                         } else if (!it3.isEmpty()){
@@ -249,6 +246,9 @@ public class Questions
                            noMoreQuestions = false;
                         }
                      } // voor andere cat: else if (category == <cat int>){ if (difficulty == <difint>){ else if (difficulty == <difint>){ } } }
-                     return noMoreQuestions;
+                     
                   }  
+                  return noMoreQuestions;
+               }
+               
 }

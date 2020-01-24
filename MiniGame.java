@@ -296,14 +296,18 @@ public void typingGame(){
                 Scanner wordInputBar = new Scanner(System.in);
             
             //Explain the game
+                System.out.println();
+                System.out.println("---------------------------------------------------------------------------");
                 System.out.println("Bij dit spel krijg je een willekeurig gegenereerd woord te zien voor 10 seconden.");
                 System.out.println("Probeer in die tijd het woord juist te typen, voor elk juist woord krijg je een punt");
                 System.out.println("Als je vijf punten hebt behaald, kun je verder!");
+                System.out.println("---------------------------------------------------------------------------");
+                System.out.println();
                 pressEnterToContinue();
 
             //If the answer is equal to the String printed on screen, add a point to RightAnswer and print a different String
             while (rightanswers < 5){
-                System.out.println("hallo");
+                System.out.println();
                 currentword = generateString(10); //Generate a random String and insert that String into currentword
                 gameTimer = new Clock(18);
                 gameTimer.startClock();
@@ -316,18 +320,22 @@ public void typingGame(){
                     // check if input matches the random string
                     if (gameTimer.getTimer() <= 0){
                         System.out.println(ANSI_RED + "Je hebt niet op tijd geantwoord" + ANSI_RESET);
+                        System.out.println();
                     } else {
                     if (!answer.equals(currentword)){
                         System.out.println(ANSI_YELLOW + "Helaas, je hebt het woord fout getypt" + ANSI_RESET);
+                        System.out.println();
                     } else if (answer.equals(currentword)){
                         rightanswers = rightanswers + 1;
                         System.out.println(ANSI_GREEN + "Goed antwoord! Je hebt nu " + rightanswers + "/5 punten" + ANSI_RESET);
+                        System.out.println();
                     }
 
                 } // time up!
                 
             } // while good < 5
             System.out.println(ANSI_GREEN + "Goed gedaan! Je hebt alle vijf punten, en kan weer verder!" + ANSI_RESET);
+            System.out.println();
     }
 
 

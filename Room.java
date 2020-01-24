@@ -139,7 +139,10 @@ public class Room
      */
     public void printLongDescription(Player activePlayer, Enemy activeEnemy)
     {
-        System.out.println(description + ".\n" + getExitString());
+        System.out.println(description);
+        System.out.println();
+        System.out.println(getExitString());
+
         if (questionLocation == 1 || gameLocation == 1){
             if(questionLocation == 1) {
                 int difficulty = activePlayer.getDifficulty();
@@ -166,11 +169,10 @@ public class Room
                     System.out.println(secondDescription);
                     System.out.println();
                 }
-                System.out.println(" ");
-                System.out.println(" ");
-                System.out.println(description + ".\n" + getExitString());
-                System.out.println(lookDescription);
             }
+            System.out.println(" ");
+            System.out.println(" ");
+            System.out.println("Je kunt gebruik maken van de volgende " + getExitString());
         }
         System.out.println();
     }
@@ -283,11 +285,11 @@ public class Room
                     System.out.println(secondDescription);
                     System.out.println();
                 }
-        System.out.println(" ");
-        System.out.println(" ");
-        System.out.println(description + ".\n" + getExitString());
-        System.out.println(lookDescription);
+        
             }
+            System.out.println(" ");
+            System.out.println(" ");
+            System.out.println("Je kunt gebruik maken van de volgende " + getExitString());
         }
     }
 
