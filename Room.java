@@ -221,6 +221,10 @@ public class Room
         return items.get(index);
     }
 
+    public String getRoomName(){
+        return this.roomName; 
+    }
+
     /**
      * Method used to print the look descriptions about the room
      */

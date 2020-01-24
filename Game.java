@@ -497,7 +497,7 @@ public class Game
             Item tempItem = activePlayer.getItemAsObject(item);
             activePlayer.removeFromInventory(tempItem.getDescription());
             currentRoom.setItem(tempItem);
-            System.out.println("je hebt " + item + " achtergelaten in " + currentRoom.getShortDescription() + "!");
+            System.out.println("je hebt " + item + " achtergelaten in " + currentRoom.getRoomName() + "!");
         }
     }
 
