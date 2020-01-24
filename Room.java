@@ -81,7 +81,7 @@ public class Room
             colors.add(ANSI_RED + "rood" + ANSI_RESET);
             colors.add(ANSI_YELLOW + "geel" + ANSI_RESET);
             colors.add(ANSI_PURPLE + "paars" + ANSI_RESET);
-            colors.add(ANSI_BLACK + "zwart" + ANSI_RESET);
+            colors.add(ANSI_bBlack + "zwart" + ANSI_RESET);
             colors.add(ANSI_WHITE + "wit" + ANSI_RESET);
             colors.add(ANSI_bMAGENTA + "roze" + ANSI_RESET);
         
@@ -208,7 +208,15 @@ public class Room
      */
     public Room getExit(String direction) 
     {
-        return exits.get(direction);
+        Room output = null;
+
+        for (String color : exits.keySet()) {
+            if (color.contains(direction)){
+                output = exits.get(color);
+                
+            }
+          }
+        return output;
     }
 
     /** 

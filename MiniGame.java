@@ -37,7 +37,6 @@ import java.util.HashMap;
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_ORANGE= "\033[48:2:255:165:0m%s\033[m\n";
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
@@ -59,17 +58,15 @@ import java.util.HashMap;
         colors = new Stack<String>();
 
         // adding colors
-        colors.add("blauw"); 
-        colors.add("groen");
-        colors.add( "rood");
-        colors.add("oranje");
-        colors.add("geel");
-        colors.add("paars");
-        colors.add("zwart");
-        colors.add("wit");
-        colors.add("roze");
-        colors.add("grijs");
-
+        // adding colors
+        colors.add(ANSI_BLUE + "blauw" + ANSI_RESET); 
+        colors.add(ANSI_GREEN + "groen" + ANSI_RESET);
+        colors.add(ANSI_RED + "rood" + ANSI_RESET);
+        colors.add(ANSI_YELLOW + "geel" + ANSI_RESET);
+        colors.add(ANSI_PURPLE + "paars" + ANSI_RESET);
+        colors.add(ANSI_bBlack + "zwart" + ANSI_RESET);
+        colors.add(ANSI_WHITE + "wit" + ANSI_RESET);
+        colors.add(ANSI_bMAGENTA + "roze" + ANSI_RESET);
         ;
     }
 
@@ -387,6 +384,15 @@ public void typingGame(){
                 // we ask the user for input
                     System.out.println("> ");
                     choice = plateInputBar.nextLine();
+
+                // check input
+                Room output = null;
+
+                for (String colorKey : platesContent.keySet()) {
+                    if (colorKey.contains(choice)){
+                        choice = colorKey;
+                    }
+                }
 
                 // check if the color platye exitst
                     if (platesContent.containsKey(choice)){
