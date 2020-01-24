@@ -354,9 +354,9 @@ public class Room
      */
     public String getLockInstruction(){
         StringBuilder output = new StringBuilder();
-        output.append("Deze kamer kun je niet openen! Je hebt het volgende item nodig om deze kamer te openen ");
+        output.append(ANSI_YELLOW + "Deze kamer kun je niet openen! Je hebt het volgende item nodig om deze kamer te openen ");
         output.append(needForUnlock.getDescription());
-        output.append(".");
+        output.append("." + ANSI_RESET);
   
         return output.toString();
     }

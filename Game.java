@@ -472,7 +472,7 @@ public class Game
             if (activePlayer.getDifficulty() >= 4) {
             System.out.println(activeClock.getTimer());
             } else {
-                System.out.println("De moeilijkheidsgraad die jij hebt gekozen bevat geen tijdslimiet");
+                System.out.println(ANSI_bMAGENTA + "De moeilijkheidsgraad die jij hebt gekozen bevat geen tijdslimiet" + ANSI_RESET);
             }
         } else if (commandWord.equals("zetten")){
             System.out.println("Je hebt nog: " + activePlayer.getMoves() + " zetten over!");
@@ -489,18 +489,21 @@ public class Game
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know what to drop...
-            System.out.println("Wat wil je achterlaten?");
+            System.out.println(ANSI_YELLOW + "Wat wil je achterlaten?" + ANSI_RESET);
+            System.out.println();
         }
 
         String item = command.getSecondWord(); // Get the item the player wants to drop
 
         if (!activePlayer.inInventory(item)){
-            System.out.println(item + " zit niet in de tas! Probeer het opnieuw!");
+            System.out.println(ANSI_RED + item + " zit niet in de tas! Probeer het opnieuw!" + ANSI_RESET);
+            System.out.println();
         } else {
             Item tempItem = activePlayer.getItemAsObject(item);
             activePlayer.removeFromInventory(tempItem.getDescription());
             currentRoom.setItem(tempItem);
-            System.out.println("je hebt " + item + " achtergelaten in " + currentRoom.getRoomName() + "!");
+            System.out.println( ANSI_GREEN + "je hebt " + item + " achtergelaten in " + ANSI_BOLD + currentRoom.getRoomName() + "!" + ANSI_RESET);
+            System.out.println();
         }
     }
 
@@ -513,6 +516,7 @@ public class Game
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
             System.out.println(ANSI_RED + "Je hebt niet aangegeven wat je wil opakken!"  + ANSI_RESET);
+            System.out.println();
         }
 
         String item = command.getSecondWord();
@@ -522,14 +526,17 @@ public class Game
 
         if (newItem == null) {
             System.out.println(ANSI_RED + "Helaas. Dit voorwerp is niet aanwezig in deze kamer!"  + ANSI_RESET);
+            System.out.println();
         }
         else {
             
             if (activePlayer.addToInventory(newItem)){
                 currentRoom.removeItem(item);
                 System.out.println(ANSI_GREEN + "je hebt " + item + " opgepakt en draagt het nu bij je in je tas!" + ANSI_RESET);
+                System.out.println();
             } else {
                 System.out.println(ANSI_RED + "Je tas zit vol! Je moet eerst een item achterlaten om " + item + " te kunnen meenemen!" + ANSI_RESET);
+                System.out.println();
             }
             
         }
@@ -601,7 +608,8 @@ public class Game
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
-            System.out.println("waarheen?");
+            System.out.println(ANSI_YELLOW + "waarheen?" + ANSI_RESET);
+            System.out.println();
             return;
         }
 
@@ -611,7 +619,8 @@ public class Game
         Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
-            System.out.println("Daar is geen deur!");
+            System.out.println(ANSI_YELLOW + "Daar is geen deur!" + ANSI_RESET);
+            System.out.println();
         }
         else {
                 historyList.add(currentRoom);
@@ -628,7 +637,8 @@ public class Game
     private boolean quit(Command command) 
     {
         if(command.hasSecondWord()) {
-            System.out.println("Quit wat?");
+            System.out.println(ANSI_YELLOW + "Quit wat?" + ANSI_RESET);
+            System.out.println();
             return false;
         }
         else {
@@ -670,7 +680,8 @@ public class Game
         currentRoom = roomtogobackto;
         roomIntroducer(currentRoom);
         } catch (EmptyStackException e) {
-            System.out.println("Je kunt nog geen 'terug' gebruiken, omdat dit de eerste kamer is");
+            System.out.println(ANSI_YELLOW + "Je kunt nog geen 'terug' gebruiken, omdat dit de eerste kamer is" + ANSI_RESET);
+            System.out.println();
         }
         
     }
@@ -690,10 +701,12 @@ public class Game
             while (answer == null){
                     System.out.println();
                     System.out.println("Wil je stoppen met het spel? Type 'true' voor ja of 'false' voor nee");
+                    System.out.println();
                 try {
                     answer = quitInput.nextBoolean();
                     } catch (InputMismatchException e) {
                     System.out.println(ANSI_RED + "Je kunt alleen 'true' typen voor ja en 'false' voor nee!" + ANSI_RESET);
+                    System.out.println();
                     quitInput.next();
                 }
                 answered = true;

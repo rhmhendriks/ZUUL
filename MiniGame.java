@@ -90,6 +90,7 @@ import java.util.HashMap;
         } catch (InputMismatchException e) {
             System.out.println();
             System.out.println(ANSI_RED + "Je kunt alleen cijfers invullen tussen 0 en 99999!"  + ANSI_RESET);
+            System.out.println();
             error = true;
         }
 
@@ -102,6 +103,7 @@ import java.util.HashMap;
             } catch (InputMismatchException e) {
                 System.out.println();
                 System.out.println(ANSI_RED + "Je kunt alleen cijfers invullen tussen 0 en 99999!" + ANSI_RESET);
+                System.out.println();
                 error = true;
             }
         }
@@ -155,14 +157,17 @@ import java.util.HashMap;
                 if (answer < numberToGuess){
                     System.out.println();
                     System.out.println(ANSI_YELLOW + "[" + answer + "]  " + "Het ingevoerde getal is te laag!"  + ANSI_RESET);
+                    System.out.println();
                 } else if (answer > numberToGuess) {;
                     System.out.println();
                     System.out.println(ANSI_RED + "[" + answer + "]  " + "Het ingevoerde getal is te hoog!!"  + ANSI_RESET);
+                    System.out.println();
                 } else if (answer == numberToGuess){
                     System.out.println();
                     System.out.println();
                     System.out.println();
                     System.out.println(ANSI_GREEN + "Gefeliciteerd! Je hebt het getal geraden! Het was: " + numberToGuess + ANSI_RESET);
+                    System.out.println();
                     result = true;
                 }
             }
@@ -200,8 +205,10 @@ import java.util.HashMap;
 
                     // let's also check what the user wanted to do
                         if (userinput.equalsIgnoreCase("status")){
+                            System.out.println();
                             System.out.println("Jij hebt nog een gezondheid van: " + activePlayer.getHealth());
                             System.out.println("De bewaker heeft nog een gezondheid van: " + activePlayer.getHealth());
+                            System.out.println();
 
                          } else if (userinput.equalsIgnoreCase("slaan")) {
                             // Radom select what damage is beiing done

@@ -212,7 +212,8 @@ public class Player
          */
         public void lostLive(){
             this.lives = this.lives - 1;
-            System.out.println("Je hebt een leven verloren! Je hebt er nog " + this.getLiveStatus() + " over!");
+            System.out.println(ANSI_bRED + "Je hebt een leven verloren! Je hebt er nog " + this.getLiveStatus() + " over!" + ANSI_RESET);
+            System.out.println();
         }
 
         /**
@@ -345,7 +346,9 @@ public class Player
                 StringBuilder output = new StringBuilder();
 
             if (this.bag.size() <= 0){
-                output.append("Je hebt niets bij je!");
+                output.append(ANSI_YELLOW);
+                output.append(" Je hebt niets bij je! ");
+                output.append(ANSI_RESET);
             } else {
                 for (Item i : bag.keySet()) {
                     output.append(bag.get(i));

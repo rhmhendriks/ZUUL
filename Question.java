@@ -174,7 +174,8 @@ public void setDifficulty(int newDifLevel){
     if (newDifLevel <= 6 && newDifLevel > 0){
         diffeculty = newDifLevel;
     } else { 
-        System.out.println("oh oow! This difficulty level is invalid! please pick between 0 and 6");
+        System.out.println(ANSI_RED + "oh oow! This difficulty level is invalid! please pick between 0 and 6" + ANSI_RESET);
+        System.out.println();
     }
 }
 
@@ -356,6 +357,7 @@ public boolean processQuestion(Player activePlayer){
 
                 if (answerForTesting == null){
                     System.out.println(ANSI_YELLOW + "Je hebt geen antwoord ingevuld!" + ANSI_RESET);
+                    System.out.println();
                 } else if (!answerForTesting.equalsIgnoreCase(rightAnswer)) {
                     activePlayer.lostLive();
 
@@ -371,16 +373,20 @@ public boolean processQuestion(Player activePlayer){
                             numberOfTries--;
                             if (useArrayList){answers.remove(givenAnswerint);}
                             System.out.println(ANSI_RED + "Dit antwoord is helaas niet goed! Je kunt het nog een keer proberen." + ANSI_RESET);
+                            System.out.println();
                             if (answerForTesting.equals("CheatDontwantaquestion!")) {
                                 System.out.println(ANSI_PURPLE + "Hmmmmm. Je hebt een cheat gebruikt, Valsspeler! De vraag is over geslagen. Je hebt het leven terug!" + ANSI_RESET);
+                                System.out.println();
                                 activePlayer.setHealth(activePlayer.getHealth()+1);
                                 rightAnswerGiven = true;
                             }
 
                         } else if (answerString != null || numberOfTries < 1 || numberOfAnswers < 2){
                             System.out.println(ANSI_RED + "Dit antwoord is helaas niet goed!" + ANSI_RESET);
+                            System.out.println();
                             if (answerForTesting.equals("CheatDontwantaquestion!")) {
                                 System.out.println(ANSI_PURPLE + "Hmmmmm. Je hebt een cheat gebruikt, Valsspeler! De vraag is over geslagen. Je hebt het leven terug!" + ANSI_RESET);
+                                System.out.println();
                                 activePlayer.setHealth(activePlayer.getHealth()+1);
                                 rightAnswerGiven = true;
                             }
@@ -388,12 +394,14 @@ public boolean processQuestion(Player activePlayer){
                         }
                         if (activePlayer.getLiveStatus() <= 1){
                             System.out.println(ANSI_RED + "Je levens zijn op! Gebruik een willekeurig commando om opnieuw te starten." + ANSI_RESET);
+                            System.out.println();
                             break;
                         }
                     System.out.println();
 
                 } else if (answerForTesting.equalsIgnoreCase(rightAnswer)) {
                     System.out.println(ANSI_GREEN + "Goed zo! Dat was het juiste antwoord! Je kunt nu verder spelen " + ANSI_RESET);
+                    System.out.println();
                     rightAnswerGiven = true;
 
                 }
