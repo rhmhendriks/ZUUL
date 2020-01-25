@@ -112,8 +112,11 @@ public class Game
                 System.out.println("Het is je niet gelukt om op tijd te ontsnappen!");
                 System.out.println("De bewakers hebben je terug gebracht naar je Cel.");
                 System.out.println();
+                pressEnterToContinue();
                 System.out.println();
                 System.out.println("Het spel wordt nu opnieuw geladen... Een ogenblik geduld...." + ANSI_RESET);
+                System.out.println();
+                System.out.println();
                 return false;
             } else if ((activePlayer.getMoves() <= 0)){
                 System.out.println();
@@ -122,8 +125,11 @@ public class Game
                 System.out.println("Je hebt niet genoeg energie meer om iets te doen, hierdoor kun je ook niet meer rennen.");
                 System.out.println("De bewakers hebben je meegesleept en terug geplaatst in je Cel. ");
                 System.out.println();
+                pressEnterToContinue();
                 System.out.println();
                 System.out.println("Het spel wordt nu opnieuw geladen... Een ogenblik geduld...." + ANSI_RESET);
+                System.out.println();
+                System.out.println();
                 return false;
             } else if (activePlayer.getLiveStatus() <= 0) {
                 System.out.println();
@@ -132,8 +138,11 @@ public class Game
                 System.out.println("Zonder levens kun je je niet meer verzetten tegen de bewakers.");
                 System.out.println("De bewakers hebben je gevonden en weer naar de cel gebracht.");
                 System.out.println();
+                pressEnterToContinue();
                 System.out.println();
                 System.out.println("Het spel wordt nu opnieuw geladen... Een ogenblik geduld...." + ANSI_RESET);
+                System.out.println();
+                System.out.println();
                 return false;
             } else {
                 finished = processCommand(command);
@@ -251,21 +260,21 @@ public class Game
         // create the rooms
             cel = new Room("cel", "Je zit in de cel. Er zit een bewaker voor de cel. De bewaker zit op veilige afstand, zodat jij hem niet kan aanraken.", false, 0, 2);
             gang = new Room("gang", "Je bent ontsnapt uit de cel. Je staat nu in een lange gang met twee deuren aan het eind van deze gang. Je zit op de hoogste verdieping van het kasteel. Om bij de uitgang te komen, moet je opzoek naar de trap. Om te weten te komen door welke deur je moet, moet je goed luisteren wat er achter deze deur zich afspeelt. De deuren in het kasteel zijn erg dik, het is onmogelijk om met het blote oor te horen wat zich achter de deur bevindt. Kijk om je heen om te kijken of je iets om je heen kan gebruiken.", true, 2, 0); // must have the keychain
-            valkuil1 = new Room("valkuil1", "Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Beantwoord eerst de volgende vraag. Gebruik daarna back om terug naar de hal te gaan.", true, 1, 0); // must have glass
+            valkuil1 = new Room("valkuil1", "Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Beantwoord eerst de volgende vraag. Gebruik daarna 'terug' om terug naar de hal te gaan.", true, 1, 0); // must have glass
             trap = new Room("trap", "Deze trap gaat maar tot en met de eerste verdieping van het kasteel. Je moet zo stil mogelijk van de trap af lopen. Beantwoord de volgende vraag goed, om ervoor te zorgen dat je zo stil mogelijk bent en je niet gesnapt wordt.", true, 0, 1); // must have glass
-            valkuil2 = new Room("valkuil2", "Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Beantwoord eerst de volgende vraag. Gebruik daarna back om terug naar de hal te gaan.", false, 1 ,0);
+            valkuil2 = new Room("valkuil2", "Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Beantwoord eerst de volgende vraag. Gebruik daarna 'terug' om terug naar de hal te gaan.", true, 1 ,0);
             hal = new Room("hal", "Je loopt rustig en voorzichtig door de hal. Gelukkig maar dat je zo voorzichtig doet. Wanneer je halverwege de hal bent komt er een kok uit een van de deuren. Kijk rond om een verstop plek te vinden.", true, 2, 0); // must have the keychain 
-            valkuil3 = new Room("valkuil3", "Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Beantwoord eerst de volgende vraag. Gebruik daarna back om terug naar de hal te gaan.", false, 1, 0);
+            valkuil3 = new Room("valkuil3", "Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Beantwoord eerst de volgende vraag. Gebruik daarna 'terug' om terug naar de hal te gaan.", true, 1, 0);
             keuken = new Room("keuken", "Je doet de deur van de keuken zachtjes open en kruipt naar binnen achter een kastje. Je kijkt over het randje van het kastje om te zien of er koks in de keuken zijn. En ja, er staan 2 koks, druk bezig met het bereiden van het avond eten. Ze staan beiden met hun gezicht naar de deur waar jij naartoe moet. De enige optie is om ze allebei uit te schakelen. Je moet om je heen kijken om iets te vinden om de koks mee uit te schakelen.", true, 2, 0); // must have the sword
             keukenTafeltje = new Room("keukenTafeltje", "Je ziet een aantal borden met een deksel daarop, op het keukentafeltje staan.", false, 0, 1);
-            eetzaal = new Room("eetzaal", "De koks in de keuken waren nog druk bezig met het voorbereiden van het avond eten, dus de eetzaal is gelukkig nog leeg. Je staat voor een keuze. Je ziet namelijk een stuk touw in de hoek van de eetzaal liggen. Er is een raam in de eetzaal waardoor je zou kunnen ontsnappen met het touw. De andere keuze is de vuursteen te pakken die bij de openhaard ligt en de trap naar beneden te pakken. Kies welk voorwerp je wilt pakken. ga daarna naar de bijbehoorde kamer. maar voordat je dit gaat doen moet je eerst de volgende vraag beantwoorden.", false, 1, 0);
-            muur = new Room("muur","Je hebt blijkbaar voor het touw gekozen. Je hangt aan het touw langs de muur. Onder je zit water, er zit namelijk een gracht om het kasteel heen. Je moet je heel langzaam laten zakken, om ervoor te zorgen dat de bewakers in de wachttorens je niet zien. Speel het volgende spel om ervoor te zorgen dat je je zo stil mogelijk naar beneden laat zakken. ", true, 1, 0); // must have the rope
-            gracht = new Room("gracht", "De gracht wordt erg goed in de gaten gehouden vanaf de bewakers toren. Een kleine beweging in het water en je wordt ontdekt. Het is al erg donker buiten, dus ze kunnen niet goed in het water kijken, maar ze horen het wel gelijk. Je besluit onderwater te zwemmen om op die manier zo min mogelijk geluid te maken. Het is een Breede gracht. Beantwoord de volgende vraag goed om ervoor te zorgen dat je lang genoeg je adem kan inhouden. ", false, 1, 0);
-            trap2 = new Room("trap2", "Je hebt blijkbaar voor de vuursteen gekozen. Je loopt de trap af, wanneer je bijna beneden bent hoor je geroesemoes en zie je dat de deur langzaam opengaat. Je moet zo snel mogelijk een verstop plek vinden. Beantwoord de volgende vraag goed, zodat je zo snel mogelijk een verstopplek kan vinden.", true, 1, 0); // must have the firestone
-            valkuil4 = new Room("valkuil4", "Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Beantwoord eerst de volgende vraag. Gebruik daarna back om terug naar de hal te gaan.", false, 1, 0);
+            eetzaal = new Room("eetzaal", "De koks in de keuken waren nog druk bezig met het voorbereiden van het avond eten, dus de eetzaal is gelukkig nog leeg. Je staat voor een keuze. Je ziet namelijk een stuk touw in de hoek van de eetzaal liggen. Er is een raam in de eetzaal waardoor je zou kunnen ontsnappen met het touw. De andere keuze is de vuursteen te pakken die bij de openhaard ligt en de trap naar beneden te pakken. Kies welk voorwerp je wilt pakken. ga daarna naar de bijbehoorde kamer. Terwijl je nadenkt over deze moeilijke beslissing moet je de volgende vraag beantwoorden:", false, 1, 0);
+            muur = new Room("muur","Je hangt aan het touw langs de muur. Onder je zit water, er zit namelijk een gracht om het kasteel heen. Je moet je heel langzaam laten zakken, om ervoor te zorgen dat de bewakers in de wachttorens je niet zien. Speel het volgende spel om ervoor te zorgen dat je je zo stil mogelijk naar beneden laat zakken. ", true, 1, 0); // must have the rope
+            gracht = new Room("gracht", "De gracht wordt erg goed in de gaten gehouden vanaf de bewakers toren. Een kleine beweging in het water en je wordt ontdekt. Het is al erg donker buiten, dus ze kunnen niet goed in het water kijken, maar ze horen het wel gelijk. Je besluit onderwater te zwemmen om op die manier zo min mogelijk geluid te maken. Het is een brede gracht. Beantwoord de volgende vraag goed om ervoor te zorgen dat je lang genoeg je adem kunt inhouden. ", false, 1, 0);
+            trap2 = new Room("trap2"," Je loopt de trap af, wanneer je bijna beneden bent hoor je geroesemoes en zie je dat de deur langzaam opengaat. Je moet zo snel mogelijk een verstop plek vinden. Beantwoord de volgende vraag goed, zodat je zo snel mogelijk een verstopplek kan vinden.", true, 1, 0); // must have the firestone
+            valkuil4 = new Room("valkuil4", "Helaas achter deze deur zitten bewakers, je bent erbij. Je bent een leven kwijt. Beantwoord eerst de volgende vraag. Gebruik daarna 'terug' om terug naar de hal te gaan.", false, 1, 0);
             poort = new Room("poort", "De bewakers zijn druk in gesprek en letten niet goed op. Je doet de deur op een kiertje en kruipt stilletjes achter een kast die 2 meter van je vandaan staat. Je pakt je vuursteen. Met de vuursteen probeer je de kast in de brand te zetten. Beantwoord de volgende vraag goed, om de kast in brand te zetten ", false, 1, 0);
             bos = new Room("bos", "Je zit in het bos, je rent zo hard als je kan weg, zodat je al zo ver mogelijk weg bent voordat ze erachter komen dat je ontsnapt bent. Je kijkt nog eens om er zeker van te zijn dat je niet achtervolgt wordt. Terwijl je achteromkijkt bots je tegen iets of iemand aan en val je op de grond. Kijk om je heen wat er is gebeurd.", false, 0, 2);
-            thuis = new Room("thuis", "Je bent veilig aangekomen bij je eigen kasteel, je hebt je koning gewaarschuwd voor de aanvalsplannen. nu maar lekker slapen en herstellen van het heftige avontuur.", false, 1, 0);
+            thuis = new Room("thuis", "Je bent veilig aangekomen bij je eigen kasteel, je hebt je koning gewaarschuwd voor de aanvalsplannen.", false, 0, 0);
 
         // initialise room exits
             cel.setExit("rcolor", gang);
@@ -279,12 +288,12 @@ public class Game
             keukenTafeltje.setExit("rcolor", eetzaal);
             eetzaal.setExit("rcolor", muur);
             eetzaal.setExit("rcolor", trap2);
-            muur.setExit("rcolor", gracht);
-            gracht.setExit("rcolor", bos);
+            muur.setExit("gracht", gracht);
+            gracht.setExit("bos", bos);
             trap2.setExit("rcolor", valkuil4);
             trap2.setExit("rcolor", poort);
-            poort.setExit("rcolor", bos);
-            bos.setExit("rcolor", thuis);
+            poort.setExit("bos", bos);
+            bos.setExit("thuis", thuis);
             
         // adding lookdescription to the rooms  
             cel.setLookDescription("Je ziet dat de bewaker een sleutelbos aan zijn broek heeft hangen. Aan jou de taak om ervoor te zorgen dat de bewaker dichter bijkomt, zodat jij de bewaker kan uitschakelen en zijn sleutelbos kan pakken om de cel te openen. Om dit te doen moet je het volgende spelletje spelen. Je ziet hier de volgende items:");
@@ -294,9 +303,9 @@ public class Game
             valkuil2.setLookDescription("er is niet veel te zien");
             hal.setLookDescription("Je ziet een harnas aan de zijkant van de hal staan, je besluit daar snel achter te gaan staan. De kok komt steeds dichterbij. Je moet zo stil mogelijk blijven staan, zodat de kok jou niet opmerkt. Beantwoord deze vraag goed om ervoor te zorgen dat jij zo stil mogelijk blijft staan.");
             valkuil3.setLookDescription("Er is niet veel te zien");
-            keuken.setLookDescription("Je ziet een metalen pan in een open kastje staan. 'pak de pan'");
+            keuken.setLookDescription("Je ziet een open kastje met daarin een zware metalen koekepan, je denkt na kan daar wat mee doen? Terwijl je nadenkt moet je de volgende vraag beantwoorden:");
             keukenTafeltje.setLookDescription("Je ziet een aantal borden met een deksel daarop, op het keukentafeltje staan.");
-            eetzaal.setLookDescription("Er is niet veel te zien");
+            eetzaal.setLookDescription("Je ziet nog steeds één touw en één vuursteen, welke kies je?");
             muur.setLookDescription("Er is niet veel te zien");
             gracht.setLookDescription("Er is niet veel te zien");
             trap2.setLookDescription("Je ziet door de spleet van de deur dat er nog maar 2 wachters bij de poort van het kasteel zijn.");
@@ -305,12 +314,13 @@ public class Game
             bos.setLookDescription("Wanneer je op kijkt zie je dat je tegen een bewaker aan ben gelopen. Gelukkig heb je een zwaard bij je. De bewaker rent namelijk op je af met getrokken zwaard. Ga het gevecht aan en schakel hem uit! gebruik hit ");
 
         // adding description 
-            cel.setSecondDescription("het is je gelukt om de bewaker uit te schakelen. Pak nu de " + ANSI_BOLD + "sleutelbos" + ANSI_RESET +" op door 'pak' te gebruiken, zodat je naar de volgende ruimt kunt.");
-            gang.setSecondDescription("Je zet het glas tegen de deur en drukt vervolgens je oor er tegenaan. Achter deur " + gang.getDirection(valkuil1) + " hoor je gekling van borden, achter de " + gang.getDirection(trap) + " deur hoor je helemaal niks, welke deur kies je? ");
+            cel.setSecondDescription("het is je gelukt om de bewaker uit te schakelen. Pak nu de " + ANSI_BOLD + "sleutelbos" + ANSI_RESET +" op door 'pak' te gebruiken, zodat je naar de volgende ruimte kunt.");
+            gang.setSecondDescription("Pak het " + ANSI_BOLD + "glas " + ANSI_RESET + "door 'pak' te gebruiken, vervolgens zet je het glas tegen de deur en drukt vervolgens je oor er tegenaan. Achter deur " + gang.getDirection(valkuil1) + " hoor je gekling van borden, achter deur " + gang.getDirection(trap) + " hoor je helemaal niks, welke deur kies je? ");
             trap.setSecondDescription("Je bent gelukkig stil genoeg geweest. Omdat je tijdens jouw spionage missie al op de eerste verdieping bent geweest van het kasteel, weet je dat de trap naar de begane grond zich aan de andere kant van het kasteel bevindt. Dit is de laatste deur waarvoor je een sleutel nodig hebt, maar er zijn 2 deuren. Kies door welke deur je wilt gaan.");
             hal.setSecondDescription("De kok loopt voorbij. Er staat een zwaard bij het harnas, neem deze mee, misschien komt die nog van pas! Je loopt door en komt weer voor 2 deuren te staan. Je hebt helaas niet gezien uit welke deur de kok kwam. Je wil naar de keuken. Maar welke deur lijdt naar de keuken? kies een deur");
-            keuken.setSecondDescription("Met de pan in je hand kruip je steeds dichter naar de 2 koks toe. Je benadert ze van achteren. Je moet heel snel handelen wil je ze allebei kunnen uit schakelen. Beantwoord de volgende vraag goed om ervoor te zorgen dat je snel genoeg handelt. ga daarna door naar de volgende ruimte.");
+            keuken.setSecondDescription("Je hebt bedacht dat je de pan kan gebruiken om de koks mee knock-out te slaan! Je pakt de " + ANSI_BOLD + "pan " + ANSI_RESET + "krijpt zachtjes met de pan naar de koks en geeft ze één voor één een flinke klap. Daar heb je geen last meer van! Nu kun je verder.");
             keukenTafeltje.setSecondDescription("Hopelijk heb je lekker gegeten en ben je weer een beetje aangesterkt voor de rest van de onsnapping. Ga door naar de volgende ruimte");
+            eetzaal.setSecondDescription("Je ziet nog steeds één touw en één vuursteen, welke kies je?");
             muur.setSecondDescription("Je bent stil genoeg geweest. Ga nu de gracht in.");
             gracht.setSecondDescription("Het is je gelukt! Ga uit de gracht.");
             trap2.setSecondDescription("Je rent zo snel mogelijk de trap af en verstopt je onder de trap. Je blijft er stil zitten. De mensen die op weg zijn naar de eetzaal lopen de trap op en merken niet dat jij er bent. Je wacht totdat ze de eetzaal in zijn. Je loopt naar de deur, kijk of je iets kan zien.");
@@ -350,8 +360,10 @@ public class Game
             // set items for unlock
                 gang.setItemForUnlocking(keychain);
                 valkuil1.setItemForUnlocking(glass);
+                valkuil2.setItemForUnlocking(keychain);
                 trap.setItemForUnlocking(glass);
                 hal.setItemForUnlocking(keychain);
+                valkuil3.setItemForUnlocking(sword);
                 keuken.setItemForUnlocking(sword);
                 muur.setItemForUnlocking(rope);
                 trap2.setItemForUnlocking(firestone);
@@ -364,49 +376,43 @@ public class Game
      * @param introducingRoom The room to be introduced
      */
     private void roomIntroducer(Room introducingRoom){
-        System.out.println();
-        System.out.println();
-        System.out.println("-----------------------------------------------------------------------------------");
-        System.out.println("Speler: " + ANSI_BOLD + activePlayer.getName() + ANSI_RESET + "   " + "Levens: " + ANSI_RED + activePlayer.createLivebar() + ANSI_RESET + "   " + "Gezondheid: " + ANSI_BOLD +  activePlayer.getHealth() + ANSI_RESET + "   " + "zetten: " + ANSI_BOLD + activePlayer.getMoves() + ANSI_RESET);
-        if(activePlayer.getTimeLimit() != 999) {
-            System.out.println("Je hebt nog " + ANSI_BOLD + activeClock.getTimer()/60 + ANSI_RESET + " minuten te spelen.");
+        StringBuilder sb = new StringBuilder();
+        if (currentRoom == thuis){
+            sb.append(ANSI_GREEN + " ");
+            sb.append("Gefeliciteerd! Je hebt je eigen kasteel bereikt!" + System.lineSeparator());
+            sb.append("Rust nu maar lekker uit na dit spannende avontuur." +  System.lineSeparator());
+            sb.append("Bedankt voor het spelen van ZUUL! En tot de volgende keer " + System.lineSeparator());
+            sb.append(System.lineSeparator());
+            sb.append(ANSI_RESET);
+            System.out.println(sb.toString());
+            pressEnterToContinue();
+            System.out.println(ANSI_CYAN + "Bedankt voor het spelen!     Tot de volgende keer");
+            System.out.println("Dit venster kan nu worden gesloten!" + ANSI_RESET);
+            System.exit(0);
+        } else {
+            System.out.println();
+            System.out.println();
+            System.out.println("-----------------------------------------------------------------------------------");
+            System.out.println("Speler: " + ANSI_BOLD + activePlayer.getName() + ANSI_RESET + "   " + "Levens: " + ANSI_RED + activePlayer.createLivebar() + ANSI_RESET + "   " + "Gezondheid: " + ANSI_BOLD +  activePlayer.getHealth() + ANSI_RESET + "   " + "zetten: " + ANSI_BOLD + activePlayer.getMoves() + ANSI_RESET);
+            if(activePlayer.getTimeLimit() != 999) {
+                System.out.println("Je hebt nog " + ANSI_BOLD + activeClock.getTimer()/60 + ANSI_RESET + " minuten te spelen.");
+                System.out.println(" ");
+            } else {
+                System.out.println(" ");
+            }
+            System.out.println("Jouw rugzak bevat: " + ANSI_BOLD +  activePlayer.getInventory() + ANSI_RESET);
             System.out.println(" ");
-          } else {
+            System.out.println("-----------------------------------------------------------------------------------");
             System.out.println(" ");
-          }
-        System.out.println("Jouw rugzak bevat: " + ANSI_BOLD +  activePlayer.getInventory() + ANSI_RESET);
-        System.out.println(" ");
-        System.out.println("-----------------------------------------------------------------------------------");
-        System.out.println(" ");
 
-        introducingRoom.printLongDescription(activePlayer, activeEnemy); // print room introduction
-        System.out.println(" ");
-        
-        if (introducingRoom == cel){
-            printHelpCell();
+            introducingRoom.printLongDescription(activePlayer, activeEnemy); // print room introduction
+            System.out.println(" ");
+
+            
+            if (introducingRoom == cel){
+                printHelpCell();
+            }
         }
-    }
-
-    /**
-     * removes all items from all rooms
-     */
-    private void cleanUpItems(){
-        cel.removeAllItemsFromRoom();
-        gang.removeAllItemsFromRoom();
-        valkuil1.removeAllItemsFromRoom();
-        trap.removeAllItemsFromRoom();
-        valkuil2.removeAllItemsFromRoom();
-        hal.removeAllItemsFromRoom();
-        valkuil3.removeAllItemsFromRoom();
-        keuken.removeAllItemsFromRoom();
-        eetzaal.removeAllItemsFromRoom();
-        muur.removeAllItemsFromRoom();
-        gracht.removeAllItemsFromRoom();
-        trap2.removeAllItemsFromRoom();
-        valkuil4.removeAllItemsFromRoom();
-        poort.removeAllItemsFromRoom();
-        bos.removeAllItemsFromRoom();
-        thuis.removeAllItemsFromRoom();
     }
 
     /**
@@ -750,7 +756,6 @@ public class Game
      * @param checkRoom the room you wanna check
      */
     private void processLock(Room checkRoom){
-
         if (!checkRoom.getLock()){
             currentRoom = checkRoom;
             activePlayer.withdrawMove();
@@ -759,12 +764,13 @@ public class Game
             Item neededForUnlock = checkRoom.getItemForUnlocking();
             if (!activePlayer.inInventory(neededForUnlock.getDescription())){
                 System.out.println(checkRoom.getLockInstruction());
+                System.out.println();
             } else {
                 checkRoom.setLock(false);
                 activePlayer.withdrawMove();
                 currentRoom = checkRoom;
                 roomIntroducer(currentRoom);
+                    }
+                }
             }
-        }
-    }
 }

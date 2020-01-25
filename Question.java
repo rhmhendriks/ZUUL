@@ -392,10 +392,11 @@ public boolean processQuestion(Player activePlayer){
                             }
                             break;
                         }
-                        if (activePlayer.getLiveStatus() <= 1){
+                        if (activePlayer.getLiveStatus() < 1){
                             System.out.println(ANSI_RED + "Je levens zijn op! Gebruik een willekeurig commando om opnieuw te starten." + ANSI_RESET);
                             System.out.println();
-                            break;
+                            rightAnswerGiven = true;
+                            
                         }
                     System.out.println();
 

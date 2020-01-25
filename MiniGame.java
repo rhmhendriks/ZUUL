@@ -309,7 +309,7 @@ public void typingGame(){
             while (rightanswers < 5){
                 System.out.println();
                 currentword = generateString(10); //Generate a random String and insert that String into currentword
-                gameTimer = new Clock(18);
+                gameTimer = new Clock(13);
                 gameTimer.startClock();
 
                     //Print the currentword on the screen

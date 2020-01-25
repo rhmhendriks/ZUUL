@@ -147,6 +147,8 @@ public class Room
             if(questionLocation == 1) {
                 int difficulty = activePlayer.getDifficulty();
                 questionLists.getRandomQuestion(0, difficulty, activePlayer);
+                System.out.println(secondDescription);
+                System.out.println();
             } else {
                 if(roomName == "cel") {
                     miniGames.guessTheNumber();
@@ -263,6 +265,8 @@ public class Room
             if (questionLocation == 2) {
             int difficulty = activePlayer.getDifficulty();
             questionLists.getRandomQuestion(0, difficulty, activePlayer);
+            System.out.println(secondDescription);
+            System.out.println();
             } else {
                 if (roomName == "cel") {
                     miniGames.guessTheNumber();

@@ -146,7 +146,7 @@ public class Player
             } else if (difficulty == 1){
                 this.difficulty = difficulty;
                 this.lives = 6;
-                this.inventorySize = 5;
+                this.inventorySize = 3;
                 this.health = 15;
                 this.maxAttackDamage = 5;
                 this.moves = 45;
@@ -166,7 +166,7 @@ public class Player
             } else if (difficulty == 3){
                 this.difficulty = difficulty;
                 this.lives = 2;
-                this.inventorySize = 1;
+                this.inventorySize = 2;
                 this.health = 10;
                 this.maxAttackDamage = 3;
                 this.moves = 25;
@@ -176,11 +176,11 @@ public class Player
             } else if (difficulty == 4){
                 this.difficulty = difficulty;
                 this.lives = 6;
-                this.inventorySize = 5;
+                this.inventorySize = 3;
                 this.health = 15;
                 this.maxAttackDamage = 5;
                 this.moves = 45;
-                this.timeLimit = 900;
+                this.timeLimit = 1260;
                 this.questionChances = 3;
                 isGood = true;
             } else if (difficulty == 5){
@@ -190,17 +190,17 @@ public class Player
                 this.health = 12;
                 this.maxAttackDamage = 4;
                 this.moves = 35;
-                this.timeLimit = 775;
+                this.timeLimit = 1050;
                 this.questionChances = 2;
                 isGood = true;
             } else if (difficulty == 6){
                 this.difficulty = difficulty;
                 this.lives = 2;
-                this.inventorySize = 1;
+                this.inventorySize = 2;
                 this.health = 10;
                 this.maxAttackDamage = 3;
                 this.moves = 25;
-                this.timeLimit = 660;
+                this.timeLimit = 840;
                 this.questionChances = 1;
                 isGood = true;
             }
