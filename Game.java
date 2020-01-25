@@ -18,8 +18,8 @@ import java.util.Scanner;
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Ronald H.M. Hendriks, Nivard Ypey and Luc Willemse
- * @version 0.2020.01.11
+ * @author  Ronald Hendrik Meulenkamp Hendriks, Nivard Ypey and Luc Willemse
+ * @version 2.0.0
  */
 
 public class Game

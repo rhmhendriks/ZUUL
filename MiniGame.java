@@ -21,8 +21,8 @@ import java.util.HashMap;
  *
  * If the command had only one word, then the second word is <null>.
  * 
- * @author  Ronald H.M. Hendriks, Nivard Ypey and Luc Willemse
- * @version 2020.01.20
+ * @author  Ronald Hendrik Meulenkamp Hendriks, Nivard Ypey and Luc Willemse
+ * @version 2.0.0
  */
 
  public class MiniGame {

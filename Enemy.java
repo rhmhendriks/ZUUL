@@ -3,8 +3,8 @@ import java.util.Random;
 /**
  * class Enemy - geef hier een beschrijving van deze class
  *
- * @author (Luc Willemse)
- * @version (20-01-2020)
+ * @author Ronald Hendrik Meulenkamp Hendriks, Nivard Ypey and Luc Willemse
+ * @version 2.0.0
  */
 public class Enemy
 {

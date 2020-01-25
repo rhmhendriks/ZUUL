@@ -4,8 +4,8 @@ import java.util.TimerTask;
 /**
  * class Clock - geef hier een beschrijving van deze class
  *
- * @author (Luc Willemse)
- * @version (15-01-2020)
+ * @author Ronald Hendrik Meulenkamp Hendriks, Nivard Ypey and Luc Willemse
+ * @version 2.0.0
  */
 public class Clock
 {

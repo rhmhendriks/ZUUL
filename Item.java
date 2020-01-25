@@ -1,3 +1,8 @@
+/**
+ * @author Ronald Hendrik Meulenkamp Hendriks, Nivard Ypey and Luc Willemse
+ * @version 2.0.0
+ */
+
 public class Item {
     
     String description;

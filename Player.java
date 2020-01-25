@@ -16,8 +16,8 @@ import java.util.Random;
  * time that the user is playing, how many lives the player has left and the 
  * amount of batlehealth that the player has left. 
  * 
- * @author  Ronald H.M. Hendriks, Nivard Ypey and Luc Willemse
- * @version 2019.01.08
+ * @author  Ronald Hendrik Meulenkamp Hendriks, Nivard Ypey and Luc Willemse
+ * @version 2.0.0
  */
 
 public class Player

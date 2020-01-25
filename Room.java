@@ -14,8 +14,8 @@ import java.util.Collections;
  * connected to other rooms via exits.  For each existing exit, the room 
  * stores a reference to the neighboring room.
  * 
- * @author  Ronald H.M. Hendriks and Luc Willemse
- * @version 2019.01.08
+ * @author  Ronald Hendrik Meulenkamp Hendriks, Nivard Ypey and Luc Willemse
+ * @version 2.0.0
  */
 
 public class Room 
