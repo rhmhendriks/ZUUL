@@ -348,14 +348,18 @@ public class Game
         // adding description 
             cel.setSecondDescription("het is je gelukt om de bewaker uit te schakelen. Pak nu de " + ANSI_BOLD + "sleutelbos" + ANSI_RESET +" op door 'pak' te gebruiken, zodat je naar de volgende ruimte kunt.");
             gang.setSecondDescription("Pak het " + ANSI_BOLD + "glas " + ANSI_RESET + "door 'pak' te gebruiken, vervolgens zet je het glas tegen de deur en drukt vervolgens je oor er tegenaan. Achter deur " + gang.getDirection(valkuil1) + " hoor je gekling van borden, achter deur " + gang.getDirection(trap) + " hoor je helemaal niks, welke deur kies je? ");
+            valkuil1.setSecondDescription("Druk op 'terug' om terug te gaan naar naar de gang");
             trap.setSecondDescription("Je bent gelukkig stil genoeg geweest. Omdat je tijdens jouw spionage missie al op de eerste verdieping bent geweest van het kasteel, weet je dat de trap naar de begane grond zich aan de andere kant van het kasteel bevindt. Dit is de laatste deur waarvoor je een sleutel nodig hebt, maar er zijn 2 deuren. Kies door welke deur je wilt gaan.");
+            valkuil2.setSecondDescription("Druk op 'terug' om terug te gaan naar naar de trap");
             hal.setSecondDescription("De kok loopt voorbij. Er staat een zwaard bij het harnas, neem deze mee, misschien komt die nog van pas! Je loopt door en komt weer voor 2 deuren te staan. Je hebt helaas niet gezien uit welke deur de kok kwam. Je wil naar de keuken. Maar welke deur lijdt naar de keuken? kies een deur");
+            valkuil3.setSecondDescription("Druk op 'terug' om terug te gaan naar naar de hal");
             keuken.setSecondDescription("Je hebt bedacht dat je de pan kan gebruiken om de koks mee knock-out te slaan! Je pakt de " + ANSI_BOLD + "pan " + ANSI_RESET + "krijpt zachtjes met de pan naar de koks en geeft ze één voor één een flinke klap. Daar heb je geen last meer van! Nu kun je verder.");
             keukenTafeltje.setSecondDescription("Hopelijk heb je lekker gegeten en ben je weer een beetje aangesterkt voor de rest van de onsnapping. Ga door naar de volgende ruimte");
             eetzaal.setSecondDescription("Je ziet nog steeds één touw en één vuursteen, welke kies je?");
             muur.setSecondDescription("Je bent stil genoeg geweest. Ga nu de gracht in.");
             gracht.setSecondDescription("Het is je gelukt! Ga uit de gracht.");
             trap2.setSecondDescription("Je rent zo snel mogelijk de trap af en verstopt je onder de trap. Je blijft er stil zitten. De mensen die op weg zijn naar de eetzaal lopen de trap op en merken niet dat jij er bent. Je wacht totdat ze de eetzaal in zijn. Je loopt naar de deur, kijk of je iets kan zien.");
+            valkuil3.setSecondDescription("Druk op 'terug' om terug te gaan naar naar de trap2");
             poort.setSecondDescription("Het is je gelukt je hebt de kast in brand gezet. Het is nog een klein vuurtje en het is de bewakers nog niet opgevallen. Snel kruip je weer terug naar de deur van de trap. De kast staat nu bijna helemaal in brand. De bewakers schrikken op uit in gesprek en rennen naar een andere kamer om emmers met water te pakken. Wanneer ze uit de kamer zijn loop je snel naar de poort. verlaat de kamer. ");
             bos.setSecondDescription("Je hebt de bewaker verslagen! Nu kan je eindelijk door rennen naar je eigen kasteel!");
 
