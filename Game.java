@@ -337,7 +337,7 @@ public class Game
             valkuil3.setLookDescription("Er is niet veel te zien");
             keuken.setLookDescription("Je ziet een open kastje met daarin een zware metalen koekepan, je denkt na kan daar wat mee doen? Terwijl je nadenkt moet je de volgende vraag beantwoorden:");
             keukenTafeltje.setLookDescription("Je ziet een aantal borden met een deksel daarop, op het keukentafeltje staan.");
-            eetzaal.setLookDescription("Je ziet nog steeds één touw en één vuursteen, welke kies je?");
+            eetzaal.setLookDescription("Je ziet nog steeds een touw en een vuursteen, welke kies je?");
             muur.setLookDescription("Er is niet veel te zien");
             gracht.setLookDescription("Er is niet veel te zien");
             trap2.setLookDescription("Je ziet door de spleet van de deur dat er nog maar 2 wachters bij de poort van het kasteel zijn.");
@@ -353,9 +353,9 @@ public class Game
             valkuil2.setSecondDescription("Druk op 'terug' om terug te gaan naar naar de trap");
             hal.setSecondDescription("De kok loopt voorbij. Er staat een zwaard bij het harnas, neem deze mee, misschien komt die nog van pas! Je loopt door en komt weer voor 2 deuren te staan. Je hebt helaas niet gezien uit welke deur de kok kwam. Je wil naar de keuken. Maar welke deur lijdt naar de keuken? kies een deur");
             valkuil3.setSecondDescription("Druk op 'terug' om terug te gaan naar naar de hal");
-            keuken.setSecondDescription("Je hebt bedacht dat je de pan kan gebruiken om de koks mee knock-out te slaan! Je pakt de " + ANSI_BOLD + "pan " + ANSI_RESET + "krijpt zachtjes met de pan naar de koks en geeft ze één voor één een flinke klap. Daar heb je geen last meer van! Nu kun je verder.");
+            keuken.setSecondDescription("Je hebt bedacht dat je de pan kan gebruiken om de koks mee knock-out te slaan! Je pakt de " + ANSI_BOLD + "pan " + ANSI_RESET + "krijpt zachtjes met de pan naar de koks en geeft ze een voor een een flinke klap. Daar heb je geen last meer van! Nu kun je verder.");
             keukenTafeltje.setSecondDescription("Hopelijk heb je lekker gegeten en ben je weer een beetje aangesterkt voor de rest van de onsnapping. Ga door naar de volgende ruimte");
-            eetzaal.setSecondDescription("Je ziet nog steeds één touw en één vuursteen, welke kies je?");
+            eetzaal.setSecondDescription("Je ziet nog steeds een touw en een vuursteen, welke kies je?");
             muur.setSecondDescription("Je bent stil genoeg geweest. Ga nu de gracht in.");
             gracht.setSecondDescription("Het is je gelukt! Ga uit de gracht.");
             trap2.setSecondDescription("Je rent zo snel mogelijk de trap af en verstopt je onder de trap. Je blijft er stil zitten. De mensen die op weg zijn naar de eetzaal lopen de trap op en merken niet dat jij er bent. Je wacht totdat ze de eetzaal in zijn. Je loopt naar de deur, kijk of je iets kan zien.");
@@ -615,7 +615,7 @@ public class Game
         System.out.println();
         System.out.println("Je kunt deze lijst bekijken met 'help'. ");
         System.out.println();
-        System.out.println("Let op: het tonen van deze lijst kost je één leven, " );
+        System.out.println("Let op: het tonen van deze lijst kost je een leven, " );
         System.out.println("je mag ook naar de cel om de lijst te bijken. ");
         System.out.println();
         System.out.println();
@@ -633,7 +633,7 @@ public class Game
         
         helpConfirmation = new Scanner(System.in);
 
-        System.out.println("Je hebt 'help' gebruikt! Dat kost je één leven.");
+        System.out.println("Je hebt 'help' gebruikt! Dat kost je een leven.");
         System.out.println("weet je zeker dat je een leven wilt betalen om ");
         System.out.println("hulp te krijgen? [Ja / Nee] ");
         confirmation = helpConfirmation.nextLine();
@@ -647,7 +647,7 @@ public class Game
             System.out.println();
             System.out.println("Je kunt deze lijst opnieuw tonen met 'help', ");
             System.out.println("maar denk eraan: het tonen van deze lijst kost");
-            System.out.println("je één leven.");
+            System.out.println("je een leven.");
             System.out.println();
             System.out.println("Natuurlijk kun je ook altijd weer naar de cel om ");
             System.out.println("om de lijst op de muur te bekijken. ");
