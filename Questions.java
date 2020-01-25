@@ -56,10 +56,10 @@ public class Questions
             it1.add (new Question("The /etc/shadow file contains plain-text passwords.", "True,False*", 1, 0));
             it1.add (new Question("Which of the following files contains encrypted user password information?", "/etc/usr,/etc/shadow*,/etc/passwd,/etc/group", 1, 0));
             it1.add (new Question("Which of the following files contains user IDs? ", "/etc/passwd*,/etc/group,/etc/shadow,/etc/usr", 1, 0));
-            it1.add (new Question("The chmod command can be used on a file by: ", "The file owner and root*,The file owner,A user that belongs to the files current group,Only root", 1, 0));
+            it1.add (new Question("The chmod command can be used on a file by: ", "The file owner and ro errorsot*,The file owner,A user that belongs to the files current group,Only root", 1, 0));
             it1.add (new Question("The chown command will only accept one file at a time as an argument", "True,False*", 1, 0));
-            it1.add (new Question("The “execute” permission is never set on files by default.", "True*,False", 1, 0));
-            it1.add (new Question("The user owner of a file will always have the same or higher permissions as “other”.", "True,False*", 1, 0));
+            it1.add (new Question("The “execute�? permission is never set on files by default.", "True*,False", 1, 0));
+            it1.add (new Question("The user owner of a file will always have the same or higher permissions as “other�?.", "True,False*", 1, 0));
             it1.add (new Question("Unix is: ", "An operating system*,A type of hardware,A distribution of Linux,A text editor", 1, 0));
             it1.add (new Question("What is the standard option to provide a command line program to view its documentation?", "–info,–doc,–help*,-h", 1, 0));
             it1.add (new Question("Which Windows technology increases system performance by using flash memory?", "Direct Memory Access,File compression,Connect Now,ReadyBoost*", 1, 0));
