@@ -164,16 +164,15 @@ public class Game
             // Name input 
                 Scanner playerName = new Scanner(System.in);
                 Scanner playerNameConfirm = new Scanner(System.in);
-                String choosenName;
-                String confirmInputName;
+                String choosenName = null;
+                String confirmInputName = null;
             
             // Difficulty selection
                 Scanner difLevel = new Scanner(System.in);
                 Scanner difLevelConfirm = new Scanner(System.in);
-                String choosenDifLevel;
-                String confirmInputDifLevel;
-                int usableDifLevel;
-
+                String choosenDifLevel = null;
+                String confirmInputDifLevel = null;
+                int usableDifLevel = 2;
         // Now we put the things on the screen
             // Set the Player Name
                 printWelcome();
@@ -181,24 +180,40 @@ public class Game
                 System.out.println("-----------------------------------------------------------------------------------");
                 System.out.println(" ");
                 System.out.println("Wat is jouw naam?");
+                try {
                 choosenName = playerName.nextLine();
+                } catch (NumberFormatException e) {
+                                
+                } 
 
                 System.out.println(" ");
 
                 System.out.println("De door jouw gekozen naam is: " + ANSI_BOLD + choosenName + ANSI_RESET);
                 System.out.println("Is dit juist? [Ja / Nee]");
+                try {
                 confirmInputName = playerNameConfirm.nextLine();
+                } catch (NumberFormatException e) {
+                                
+                } 
 
                 while (!confirmInputName.equalsIgnoreCase("ja")){
                     System.out.println(" ");
                     System.out.println("Wat is jouw naam?");
+                    try {
                     choosenName = playerName.nextLine();
+                    } catch (NumberFormatException e) {
+                            
+                    }     
 
                     System.out.println(" ");
 
                     System.out.println("De door jouw gekozen naam is: " + ANSI_BOLD + choosenName + ANSI_RESET);
                     System.out.println("Is dit juist? [Ja / Nee]");
-                    confirmInputName = playerNameConfirm.nextLine();
+                    try {
+                        confirmInputName = playerNameConfirm.nextLine();
+                    } catch (NumberFormatException e) {
+                        
+                    }     
                 }
                 
             // create some room
@@ -213,25 +228,42 @@ public class Game
                 System.out.println("(4) Makkelijk   (5) Gemiddeld   (6) Moeilijk");
                 System.out.println(" ");
                 System.out.println("Op welk niveau wil je dit spel spelen? [nummer bijv. '2'] ");
+                try {
                 choosenDifLevel = difLevel.nextLine();
                 usableDifLevel = Integer.parseInt(choosenDifLevel);
+                } catch (NumberFormatException e) {
+                                
+                } 
 
                 System.out.println(" ");
 
                 System.out.println("Het door jouw gekozen niveau is: " + ANSI_BOLD + choosenDifLevel + ANSI_RESET);
                 System.out.println("Is dit juist? [Ja / Nee]");
+                try {
                 confirmInputDifLevel = difLevelConfirm.nextLine();
+                } catch (NumberFormatException e) {
+                            
+                }     
 
                 while (!confirmInputDifLevel.equalsIgnoreCase("ja") || usableDifLevel < 1 || usableDifLevel > 6){
                     System.out.println(" ");
                     System.out.println("Op welk niveau wil je dit spel spelen? [nummer bijv. '2'] ");
+                    try {
                     choosenDifLevel = difLevel.nextLine();
+                    usableDifLevel = Integer.parseInt(choosenDifLevel);
+                    } catch (NumberFormatException e) {
+                                
+                    } 
 
                     System.out.println(" ");
 
                     System.out.println("Het door jouw gekozen niveau is: " + ANSI_BOLD +  choosenDifLevel + ANSI_RESET);
                     System.out.println("Is dit juist? [Ja / Nee]");
+                    try {
                     confirmInputDifLevel = difLevelConfirm.nextLine();
+                    } catch (NumberFormatException e) {
+                                
+                    } 
                 }
 
                 System.out.println(" ");

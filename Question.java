@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -282,8 +283,13 @@ public boolean processQuestion(Player activePlayer){
                 printAnswerOptions();
                 System.out.println();
                 System.out.print(">");
-                givenAnswer = answerBar.nextLine();
-                System.out.println();
+                try {
+                    givenAnswer = answerBar.nextLine();
+                    System.out.println();
+                } catch (NoSuchElementException e){
+                    System.out.println(ANSI_YELLOW + "Dit antwoord is ongeldig! probeer het opnieuw!" + ANSI_RESET);
+                    System.out.println();
+                }
 
             // Check the answer
             if (givenAnswer != null){
@@ -342,13 +348,22 @@ public boolean processQuestion(Player activePlayer){
                 } else {
                     
                 }
+            } else {
+                System.out.println(ANSI_YELLOW + "Er is geen antwoordt ingevuld!" + ANSI_RESET);
+                System.out.println();
             }
 
             // now we will set the answer to a dynamicly checkable variable
                 if (givenAnswerint != 999){
                     useArrayList = true;
                     if (givenAnswerint <= answers.size()-1){
+                        try {
                         answerForTesting = answers.get(givenAnswerint);
+                        } catch (IndexOutOfBoundsException e) {
+                            System.out.println(ANSI_YELLOW + "Dit was geen antwoordmogelijkheid!" + ANSI_RESET);
+                            break;
+                        }
+
                     } 
                 } else {
                     useArrayList = false;
